@@ -1,0 +1,41 @@
+site_title: locationd documentation
+site_logo_url: https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg
+navigation:
+  - title: Introduction
+    children:
+      - title: About locationd
+        location: index.md
+      - title: Architecture
+        location: architecture.md
+  - title: Install & Configure
+    children:
+      - title: Install locationd
+        location: installation.md
+      - title: Configure from gadget
+        location: configure-from-gadget.md
+      - title: Connect serial ports
+        location: connect-serial-ports.md
+      - title: AssistNow
+        location: assistnow.md
+  - title: Usage
+    children:
+      - title: Obtain Location
+        location: obtain-location.md
+  - title: Reference
+    children:
+      - title: Commands
+        location: reference/commands.md
+      - title: Configuration
+        location: reference/configuration.md
+      - title: Available Providers
+        location: reference/available-providers.md
+      - title: DBus API
+        location: reference/dbus-api.md
+  - title: Troubleshoot
+    children:
+      - title: FAQ
+        location: faq.md
+  - title: Release notes
+    location: release-notes.md
+  - title: Report a Bug
+    location: report-bug.md
