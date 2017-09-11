@@ -68,7 +68,10 @@ std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::in
     connection_ = connection;
     proxy_ = service;
 
-    state_ = boost::lexical_cast<Service::State>(com_ubuntu_location_service_get_state(proxy_.get()));
+    const auto raw_state = com_ubuntu_location_service_get_state(proxy_.get());
+    if (raw_state)
+        state_ = boost::lexical_cast<Service::State>(raw_state);
+
     does_satellite_based_positioning_ = com_ubuntu_location_service_get_does_satellite_based_positioning(proxy_.get());
     does_report_cell_and_wifi_ids_ = com_ubuntu_location_service_get_does_report_cell_and_wifi_ids(proxy_.get());
     is_online_ = com_ubuntu_location_service_get_is_online(proxy_.get());
