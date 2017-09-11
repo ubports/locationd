@@ -92,7 +92,6 @@ parts:
     snap:
       - bin/locationd
       - etc/dbus-1/system.d
-      - etc/gps.conf
       - lib/
       - lib/libubuntu-location-service*
       - share/ubuntu-location-service
