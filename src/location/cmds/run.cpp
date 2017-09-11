@@ -71,18 +71,7 @@ location::cmds::Run::Run()
             engine->add_provider(std::make_shared<location::providers::dummy::Provider>());
         }
 
-        try
-        {
-            engine->add_provider(location::providers::ubx::Provider::create_instance(util::settings::Source{}));
-        }
-        catch (const std::exception& e)
-        {
-            ctxt.cout << "Error adding UBX provider: " << e.what() << std::endl;
-        }
-        catch (...)
-        {
-            ctxt.cout << "Error adding UBX provider." << std::endl;
-        }
+        add_provider<location::providers::ubx::Provider>(engine, ctxt);
 
         location::dbus::skeleton::Service::Configuration config
         {
@@ -95,6 +84,23 @@ location::cmds::Run::Run()
 
         return runtime.run();
     });
+}
+
+template<typename T>
+void location::cmds::Run::add_provider(const std::shared_ptr<Engine> &engine, const Context& ctxt)
+{
+    try
+    {
+        engine->add_provider(T::create_instance(util::settings::Source{}));
+    }
+    catch (const std::exception& e)
+    {
+        ctxt.cout << "Error adding provider: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        ctxt.cout << "Error adding provider." << std::endl;
+    }
 }
 
 void location::cmds::Run::account_for_lp1447110() const
