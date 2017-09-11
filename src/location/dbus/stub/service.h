@@ -59,14 +59,6 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
     };
     static void on_bus_acquired(GObject* source, GAsyncResult* res, gpointer user_data);
 
-    struct NameAppearedForCreationContext
-    {
-        guint watch_id;
-        std::function<void(const Result<Service::Ptr>&)> cb;
-    };
-    static void on_name_appeared_for_creation(
-            GDBusConnection* connection_, const gchar* name, const gchar* name_owner, gpointer user_data);
-
     struct ProxyCreationContext
     {
         glib::SharedObject<GDBusConnection> connection;

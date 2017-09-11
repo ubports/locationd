@@ -204,40 +204,16 @@ void location::dbus::stub::Service::on_bus_acquired(GObject* source, GAsyncResul
         }
         else
         {
-            auto name_appeared_for_creation_context =
-                    new NameAppearedForCreationContext{0, std::move(context->cb)};
-
-            name_appeared_for_creation_context->watch_id =
-                    g_bus_watch_name_on_connection(
-                        bus, location::dbus::Service::name(), G_BUS_NAME_WATCHER_FLAGS_NONE,
-                        on_name_appeared_for_creation, nullptr,
-                        name_appeared_for_creation_context, nullptr);
+            com_ubuntu_location_service_proxy_new(
+                        bus, G_DBUS_PROXY_FLAGS_NONE, location::dbus::Service::name(), location::dbus::Service::path(),
+                        nullptr, on_proxy_ready, new Service::ProxyCreationContext
+                        {
+                            location::glib::make_shared_object(bus),
+                            Ptr{new Service{}},
+                            context->cb
+                        });
         }
 
-        delete context;
-    }
-}
-
-void location::dbus::stub::Service::on_name_appeared_for_creation(
-        GDBusConnection* bus, const gchar* name, const gchar* name_owner, gpointer user_data)
-{
-    LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
-    boost::ignore_unused(name, name_owner);
-
-    if (auto context = static_cast<NameAppearedForCreationContext*>(user_data))
-    {
-        com_ubuntu_location_service_proxy_new(
-                    bus, G_DBUS_PROXY_FLAGS_NONE, location::dbus::Service::name(), location::dbus::Service::path(),
-                    nullptr, on_proxy_ready, new Service::ProxyCreationContext
-                    {
-                        location::glib::make_shared_object(bus),
-                        Ptr{new Service{}},
-                        context->cb
-                    });
-
-        // Make sure that we only react to name appeared events once in this code path.
-        g_bus_unwatch_name(context->watch_id);
-        // Clean up our context.
         delete context;
     }
 }
