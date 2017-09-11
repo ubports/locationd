@@ -288,8 +288,8 @@ void location::dbus::stub::Service::on_session_ready(GObject *source, GAsyncResu
             }
             else
             {
-                // TODO(tvoss): Clarifz on error reporting infrastructure.
-                glib::wrap_error_as_exception(error);
+                LOG(ERROR) << "Failed to connect with locationd service: " << error->message << std::endl;
+                context->cb(nullptr);
             }
         }
         delete context;

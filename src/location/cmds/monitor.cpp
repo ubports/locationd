@@ -194,15 +194,13 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
             }
 
             auto service = result.value();
-            service->create_session_for_criteria(location::Criteria{}, [this, &ctxt, service](const Result<Service::Session::Ptr>& result)
+            service->create_session_for_criteria(location::Criteria{}, [this, &ctxt, service](const Service::Session::Ptr& session)
             {
-                if (!result)
+                if (!session)
                 {
                     glib::Runtime::instance()->stop();
                     return;
                 }
-
-                auto session = result.value();
 
                 session->updates().position.changed().connect([this, session](const location::Update<location::Position>& pos)
                 {
