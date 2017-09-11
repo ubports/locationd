@@ -13,29 +13,29 @@ sirf_device=$(snapctl get sirf.provider.device)
 sirf_protocol=$(snapctl get sirf.provider.protocol)
 
 if [ -n "$ubx_device" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.path --value="$ubx_device"
+    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_device"
 fi
 
 if [ -n "$ubx_protocol" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.protocol --value="$ubx_protocol"
+    $SNAP/bin/locationd set --key=ubx.provider.protocol --value="$ubx_protocol"
 fi
 
 if [ -n "$ubx_enable" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.path --value="$ubx_enable"
+    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_enable"
 fi
 
 if [ -n "$ubx_token" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.assist_now.token --value="$ubx_token"
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.token --value="$ubx_token"
 fi
 
 if [ -n "$ubx_timeout" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
 fi
 
 if [ -n "$sirf_device" ]; then
-    /snap/bin/locationd.set --key=sirf.provider.path --value="$sirf_device"
+    $SNAP/bin/locationd set --key=sirf.provider.path --value="$sirf_device"
 fi
 
 if [ -n "$sirf_protocol" ]; then
-    /snap/bin/locationd.set --key=sirf.provider.protocol --value="$sirf_protocol"
+    $SNAP/bin/locationd set --key=sirf.provider.protocol --value="$sirf_protocol"
 fi
