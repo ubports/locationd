@@ -83,6 +83,7 @@ parts:
       - libprocess-cpp-dev
       - libtrust-store-dev
       - libproperties-cpp-dev
+      - lsb-release
       - trust-store-bin
     stage-packages:
       - geoclue-ubuntu-geoip
