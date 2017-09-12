@@ -223,6 +223,13 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
 
                 LOG(INFO) << "Enabled position/heading/velocity updates..." << std::endl;
             });
+
+            // If the service goes away for whatever reason we will shutdown and
+            // print a warning to the user.
+            service->service_disappeared().connect([]() {
+                LOG(ERROR) << "locationd service disappeared, shutting down." << std::endl;
+                glib::Runtime::instance()->stop();
+            });
         });
 
         return runtime.run();

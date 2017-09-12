@@ -55,6 +55,11 @@ void location::dbus::stub::Service::deinit()
         g_signal_handler_disconnect(proxy_.get(), id);
 
     signal_handler_ids.clear();
+
+    if (name_vanished_context_) {
+        g_bus_unwatch_name(name_vanished_context_->watch_id);
+        name_vanished_context_.reset();
+    }
 }
 
 std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::init(
@@ -67,6 +72,17 @@ std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::in
 
     connection_ = connection;
     proxy_ = service;
+
+    // Create a watch to get notified when the service instance disappears
+    // so we can forward this to our users
+    name_vanished_context_.reset(new Service::NameVanishedContext
+    {
+        0, shared_from_this()
+    });
+    name_vanished_context_->watch_id = g_bus_watch_name_on_connection(
+        connection_.get(), location::dbus::Service::name(), G_BUS_NAME_WATCHER_FLAGS_NONE,
+        nullptr, on_name_vanished,
+        name_vanished_context_.get(), nullptr);
 
     const auto raw_state = com_ubuntu_location_service_get_state(proxy_.get());
     if (raw_state)
@@ -163,6 +179,11 @@ core::Property<std::map<location::SpaceVehicle::Key, location::SpaceVehicle>>& l
     return visible_space_vehicles_;
 }
 
+const core::Signal<void>& location::dbus::stub::Service::service_disappeared() const
+{
+    return service_disappeared_;
+}
+
 void location::dbus::stub::Service::on_proxy_ready(GObject* source, GAsyncResult* res, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
@@ -185,6 +206,18 @@ void location::dbus::stub::Service::on_proxy_ready(GObject* source, GAsyncResult
         }
 
         delete context;
+    }
+}
+
+void location::dbus::stub::Service::on_name_vanished(
+        GDBusConnection* bus, const gchar* name, gpointer user_data)
+{
+    LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
+    boost::ignore_unused(bus, name);
+
+    if (auto context = static_cast<Service::NameVanishedContext*>(user_data))
+    {
+        context->instance->service_disappeared_();
     }
 }
 
