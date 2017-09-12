@@ -74,17 +74,17 @@ struct LocationServiceStandalone : public core::dbus::testing::Fixture
 {
     struct SignalingStatefulMonitorDelegate : public location::cmds::Monitor::Delegate
     {
-        void on_new_position(const location::Update<location::Position>& pos)
+        void on_new_position(const location::Update<location::Position>& pos) override
         {
             position_ = pos; signal_if_updates_complete();
         }
 
-        void on_new_heading(const location::Update<location::units::Degrees>& heading)
+        void on_new_heading(const location::Update<location::units::Degrees>& heading) override
         {
             heading_ = heading; signal_if_updates_complete();
         }
 
-        void on_new_velocity(const location::Update<location::units::MetersPerSecond>& velocity)
+        void on_new_velocity(const location::Update<location::units::MetersPerSecond>& velocity) override
         {
             velocity_ = velocity; signal_if_updates_complete();
         }
@@ -93,6 +93,13 @@ struct LocationServiceStandalone : public core::dbus::testing::Fixture
         {
             if (position_ && heading_ && velocity_)
                 core::posix::this_process::instance().send_signal_or_throw(core::posix::Signal::sig_term);
+        }
+
+        void update_all(const location::Position &pos, const location::units::Degrees &heading, const location::units::MetersPerSecond &velocity) override
+        {
+            position_ = pos;
+            heading_ = heading;
+            velocity_ = velocity;
         }
 
         location::Optional<location::Update<location::Position>> position_;

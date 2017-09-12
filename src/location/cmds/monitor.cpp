@@ -26,6 +26,7 @@
 #include <location/runtime.h>
 
 #include <boost/locale.hpp>
+#include <boost/core/ignore_unused.hpp>
 
 #include <iostream>
 #include <type_traits>
@@ -115,7 +116,14 @@ void location::cmds::Monitor::TableOutputDelegate::print_row()
     }
 
     out << std::endl;
+}
 
+void location::cmds::Monitor::TableOutputDelegate::update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity)
+{
+    last_position_update = pos;
+    last_heading_update = heading;
+    last_velocity_update = velocity;
+    print_row();
 }
 
 location::cmds::Monitor::KmlOutputDelegate::KmlOutputDelegate(std::ostream& out) : out{out}
@@ -156,6 +164,12 @@ void location::cmds::Monitor::KmlOutputDelegate::on_new_heading(const Update<uni
 void location::cmds::Monitor::KmlOutputDelegate::on_new_velocity(const Update<units::MetersPerSecond>&)
 {
     // Empty on purpose.
+}
+
+void location::cmds::Monitor::KmlOutputDelegate::update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity)
+{
+    boost::ignore_unused(heading, velocity);
+    on_new_position(pos);
 }
 
 location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
@@ -222,6 +236,12 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
                 session->updates().velocity_status = location::Service::Session::Updates::Status::enabled;
 
                 LOG(INFO) << "Enabled position/heading/velocity updates..." << std::endl;
+
+                // Print out current location data so that the user has immediate
+                // feedback of the current position.
+                Monitor::delegate->update_all(session->updates().position.get().value,
+                                              session->updates().heading.get().value,
+                                              session->updates().velocity.get().value);
             });
 
             // If the service goes away for whatever reason we will shutdown and
