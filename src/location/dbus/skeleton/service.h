@@ -66,6 +66,8 @@ public:
     void create_session_for_criteria(const Criteria& criteria, const std::function<void(const Session::Ptr&)>& cb) override;
     void add_provider(const Provider::Ptr& provider) override;
 
+    const core::Signal<void>& lost_service_name() const;
+
 private:
     // Models the generation of stable and unique object paths for client-specific sessions.
     // The requirements for the resulting object path are:
@@ -180,6 +182,8 @@ private:
     glib::SharedObject<ComUbuntuLocationService> skeleton;
     glib::SharedObject<GDBusObjectManagerServer> object_manager_server;
     std::shared_ptr<DBusDaemonCredentialsResolver> credentials_resolver;
+
+    core::Signal<void> lost_service_name_;
 };
 
 }  // namespace skeleton

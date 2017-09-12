@@ -25,6 +25,7 @@
 #include <location/service_with_engine.h>
 #include <location/settings.h>
 #include <location/system_configuration.h>
+#include <location/logging.h>
 
 #include <location/glib/runtime.h>
 #include <location/glib/serializing_bus.h>
@@ -81,6 +82,15 @@ location::cmds::Run::Run()
         };
 
         auto skeleton = location::dbus::skeleton::Service::create(config);
+
+        // In case that we are either not able to acquire the service DBus name
+        // or we loose it later we terminate the service and let the outer system
+        // decide what to do.
+        skeleton->lost_service_name().connect([ctxt]()
+        {
+            LOG(ERROR) << "Lost service DBus name, shutting down." << std::endl;
+            glib::Runtime::instance()->stop();
+        });
 
         return runtime.run();
     });
