@@ -128,22 +128,29 @@ void location::cmds::Monitor::TableOutputDelegate::update_all(const Position &po
 
 location::cmds::Monitor::KmlOutputDelegate::KmlOutputDelegate(std::ostream& out) : out{out}
 {
-    // We have to imbue the right locale to make sure that formatting
-    // of floating point numbers is correct.
-    out.imbue(std::locale("C"));
-
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
-        << "<Folder><open>1</open><name>Recorded positions</name>";
 }
 
 location::cmds::Monitor::KmlOutputDelegate::~KmlOutputDelegate()
 {
-    out << "</Folder></kml>";
+    if (initialized_)
+        out << "</Folder></kml>";
 }
 
 void location::cmds::Monitor::KmlOutputDelegate::on_new_position(const Update<Position>& pos)
 {
+    if (!initialized_)
+    {
+        // We have to imbue the right locale to make sure that formatting
+        // of floating point numbers is correct.
+        out.imbue(std::locale("C"));
+
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
+            << "<Folder><open>1</open><name>Recorded positions</name>";
+
+        initialized_ = true;
+    }
+
     static constexpr const char* placemark_pattern
     {
         "<Placemark><name>{1}</name><Point><coordinates>{2},{3},{4}</coordinates></Point></Placemark>"

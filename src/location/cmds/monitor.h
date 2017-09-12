@@ -97,6 +97,7 @@ public:
 
     private:
         std::ostream& out;
+        bool initialized_ = false;
         Optional<Update<Position>> last_position_update;
         Optional<Update<units::Degrees>> last_heading_update;
         Optional<Update<units::MetersPerSecond>> last_velocity_update;
