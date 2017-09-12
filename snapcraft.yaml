@@ -5,7 +5,7 @@ summary: Location service mediates access to positioning providers.
 description: |
   Location service mediates access to positioning providers.
 
-  Please find the source for this snap at https://code.launchpad.net/location-service
+  Please find the source for this snap at https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/location-service
 
 apps:
   run:
