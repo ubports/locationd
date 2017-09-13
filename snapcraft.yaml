@@ -14,21 +14,15 @@ apps:
     slots: [service-control, service-observe]
     plugs: [ubx, network, network-manager]
   list-providers:
-    command: bin/locationd list    
+    command: bin/locationd list
   status:
     command: bin/locationd status --bus=system
     plugs: [client-observe]
   monitor:
     command: bin/locationd monitor --bus=system
     plugs: [client-control, client-observe]
-  provide:
-    command: bin/locationd provider --bus=system
-    plugs: [client-control, network]
   set:
     command: bin/locationd set
-  test:
-    command: bin/locationd test
-    plugs: [ubx, network]
 
 slots:
     service-observe:
