@@ -32,6 +32,7 @@
 #include <location/dbus/skeleton/service.h>
 #include <location/providers/dummy/provider.h>
 #include <location/providers/ubx/provider.h>
+#include <location/providers/mls/provider.h>
 
 namespace cli = location::util::cli;
 
@@ -73,6 +74,7 @@ location::cmds::Run::Run()
         }
 
         add_provider<location::providers::ubx::Provider>("ubx", engine.get(), ctxt);
+        add_provider<location::providers::mls::Provider>("mls", engine.get(), ctxt);
 
         location::dbus::skeleton::Service::Configuration config
         {
