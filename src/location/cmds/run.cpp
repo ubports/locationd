@@ -36,6 +36,10 @@
 
 namespace cli = location::util::cli;
 
+namespace {
+constexpr const char *provider_enable_key_suffix{".provider.enable"};
+}
+
 location::cmds::Run::Run()
     : CommandWithFlagsAndAction{cli::Name{"run"}, cli::Usage{"run"}, cli::Description{"runs the daemon"}},
       testing{false},
@@ -102,7 +106,7 @@ template<typename T>
 void location::cmds::Run::add_provider(const std::string &name, Engine *engine, const Context& ctxt)
 {
     util::settings::Source s{};
-    if (!s.get_value<bool>(name + ".provider.enable", true)) {
+    if (!s.get_value<bool>(name + provider_enable_key_suffix, true)) {
         LOG(INFO) << "Not adding provider " << name << " as disabled by configuration";
         return;
     }
