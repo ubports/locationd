@@ -48,7 +48,7 @@ private:
     void account_for_lp1447110() const;
 
     template<typename T>
-    void add_provider(Engine *engine, const Context& ctxt);
+    void add_provider(const std::string &name, Engine *engine, const Context& ctxt);
 
     bool testing;                               // Whether we are running in a testing environment.
     dbus::Bus bus;                              // The bus we should connect to.

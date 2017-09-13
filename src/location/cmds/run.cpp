@@ -72,7 +72,7 @@ location::cmds::Run::Run()
             engine->add_provider(std::make_shared<location::providers::dummy::Provider>());
         }
 
-        add_provider<location::providers::ubx::Provider>(engine.get(), ctxt);
+        add_provider<location::providers::ubx::Provider>("ubx", engine.get(), ctxt);
 
         location::dbus::skeleton::Service::Configuration config
         {
@@ -97,11 +97,17 @@ location::cmds::Run::Run()
 }
 
 template<typename T>
-void location::cmds::Run::add_provider(Engine *engine, const Context& ctxt)
+void location::cmds::Run::add_provider(const std::string &name, Engine *engine, const Context& ctxt)
 {
+    util::settings::Source s{};
+    if (!s.get_value<bool>(name + ".provider.enable", true)) {
+        LOG(INFO) << "Not adding provider " << name << " as disabled by configuration";
+        return;
+    }
+
     try
     {
-        engine->add_provider(T::create_instance(util::settings::Source{}));
+        engine->add_provider(T::create_instance(s));
     }
     catch (const std::exception& e)
     {
