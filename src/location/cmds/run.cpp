@@ -72,7 +72,7 @@ location::cmds::Run::Run()
             engine->add_provider(std::make_shared<location::providers::dummy::Provider>());
         }
 
-        add_provider<location::providers::ubx::Provider>(engine, ctxt);
+        add_provider<location::providers::ubx::Provider>(engine.get(), ctxt);
 
         location::dbus::skeleton::Service::Configuration config
         {
@@ -97,7 +97,7 @@ location::cmds::Run::Run()
 }
 
 template<typename T>
-void location::cmds::Run::add_provider(const std::shared_ptr<Engine> &engine, const Context& ctxt)
+void location::cmds::Run::add_provider(Engine *engine, const Context& ctxt)
 {
     try
     {
