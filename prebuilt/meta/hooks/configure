@@ -10,6 +10,7 @@ ubx_enable=$(snapctl get ubx.provider.assistnow.enable)
 ubx_token=$(snapctl get ubx.provider.assistnow.token)
 ubx_timeout=$(snapctl get ubx.provider.assistnow.timeout)
 
+sirf_enable=$(snapctl get sirf.provider.enable)
 sirf_device=$(snapctl get sirf.provider.device)
 sirf_protocol=$(snapctl get sirf.provider.protocol)
 
@@ -35,6 +36,10 @@ fi
 
 if [ -n "$ubx_timeout" ]; then
     $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
+fi
+
+if [ -n "$sirf_enable"]; then
+    $SNAP/bin/locationd set --key=sirf.provider.enable --value="$sirf_enable"
 fi
 
 if [ -n "$sirf_device" ]; then
