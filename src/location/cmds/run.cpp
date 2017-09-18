@@ -105,6 +105,11 @@ location::cmds::Run::Run()
 template<typename T>
 void location::cmds::Run::add_provider(const std::string &name, Engine *engine, const Context& ctxt)
 {
+    if (!engine) {
+        ctxt.cout << "Error adding provider: No suitable engine instance provider" << std::endl;
+        return;
+    }
+
     util::settings::Source s{};
     if (!s.get_value<bool>(name + provider_enable_key_suffix, true)) {
         LOG(INFO) << "Not adding provider " << name << " as disabled by configuration";
