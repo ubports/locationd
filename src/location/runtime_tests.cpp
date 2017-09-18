@@ -78,8 +78,10 @@ struct Fixture
 };
 
 #if defined(LOCATION_PROVIDERS_GPS)
-int snr_and_ttff(std::ostream& cout, std::ostream& cerr)
+int snr_and_ttff(const std::string& test_suite, std::ostream& cout, std::ostream& cerr)
 {
+    (void) test_suite;
+
     location::util::Benchmark benchmark{boost::lexical_cast<unsigned int>(env::get("SNR_AND_TTF_PROVIDER_TEST_TRIALS", "15")), "ttff in [µs]"};
 
     auto hal = gps::HardwareAbstractionLayer::create_default_instance();
@@ -341,7 +343,7 @@ int sirf(std::ostream& cout, std::ostream&)
 int location::execute_runtime_tests(const std::string& test_suite, std::ostream& cout, std::ostream& cerr)
 {
     if (test_suite == "android-gps")
-        return snr_and_ttff(cout, cerr);
+        return snr_and_ttff(test_suite, cout, cerr);
     else if (test_suite == "sirf")
         return sirf(cout, cerr);
     else if (test_suite == "ubx")

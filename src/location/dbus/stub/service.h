@@ -52,6 +52,8 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
     core::Property<bool>& is_online() override;
     core::Property<std::map<SpaceVehicle::Key, SpaceVehicle>>& visible_space_vehicles() override;
 
+    const core::Signal<void>& service_disappeared() const;
+
   private:
     struct BusAcquisitionContext
     {
@@ -59,13 +61,13 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
     };
     static void on_bus_acquired(GObject* source, GAsyncResult* res, gpointer user_data);
 
-    struct NameAppearedForCreationContext
+    struct NameVanishedContext
     {
         guint watch_id;
-        std::function<void(const Result<Service::Ptr>&)> cb;
+        Service::Ptr instance;
     };
-    static void on_name_appeared_for_creation(
-            GDBusConnection* connection_, const gchar* name, const gchar* name_owner, gpointer user_data);
+    static void on_name_vanished(
+            GDBusConnection* connection_, const gchar* name, gpointer user_data);
 
     struct ProxyCreationContext
     {
@@ -102,6 +104,7 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
     glib::SharedObject<GDBusConnection> connection_;
     glib::SharedObject<ComUbuntuLocationService> proxy_;
     std::set<ulong> signal_handler_ids;
+    std::unique_ptr<NameVanishedContext> name_vanished_context_;
 
     std::uint64_t provider_counter{0};
     std::set<Provider::Ptr> providers;
@@ -111,6 +114,7 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
     core::Property<bool> does_report_cell_and_wifi_ids_;
     core::Property<bool> is_online_;
     core::Property<std::map<SpaceVehicle::Key, SpaceVehicle>> visible_space_vehicles_;
+    core::Signal<void> service_disappeared_;
 };
 }
 }

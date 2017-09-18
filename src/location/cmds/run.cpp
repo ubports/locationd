@@ -25,14 +25,21 @@
 #include <location/service_with_engine.h>
 #include <location/settings.h>
 #include <location/system_configuration.h>
+#include <location/logging.h>
 
 #include <location/glib/runtime.h>
 #include <location/glib/serializing_bus.h>
 #include <location/dbus/skeleton/service.h>
 #include <location/providers/dummy/provider.h>
 #include <location/providers/ubx/provider.h>
+#include <location/providers/sirf/provider.h>
+#include <location/providers/mls/provider.h>
 
 namespace cli = location::util::cli;
+
+namespace {
+constexpr const char *provider_enable_key_suffix{".provider.enable"};
+}
 
 location::cmds::Run::Run()
     : CommandWithFlagsAndAction{cli::Name{"run"}, cli::Usage{"run"}, cli::Description{"runs the daemon"}},
@@ -71,18 +78,9 @@ location::cmds::Run::Run()
             engine->add_provider(std::make_shared<location::providers::dummy::Provider>());
         }
 
-        try
-        {
-            engine->add_provider(location::providers::ubx::Provider::create_instance(util::settings::Source{}));
-        }
-        catch (const std::exception& e)
-        {
-            ctxt.cout << "Error adding UBX provider: " << e.what() << std::endl;
-        }
-        catch (...)
-        {
-            ctxt.cout << "Error adding UBX provider." << std::endl;
-        }
+        add_provider<location::providers::ubx::Provider>("ubx", engine.get(), ctxt);
+        add_provider<location::providers::sirf::Provider>("sirf", engine.get(), ctxt);
+        add_provider<location::providers::mls::Provider>("mls", engine.get(), ctxt);
 
         location::dbus::skeleton::Service::Configuration config
         {
@@ -93,8 +91,45 @@ location::cmds::Run::Run()
 
         auto skeleton = location::dbus::skeleton::Service::create(config);
 
+        // In case that we are either not able to acquire the service DBus name
+        // or we loose it later we terminate the service and let the outer system
+        // decide what to do.
+        skeleton->lost_service_name().connect([ctxt]()
+        {
+            LOG(ERROR) << "Lost service DBus name, shutting down." << std::endl;
+            glib::Runtime::instance()->stop();
+        });
+
         return runtime.run();
     });
+}
+
+template<typename T>
+void location::cmds::Run::add_provider(const std::string &name, Engine *engine, const Context& ctxt)
+{
+    if (!engine) {
+        ctxt.cout << "Error adding provider: No suitable engine instance provider" << std::endl;
+        return;
+    }
+
+    util::settings::Source s{};
+    if (!s.get_value<bool>(name + provider_enable_key_suffix, true)) {
+        LOG(INFO) << "Not adding provider " << name << " as disabled by configuration";
+        return;
+    }
+
+    try
+    {
+        engine->add_provider(T::create_instance(s));
+    }
+    catch (const std::exception& e)
+    {
+        ctxt.cout << "Error adding provider: " << e.what() << std::endl;
+    }
+    catch (...)
+    {
+        ctxt.cout << "Error adding provider." << std::endl;
+    }
 }
 
 void location::cmds::Run::account_for_lp1447110() const

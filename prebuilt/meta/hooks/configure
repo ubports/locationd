@@ -9,33 +9,62 @@ ubx_protocol=$(snapctl get ubx.provider.protocol)
 ubx_enable=$(snapctl get ubx.provider.assistnow.enable)
 ubx_token=$(snapctl get ubx.provider.assistnow.token)
 ubx_timeout=$(snapctl get ubx.provider.assistnow.timeout)
+
+sirf_enable=$(snapctl get sirf.provider.enable)
 sirf_device=$(snapctl get sirf.provider.device)
 sirf_protocol=$(snapctl get sirf.provider.protocol)
 
+mls_enable=$(snapctl get mls.provider.enable)
+mls_host=$(snapctl get mls.provider.host)
+mls_api_key=$(snapctl get ml.sprovider.api_key)
+
 if [ -n "$ubx_device" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.path --value="$ubx_device"
+    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_device"
 fi
 
 if [ -n "$ubx_protocol" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.protocol --value="$ubx_protocol"
+    $SNAP/bin/locationd set --key=ubx.provider.protocol --value="$ubx_protocol"
 fi
 
 if [ -n "$ubx_enable" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.path --value="$ubx_enable"
+    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_enable"
 fi
 
 if [ -n "$ubx_token" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.assist_now.token --value="$ubx_token"
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.token --value="$ubx_token"
 fi
 
 if [ -n "$ubx_timeout" ]; then
-    /snap/bin/locationd.set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
+fi
+
+if [ -n "$sirf_enable"]; then
+    $SNAP/bin/locationd set --key=sirf.provider.enable --value="$sirf_enable"
 fi
 
 if [ -n "$sirf_device" ]; then
-    /snap/bin/locationd.set --key=sirf.provider.path --value="$sirf_device"
+    $SNAP/bin/locationd set --key=sirf.provider.path --value="$sirf_device"
 fi
 
 if [ -n "$sirf_protocol" ]; then
-    /snap/bin/locationd.set --key=sirf.provider.protocol --value="$sirf_protocol"
+    $SNAP/bin/locationd set --key=sirf.provider.protocol --value="$sirf_protocol"
+fi
+
+# Disable Mozilla Location Service provider by default to prevent
+# us from talking to a remote location service without the user
+# acknowledging this.
+if [ -z "$mls_enable" ]; then
+    mls_enable="false"
+fi
+
+if [ -n "$mls_enable" ]; then
+    $SNAP/bin/locationd set --key=mls.provider.enable --value="$mls_enable"
+fi
+
+if [ -n "$mls_host" ]; then
+    $SNAP/bin/locationd set --key=mls.provider.host --value="$mls_host"
+fi
+
+if [ -n "$mls_api_key" ]; then
+    $SNAP/bin/locationd set --key=mls.provider.api_key --value="$mls_api_key"
 fi

@@ -55,6 +55,8 @@ public:
         virtual void on_new_heading(const Update<units::Degrees>& heading) = 0;
         // on_new_velocity is invoked for every incoming velocity update.
         virtual void on_new_velocity(const Update<units::MetersPerSecond>& velocity) = 0;
+        // emit_current is invoked when the current location should be emitted
+        virtual void update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity) = 0;
     };
 
     // PrintingDelegate implements Delegate, printing updates to the given output stream.
@@ -68,6 +70,7 @@ public:
         void on_new_position(const Update<Position>& pos) override;
         void on_new_heading(const Update<units::Degrees>& heading) override;
         void on_new_velocity(const Update<units::MetersPerSecond>& velocity) override;
+        void update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity) override;
 
     private:
         void print_header();
@@ -90,9 +93,11 @@ public:
         void on_new_position(const Update<Position>& pos) override;
         void on_new_heading(const Update<units::Degrees>& heading) override;
         void on_new_velocity(const Update<units::MetersPerSecond>& velocity) override;
+        void update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity) override;
 
     private:
         std::ostream& out;
+        bool initialized_ = false;
         Optional<Update<Position>> last_position_update;
         Optional<Update<units::Degrees>> last_heading_update;
         Optional<Update<units::MetersPerSecond>> last_velocity_update;
