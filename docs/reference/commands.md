@@ -74,3 +74,6 @@ Example:
 ```bash
 $ locationd.set --key=ubx.provider.path --value="/dev/ttyACM1"
 ```
+
+See the [configuration documentation](configuration.md) for further details
+and available options.

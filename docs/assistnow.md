@@ -5,8 +5,10 @@ table_of_contents: False
 
 # u-blox AssistNow 
 
-[AssistNow](https://www.u-blox.com/en/assistnow-lock-your-position-instantly) is a technology
-from u-blox which allows instant locking of the current position.
+[AssistNow](https://www.u-blox.com/en/assistnow-lock-your-position-instantly)<sup
+id="a1">[1](#f1)</sup> is a technology from u-blox which allows
+instant locking of the current position. It is an implementation of Assisted GPS
+(A-GPS).
 
 !!! Note:
     The AssistNow technology is only available with chipsets from
@@ -45,3 +47,5 @@ to use the AssistNow service.
     If you want to provision a device from the first boot on
     with AssistNow enabled please have a look at [Configure from gadget](configure-from-gadget.md)
     for instructions of how to implement this.
+
+<b id="f1">1</b> AssistNow is a registered trademark of [u-blox](https://u-blox.com) [↩](#a1)

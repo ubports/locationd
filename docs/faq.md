@@ -23,10 +23,14 @@ This can have multiple reasons:
    steps necessary to [connect serial ports](connect-serial-ports.md) with the
    locationd snap.
 
- * *Finding the current position might take a moment:* Finding the current position
-   might take a moment depending on the provider being used. locationd only starts
-   its internal providers when there is atleast a single user. If the `locationd.monitor`
-   command is the only user finding the current position will take a moment.
+ * *Determining the initial location takes awhile:* Depending on which provider is being
+   used, determining the initial position may take some time. If `locationd.monitor` is the
+   only client of locationd, there will be a delay before it starts providing location updates.
+
+ * *No satelites visibile:* If you're indoor or in a tunnel your device can't find
+   any satelites which will prevent it from locking your current position. Please
+   move into an environment where your device has access to the sky to receive
+   necessary signals from available satelites.
 
 ## How can I enable support for Assisted GPS (A-GPS)?
 

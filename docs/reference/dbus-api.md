@@ -93,8 +93,8 @@ Type: `b`
 
 Access: read
 
-Indicates whether the service considers providers relying
-on visible cell and wifi networks for positioning requests.
+Indicates whether the service honors location data from providers that
+use cell towers or WiFi networks to provide location data.
 
 **IsOnline**
 

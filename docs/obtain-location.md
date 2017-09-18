@@ -24,7 +24,7 @@ To get the location continously reported in a table format you can run
 the following command:
 
 ```
-$ locationd.monitor --format=table
+$ locationd.monitor --output-format=table
 Enabled position/heading/velocity updates...
 lat.[deg]      lon.[deg]      hor.acc.[m]    alt.[m]       ver.acc.[m]     heading[deg]   vel.[m/s]
 51.44483       7.21064        13.27          n/a            n/a            n/a            n/a
@@ -52,12 +52,10 @@ about details of the KML format.
 
 ## In your application
 
-The service offers as primary interaction point a DBus interface. This
-can be used to obtain various information from the service including positioning
-data. The DBus interface is described [here](reference/dbus-api.md).
-
-To obtain location data in your application you have to talk to the locationd
-service over DBus.
+The primary method applications should use to query location and/or receive
+continual location updates is locationd's DBus API. It can be used to obtain
+various information from the service including positioning data. The DBus
+interface is described [here](reference/dbus-api.md).
 
 The general steps to obtain location updates via DBus look like this:
 

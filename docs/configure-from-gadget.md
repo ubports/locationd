@@ -41,7 +41,6 @@ automatically configured when the device boots the first time and
 all specified configuration items will be applied.
 
 !!! Note:
-    The configuration applied from the gagdet snap
-    are pure defaults which are only set on first device boot. Updated
-    configuration data for already deployed devices can not be applied
-    this way.
+    Configuration items defined in a gadget snap are used to set default
+    values for the items on first boot. If these items are changed in a
+    gadget snap update, the new values will not be applied.

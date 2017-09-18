@@ -6,11 +6,12 @@ table_of_contents: False
 # Architecture
 
 This describes the architecture of the locationd service and gives
-an overview how it works internally.
+an overview of how it works internally.
 
 ## Vocabulary
-To make the remainder of this documentation as easily understandable
-as possible, we start over with introducing some vocabulary:
+
+To make the remainder of this documentation easy to understand, some
+new terminology is defined:
 
  - `Engine`: Responsible for handling input from multiple positioning
    subsystems and maintaining the state of the overall system. Think
@@ -28,7 +29,8 @@ as possible, we start over with introducing some vocabulary:
    Session creation is subject to security mediation and contextual
    prompting.
 
- - `Update`: An update is a timestamped entity to a certain type of data.
+ - `Update`: An update is a timestamped entity containing a location,
+   heading or velocity.
 
  - [WGS84](http://en.wikipedia.org/wiki/World_Geodetic_System): The coordinate system that is used throughout the entire location subsystem.
 
@@ -63,3 +65,7 @@ are known:
 | Compass | People's Republic of China's global system, planned to be operational by 2020. |
 | IRNSS | India's regional navigation system, planned to be operational by 2014, covering India and Northern Indian Ocean. |
 | QZSS | Japanese regional system covering Asia and Oceania. |
+
+!!! Note:
+    Which GNSS systems are supported on your system depends on the
+    chipset being used.

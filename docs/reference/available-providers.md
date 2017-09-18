@@ -5,9 +5,9 @@ table_of_contents: True
 
 # Available Providers
 
-locationd comes with a set of builtin providers. Each provider will
-retrieve positioning data from a source and hand it to the locationd
-service which will forward it to its users.
+locationd comes with a set of builtin providers. Providers retrieve
+positioning data from a source (eg. GPS) and pass it to locationd for
+processing.
 
 This page lists all existing providers and gives necessary information.
 
@@ -24,15 +24,8 @@ is used for testing and validation and not of any use for anything else.
 
 The `fusion` provider combines positioning data from multiple providers
 and returns the most suitable position. It follows the principle of
-forwarding the neweest and most accurate position out of multiple
+forwarding the newest and most accurate position out of multiple
 providers to the locationd engine.
-
-## gps
-
-The `gps` is a legacy provider which integrates locationd with a GPS
-driver originating in a Android HAL implementation. It is not used
-in the snap distribution of locationd but kept for reference and
-possible future use cases.
 
 ## mls
 
