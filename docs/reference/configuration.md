@@ -12,6 +12,24 @@ from a device [gadget snap](https://docs.ubuntu.com/core/en/reference/gadget).
 
 The available configuration items are documented in the following sections.
 
+### ubx.provider.enable
+
+This configuration item allows enabling or disabling the u-blox location
+provider.
+
+Possible values:
+
+ * `true`: Enable the ubx provider
+ * `false`: Disable the ubx provider
+
+Default value: `true`
+
+Example:
+
+```
+$ snap set locationd ubx.provider.enable=true
+```
+
 ### ubx.provider.device
 
 Path to serial port device which the locationd service will use to
@@ -72,6 +90,24 @@ Example:
 $ snap set locationd ubx.provide.assistnow.token=aabbccddee
 ```
 
+### sirf.provider.enable
+
+This configuration item allows enabling or disabling the SiRF location
+provider.
+
+Possible values:
+
+ * `true`: Enable the SiRF provider
+ * `false`: Disable the SiRF provider
+
+Default value: `true`
+
+Example:
+
+```
+$ snap set locationd sirf.provider.enable=true
+```
+
 ### sirf.provider.device
 
 Path to serial port device which the locationd service will use to
@@ -112,7 +148,7 @@ from talking to any web service without the user acknowledging this.
 Default value: `false`
 
 Possible values:
-true
+
  * `true`: Enable the Mozilla Location Service provider
  * `false`: Disable the Mozilla Location Service provider
 
