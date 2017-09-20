@@ -27,10 +27,10 @@ This can have multiple reasons:
    used, determining the initial position may take some time. If `locationd.monitor` is the
    only client of locationd, there will be a delay before it starts providing location updates.
 
- * *No satelites visibile:* If you're indoor or in a tunnel your device can't find
-   any satelites which will prevent it from locking your current position. Please
-   move into an environment where your device has access to the sky to receive
-   necessary signals from available satelites.
+ * *No satelites visibile:* If the device is not able to see the minimum number of
+   satellites (this number is four for GPS) due to being indoors, in a tunnel, or some
+   other situation that blocks line of sight to satellites, then this will prevent the GPS
+   from being able to determine its position.
 
 ## How can I enable support for Assisted GPS (A-GPS)?
 

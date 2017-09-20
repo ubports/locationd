@@ -47,11 +47,11 @@ Connects to a locationd instance and monitors its activity. Supports
 KML or tabular data output of position/heading/velocity data.
 
 !!! Note:
-    It might take a moment for first updates to appear as locationd
-    keeps positioning only active when there is atleast a single user
-    present. If the monitor command is the only active it needs to
-    warum up the chip and lock the current positon first before it
-    can come back with an update.
+    There may be a short delay before positioning updates start to appear as locationd
+    only reports updates if one or more clients are active. If the monitor command is the
+    only client, this is the reason for the short delay. Also, locationd only reports
+    updates if the device's location is actually changing. If the device is stationary,
+    there will be no updates to report.
 
 Example:
 

@@ -172,7 +172,7 @@ API key to use with the [Mozilla Location Service](https://location.services.moz
 allowed to use the [Mozilla Location Service](https://location.services.mozilla.com/) you need
 to ask for a API key. See [here](https://location.services.mozilla.com/api) for details.
 
-The default value is `test`, which limits the use of the service in some ways (no specified
+The default value is `test`, which limits the use of the service in some ways (not specified
 by the [Mozilla Location Service](https://location.services.mozilla.com/)).
 
 Default value: `test`

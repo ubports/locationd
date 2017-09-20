@@ -24,7 +24,7 @@ locationd:service-observe  locationd:client-observe
 
 !!! Note:
     The `locationd:network-manager` plug will be only connected if the
-    network-manager snap was installed on the system.
+    network-manager snap is installed on the system.
 
     The `locationd:ubx` plug needs to be connected to a slot offering
     access to the serial port to be used by the `ubx` provider inside

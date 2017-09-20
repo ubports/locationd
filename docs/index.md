@@ -21,7 +21,7 @@ The locationd snap offers the following features:
   * A specialized fusion provider which combines multiple location providers
     to find the most accurate position
   * Support for external location providers which are running on the same
-    system an exposing a well defined DBus interface.
+    system an exposing a well defined DBus interface
 
 ## Learn more
 
