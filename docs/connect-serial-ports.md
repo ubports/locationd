@@ -23,7 +23,7 @@ snap itself.
     implement a custom systemd service job which calls `snap connect ..`
     to connect the right slots and plugs.
 
-One the serial port plug and slot have been connected, the provider
+Once the serial port plug and slot have been connected, the provider
 still needs to be configured to use the device.  For example, you can
 set the device path of the ubx provider via the following command:
 
@@ -55,5 +55,5 @@ To manually connect this gadget snap serial port slot to locationd's serial-port
 $ snap connect locationd:ubx my-gagdet:ubx
 ```
 
-Once this interface connection has been made, locationd is allowed to access to
+Once this interface connection has been made, locationd is allowed access to
 `/dev/ttyACM1`, and can communicate with the GPS chipset.

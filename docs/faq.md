@@ -23,11 +23,11 @@ This can have multiple reasons:
    steps necessary to [connect serial ports](connect-serial-ports.md) with the
    locationd snap.
 
- * *Determining the initial location takes awhile:* Depending on which provider is being
+ * *Determining the initial location takes a while:* Depending on which provider is being
    used, determining the initial position may take some time. If `locationd.monitor` is the
    only client of locationd, there will be a delay before it starts providing location updates.
 
- * *No satelites visibile:* If the device is not able to see the minimum number of
+ * *No satellites visibile:* If the device is not able to see the minimum number of
    satellites (this number is four for GPS) due to being indoors, in a tunnel, or some
    other situation that blocks line of sight to satellites, then this will prevent the GPS
    from being able to determine its position.
