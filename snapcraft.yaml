@@ -12,7 +12,7 @@ apps:
     daemon: simple
     command: bin/locationd run --bus=system
     slots: [service-control, service-observe]
-    plugs: [ubx, network, network-manager]
+    plugs: [ubx, network, network-manager, wpa]
   list-providers:
     command: bin/locationd list
   status:
@@ -36,6 +36,10 @@ plugs:
         interface: location-control
     ubx:
         interface: serial-port
+    wpa:
+        interface: dbus
+        bus: system
+        name: fi.w1.wpa_supplicant1
 
 parts:
   hooks:
