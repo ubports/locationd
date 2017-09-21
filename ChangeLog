@@ -1,0 +1,939 @@
+2017-09-21 locationd 4.1.0
+
+  [ unknown ]
+  * Removing graphviz dependency.
+    
+    Approved by PS Jenkins bot.
+    
+  * Remove obsolete default provider set.
+    
+    Approved by PS Jenkins bot.
+    
+  * Modifications related to compliance with our packaging standards.
+    
+    Approved by PS Jenkins bot, Timo Jyrinki.
+    
+  * Clean up the overall source tree and add additional tests.
+    
+    Approved by Martin Mrazik, PS Jenkins bot.
+    
+  * Fix dep
+    
+  * Fix the FTBFS due to the new saucy toolchain. Add multi-arch support, fix the binary paths (libexec). Fix some lintian issues.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Change name to the project name.
+    
+    Approved by PS Jenkins bot, Thomas Voß.
+    
+  * * Fix test-cases to rely on proper floating point comparisons.
+    
+    Approved by PS Jenkins bot, Timo Jyrinki.
+    
+  * Releasing 0.0.1daily13.06.14.1-0ubuntu1 to ubuntu.
+    
+    Approved by PS Jenkins bot.
+    
+  * Releasing 0.0.1daily13.06.17-0ubuntu1 to ubuntu.
+    
+    Approved by PS Jenkins bot.
+    
+  * Releasing 0.0.1daily13.06.18-0ubuntu1 to ubuntu.
+    
+    Approved by PS Jenkins bot.
+    
+  * Ship a -doc package now to install the documentation. In addition to it, build in parallel as well as check for missing files.
+    
+    Approved by PS Jenkins bot, Sebastien Bacher.
+    
+  * Releasing 0.0.1+13.10.20130705-0ubuntu1 to ubuntu.
+    
+    Approved by PS Jenkins bot.
+    
+  * -dev package should suggests -doc.
+    
+    Approved by Thomas Voß, PS Jenkins bot.
+    
+  * Releasing 0.0.1+13.10.20130709-0ubuntu1 (revision 18 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Adapt to new gmock snapshot (which doesn't ship anymore shared lib). Fixes: https://bugs.launchpad.net/bugs/1185265.
+    
+    Approved by PS Jenkins bot, Thomas Voß.
+    
+  * Releasing 0.0.1+13.10.20130711-0ubuntu1 (revision 20 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Adjust build and runtime dependency to use the hardware bits of the platform API.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Releasing 0.0.1+13.10.20130813-0ubuntu1 (revision 22 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Add an upstart config file to examples, adjust path to service executable.
+    
+    Approved by PS Jenkins bot, Łukasz Zemczak.
+    
+  * Releasing 0.0.1+13.10.20130814-0ubuntu1 (revision 24 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Adjust path to service executable.
+    
+    Approved by PS Jenkins bot, Michael Frey.
+    
+  * Releasing 0.0.1+13.10.20130815.1-0ubuntu1 (revision 26 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Add linker flags to pkgconfig setup.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Releasing 0.0.1+13.10.20130819-0ubuntu1 (revision 28 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Switch to gcc 4.7.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Releasing 0.0.1+13.10.20130821-0ubuntu1 (revision 30 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Log gps::Provider status updates to syslog, but only every 20th satellite visibility update.
+    
+    Approved by PS Jenkins bot.
+    
+  * Releasing 0.0.1+13.10.20130827-0ubuntu1 (revision 32 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Remove ruby-ronn from the build-dependencies.
+    
+    Approved by Łukasz Zemczak, PS Jenkins bot.
+    
+  * Releasing 0.0.1+13.10.20130829.1-0ubuntu1 (revision 34 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  *  * Remove build-dependency on lcov.
+     * Add build-dependency on graphviz.
+     * Add "Pre-Depends: ${misc:Pre-Depends}" for libubuntu-location-service0.
+     * Add MultiArch: foreign for ubuntu-location-service-doc.
+     * Disable JS-based search engine in doxygen setup to address lintian warning. Fixes: https://bugs.launchpad.net/bugs/1218896.
+    
+    Approved by Michael Terry, PS Jenkins bot.
+    
+  * Releasing 0.0.1+13.10.20130903-0ubuntu1 (revision 36 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Correctly link against gflags. Fixes: https://bugs.launchpad.net/bugs/1218896.
+    
+    Approved by Michael Terry, PS Jenkins bot.
+    
+  * Releasing 0.0.1+13.10.20130904-0ubuntu1 (revision 38 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Replace throwing an exception with logging, fulfill the noexcept promise. Fixes: https://bugs.launchpad.net/bugs/1182658.
+    
+    Approved by Olivier Tilloy, PS Jenkins bot.
+    
+  * Really fulfil the noexcept promise. Fixes: https://bugs.launchpad.net/bugs/1182658.
+    
+    Approved by PS Jenkins bot, Thomas Voß.
+    
+  * Releasing 0.0.1+13.10.20131011-0ubuntu1 (revision 41 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Refactor packaging of service executable. Fixes: https://bugs.launchpad.net/bugs/1235419.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Refactor packaging of service executable. Fixes: https://bugs.launchpad.net/bugs/1235419.
+    
+    Approved by PS Jenkins bot, Didier Roche.
+    
+  * Releasing 0.0.2+13.10.20131015.2-0ubuntu1 (revision 45 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  * Ensure the service is restarted if ended unexpectedly. Fixes: https://bugs.launchpad.net/bugs/1240025.
+    
+    Approved by PS Jenkins bot, Loïc Minier, Thomas Voß.
+    
+  * Releasing 0.0.2+13.10.20131016.1-0ubuntu1 (revision 47 from lp:location-service).
+    
+    Approved by PS Jenkins bot.
+    
+  *  * Fix a race when a session is created while another one ends.
+     * Ensure a sensible minimum interval between consecutive location updates in the GPS provider. Fixes: https://bugs.launchpad.net/bugs/1240878.
+    
+    Approved by Olivier Tilloy, PS Jenkins bot.
+    
+  * Sync trunk with distro.
+    
+    Approved by Mathieu Trudel-Lapierre, PS Jenkins bot.
+    
+  * See more information in merge proposal
+    
+  * Adjust to changes in new dbus-cpp version. 
+    
+  * Force compilation against gcc 4.7. 
+    
+  * Backport dummy provider and accompanying tests. 
+    
+  * Bump the build-dependency on dbus-cpp due to the ABI change 
+    
+  * Reenable onSessionDied(). 
+    
+  * See more information in merge proposal
+    
+  * Patch version bump reflecting the toolchain switch. 
+    
+  * [ Thomas Voß ]
+    * Patch version bump reflecting the toolchain switch.
+    * No change rebuild against boost1.55.
+    [ thomas-voss ]
+    * Re-enable onSessionDied().
+    [ Łukasz 'sil2100' Zemczak ]
+    * Bump the build-dependency on dbus-cpp due to the ABI change
+    [ thomas-voss ]
+    * Backport dummy provider and accompanying tests.
+    [ thomas-voss ]
+    * Force compilation against gcc 4.7.
+    [ thomas-voss ]
+    * * Fix a race when a session is created while another one ends. *
+      Ensure a sensible minimum interval between consecutive location
+      updates in the GPS provider. (LP: #1240878)
+    * Adjust to changes in new dbus-cpp version.
+    
+  * Platform API V2 rebuild 
+    
+  * [ Ubuntu daily release ]
+    * New rebuild forced
+    [ Ricardo Mendoza ]
+    * Platform API V2 rebuild
+    
+  * This MP consolidates multiple related changes together, with the goal of:
+    
+    (1.) Make the service instance accessible via a cli. Useful for testing scenarios.
+    (2.) To cut down time-to-first-fix (ttff) by:
+      (2.1) Leveraging SUPL and other supplementary data downloaded over ordinary data connections.
+      (2.2) Enabling network-based positioning providers to acquire fast position estimates.
+    
+    In more detail:
+    
+    * Added tests for daemon and cli.
+    * Unified daemon and cli header and implementation files.
+    * Add a command-line interface to the service.
+    * Split up provider selection policy to rely on an interface ProviderEnumerator to ease in testing.
+    * Trimmed down on types.
+    * Removed connectivity API draft to prepare for simpler approach.
+    * Refactored includes.
+    * Added a configuration option to handle cell and wifi ID reporting.
+    * Add a mock for a connectivity API exposed to providers and reporters.
+    * Add units for connectivity api.
+    * Refactor cell class into namespace radio. Fixes: 1226204, 1248973, 1281817
+    
+  * Releasing 1.0.0+14.10.20140715
+    
+  * Switch to json-c for json parsing/generation purposes. 
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * [ thomas-voss ]
+    * Switch to json-c for json parsing/generation purposes.
+    * New rebuild forced
+    [ Thomas Voß ]
+    * Bump major version.
+    
+  * Bump major revision and so name to account for toolchain update. 
+    Approved by: Colin Watson
+    
+  * See more information in merge proposal
+    
+  * Add missing dependencies to devel package Fixes: 1349746
+    Approved by: PS Jenkins bot, Robert Bruce Park
+    
+  * See more information in merge proposal
+    
+  * Make sure that logging directories are created on service startup. Fixes: 1349704
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * Fix build warnings. 
+    Approved by: Manuel de la Peña
+    
+  * Add a vanilla gps.conf file and install it to /etc/gps.conf.
+    Make sure that expections thrown while trying to download GPS Xtra data do not abort the service. Fixes: 1347887
+    Approved by: Ricardo Salveti, PS Jenkins bot
+    
+  * [ thomas-voss ]
+    * Make sure that logging directories are created on service startup.
+      (LP: #1349704)
+    * Fix build warnings.
+    * Add a vanilla gps.conf file and install it to /etc/gps.conf. Make
+      sure that expections thrown while trying to download GPS Xtra data
+      do not abort the service. (LP: #1347887)
+    [ Pete Woods ]
+    * Add libdbus-cpp and libdbus as dependencies on devel package.
+    * Enable building on arm64, powerpc and ppc64el.
+    
+  * [ thomas-voss ]
+    * Make sure that logging directories are created on service startup.
+      (LP: #1349704)
+    * Fix build warnings.
+    * Add a vanilla gps.conf file and install it to /etc/gps.conf. Make
+      sure that expections thrown while trying to download GPS Xtra data
+      do not abort the service. (LP: #1347887)
+    [ Pete Woods ]
+    * Add libdbus-cpp and libdbus as dependencies on devel package.
+    * Enable building on arm64, powerpc and ppc64el.
+    * No-change rebuild to get dbgsyms for all binaries onto
+      ddebs.ubuntu.com
+    [ Thomas Voß ]
+    * Bump major revision and so name to account for toolchain update.
+    [ thomas-voss ]
+    * Switch to json-c for json parsing/generation purposes.
+    * New rebuild forced
+    
+  * Expose connectivity state and primary connection characteristics. Fixes: 1337102
+    Approved by: Heikki Holstila, PS Jenkins bot
+    
+  * Make the location service a trusted helper. 
+    Approved by: Seth Arnold
+    
+  * Add camera app and osm touch to the whitelist for permission mgmt. 
+    
+  * Revert hotfix for bug#1352977 
+    Approved by: Thomas Voß
+    
+  * Ensure that connections to events are properly cut on destruction. 
+    
+  * Adjust naming of properties as exposed by NetworkManager. 
+    Approved by: Manuel de la Peña
+    
+  * Make sure that state property changes are correctly reported to the bus. Fixes: 1348334, 1353413
+    Approved by: PS Jenkins bot
+    
+  * Add a demultiplexing reporter implementation.
+    Adjust daemon config to instantiate a demultiplexing reporter instance, together with two ichnaea reporters feeding to Mozilla's and Ubuntu's location service instances. 
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * Make sure the per-user trust-store instances are restarted on location service restarts. 
+    Approved by: PS Jenkins bot, Oliver Grawert, Brendan Donegan
+    
+  * Clean up CachedRadioCell and CachedWirelessNetwork.
+    Switch to logging to syslog. Fixes: 1356814
+    Approved by: PS Jenkins bot
+    
+  * Map edge -> gsm.
+    Map hspa -> umts. Fixes: 1357042
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * Add request for wireless scans to load test threads.
+    Make sure that cached devices are considered instead of recreating device instances.
+    Make sure that scan done signals are relayed correctly. 
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * Improve accuracy in the remote provider.
+    
+  * Add a new provider that uses the espoo project. 
+    Approved by: PS Jenkins bot, Thomas Voß
+    
+  * Improve the accuracy reported by the remote provider. 
+    Approved by: Thomas Voß
+    
+  * Somewhat clean up remote provider and add an acceptance-style test. 
+    Approved by: Loïc Minier, PS Jenkins bot
+    
+  * Update upstart job start conditions; workaround startup issue with a sleep. Fixes: 1356468
+    Approved by: PS Jenkins bot, Thomas Voß
+    
+  * Expose remote::Interface and respective stub/skeleton for using and exposing remote location providers. 
+    Approved by: PS Jenkins bot, Manuel de la Peña
+    
+  * Add a standalone daemon for executing providers out of process. 
+    Approved by: Manuel de la Peña
+    
+  * Implement heuristic to invalidate 3G cells after 60 seconds. Fixes: 1371514
+    Approved by: PS Jenkins bot
+    
+  * [ thomas-voss ]
+    Implement heuristic to invalidate 3G cells after 60 seconds. (LP:
+    #1371514)
+    
+  * [ thomas-voss ]
+    * Implement heuristic to invalidate 3G cells after 60 seconds. (LP:
+      #1371514)
+    [ thomas-voss ]
+    * Expose remote::Interface and respective stub/skeleton for using and
+      exposing remote location providers.
+    * Add a standalone daemon for executing providers out of process.
+    
+  * Ensure Engine::for_each_provider fulfills the noexcept promise 
+    Approved by: Thomas Voß
+    
+  * Make the service translateable. Fixes: 1354092, 1367707
+    Approved by: Loïc Minier, Alberto Aguirre, Manuel de la Peña, Martin Pitt
+    
+  * Also consider updates to NetworkRegistration::Status as trigger for querying connection characteristics.
+    
+  * Make sure that modems are cached, no matter if they come with a valid NetworkRegistration. 
+    Approved by: Loïc Minier, PS Jenkins bot
+    
+  * Prefer /system/etc/gps.conf over /etc/gps.conf. 
+    Approved by: Loïc Minier, Ondrej Kubik, PS Jenkins bot
+    
+  * Allow for creation of initially invalid radio cells. Fixes: 1380668
+    Approved by: Loïc Minier
+    
+  * [ thomas-voss ]
+    * Allow for creation of initially invalid radio cells. (LP: #1380668)
+    [ thomas-voss ]
+    * Prefer /system/etc/gps.conf over /etc/gps.conf.
+    [ thomas-voss ]
+    * Make sure that modems are cached, no matter if they come with a
+      valid NetworkRegistration.
+    [ thomas-voss ]
+    * Make the service translateable. (LP: #1354092)
+    [ Alberto Aguirre ]
+    * Ensure Engine::for_each_provider fulfills the noexcept promise
+    [ thomas-voss ]
+    * Implement heuristic to invalidate 3G cells after 60 seconds. (LP:
+      #1371514)
+    [ thomas-voss ]
+    * Expose remote::Interface and respective stub/skeleton for using and
+      exposing remote location providers.
+    * Add a standalone daemon for executing providers out of process.
+    [ Loïc Minier ]
+    * Update upstart job start conditions; workaround startup issue with a
+      sleep. (LP: #1356468)
+    [ thomas-voss ]
+    * Somewhat clean up remote provider and add an acceptance-style test.
+    
+  * Switch to a NonSelectingProviderSelectionPolicy by default. 
+    
+  * Bump build dependency. 
+    
+  * Disconnect event connections for bag of providers. Fixes: 1387572
+    Approved by: Alberto Aguirre, PS Jenkins bot
+    
+  * Resync trunk
+    
+  * The headers shipped in libubuntu-location-service-dev contain includes that are provided in the libboost-dev package (specifically headers like boost/units/cmath.hpp). Make the dev package depend on libboost-dev so the downstreams get what they need to compile against the libubuntu-location-service-dev headers
+    
+    fixes: LP: #1371146 Fixes: 1371146
+    Approved by: Daniel van Vugt, PS Jenkins bot
+    
+  * Make sure that devices being added/removed by NetworkManager are handled correctly. Fixes: 1390490
+    
+  * Fix #1394204 by:
+    
+    (1.) Relying on the cached devices for querying device properties. This is sufficient, as the cache is always consistent in this particular scenario.
+    (2.) Not explicitly reacting to modem state changes coming in via Ofono but instead only reacting to changes to the PrimaryConnection property of NetworkManager. Fixes: #1394204
+    
+  * Fix FTBFS in test cases.
+    
+  * Print details about visible space vehicles to the gps provider test case. Fixes: #1408984
+    Approved by: Loïc Minier
+    
+  * Resync trunk
+    
+  * See more information in merge proposal
+    
+  * Add an interface for querying settings by key.
+    Add an implementation leveraging boost::property_tree to provide settings. Fixes: #1362765
+    Approved by: Loïc Minier
+    
+  * Allow for enabling/disabling providers.
+    Wire up engine state changes to enabling/disabling of providers. Fixes: #1392399
+    Approved by: Loïc Minier
+    
+  * Make the remote::Provider::Stub fail loudly on construction if the other side is not reachable.
+    Relax the exception in location::Daemon::main and do not exit if instantiating a provider fails. Fixes: #1414591
+    Approved by: Charles Kerr, Loïc Minier, PS Jenkins bot
+    
+  * Automatically clean up session store for dead clients. Fixes: #1418033
+    
+  * Launchpad automatic translations update.
+    
+  * Account for dbus interface breakage in NM from 0.9.8.8 -> 0.9.10.0.
+    Approved by: Ricardo Salveti, PS Jenkins bot
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * If an exception is thrown from the io_executor run method it must be caught, logger and continued with the main loop.
+    Approved by: Jim Hodapp, Thomas Voß
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * Remove the pimpl implementation from the providers and hide their public headers because they should only be used within the project.
+    Approved by: Thomas Voß, Jim Hodapp
+    
+  * Improve the selection of the bag of providers to ensure that the locations used are within a reasonable time margin.
+    Approved by: PS Jenkins bot, Jim Hodapp
+    
+  * Increase default timeout for downloading gps xtra data. Fixes: #1447161
+    Approved by: PS Jenkins bot
+    
+  * See more information in merge proposal
+    
+  * Make sure that cached modems are considered as well when calculating connection characteristics.
+    Approved by: Michael Frey
+    
+  * Make sure we always hand a lock owning its mutex to on_access_point_added. Fixes: #1426307
+    Approved by: PS Jenkins bot
+    
+  * Remerged with trunk.
+    
+  * Ensure that the trust store is started when is needed.
+    
+    Approved by: Michael Frey, PS Jenkins bot, Thomas Voß
+    
+  * No change rebuild against platform-api 3
+    Approved by: PS Jenkins bot
+    
+  * drop build-dependency on g++-4.9 Fixes: #1452329
+    Approved by: Pete Woods, PS Jenkins bot, Rodney Dawes
+    
+  * Add documentation for debugging, hacking and debugging the location service.
+    Pull manual testing instructions over from the wiki.
+    Add tools for formatting the source.
+    Approved by: Alberto Mardegan
+    
+  * Cherry pick rev. 196 from trunk.
+    
+  * Cherry-pick rev. 196 and 199 from lp:location-service. The changes got accidentally removed by merging the outstanding documentation branch.
+    
+  * Handle responses of clients to updates asynchronously.
+    Rely on dummy::ConnectivityManager as harvesting is disabled anyway. Fixes: #1387643, #1462664
+    Approved by: Alberto Mardegan
+    
+  * Make sure that injected time is given in milliseconds
+    Approved by: Thomas Voß
+    
+  * [ Alberto Mardegan ]
+    * Make sure that injected time is given in milliseconds
+    [ Thomas Voß ]
+    * Cherry-pick rev. 196 and 199 from lp:location-service. The changes
+      got accidentally removed by merging the outstanding documentation
+      branch.
+    * Handle responses of clients to updates asynchronously. Rely on
+      dummy::ConnectivityManager as harvesting is disabled anyway. (LP:
+      #1462664, #1387643)
+    [ Thomas Voß ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    [ thomas-voss ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    
+  * Adjust default timeout for downloading GPS XTRA data.
+    
+    30 seconds are perfectly fine, as operation without the xtra data
+    will take significantly longer.
+    Approved by: Alberto Mardegan
+    
+  * [ Alberto Mardegan ]
+    * Make sure that injected time is given in milliseconds
+    [ Thomas Voß ]
+    * Cherry-pick rev. 196 and 199 from lp:location-service. The changes
+      got accidentally removed by merging the outstanding documentation
+      branch.
+    * Handle responses of clients to updates asynchronously. Rely on
+      dummy::ConnectivityManager as harvesting is disabled anyway. (LP:
+      #1462664, #1387643)
+    [ Thomas Voß ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    [ thomas-voss ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Manuel de la Pena ]
+    * Make sure that cached modems are considered as well when calculating
+      connection characteristics.
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Manuel de la Pena ]
+    * Improve the selection of the bag of providers to ensure that the
+      locations used are within a reasonable time margin.
+    * Remove the pimpl implementation from the providers and hide their
+      public headers because they should only be used within the project.
+    [ Thomas Voß ]
+    * Increase default timeout for downloading gps xtra data. (LP:
+      #1447161)
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Manuel de la Pena ]
+    * If an exception is thrown from the io_executor run method it must be
+      caught, logger and continued with the main loop.
+    [ CI Train Bot ]
+    * Launchpad automatic translations update. added: po/af.po po/bg.po
+      po/sk.po
+    * New rebuild forced.
+    [ thomas-voss ]
+    * Account for dbus interface breakage in NM from 0.9.8.8 -> 0.9.10.0.
+    [ thomas-voss ]
+    * Automatically clean up session store for dead clients. (LP:
+      #1418033)
+    [ thomas-voss ]
+    * Make the remote::Provider::Stub fail loudly on construction if the
+      other side is not reachable. Relax the exception in
+      location::Daemon::main and do not exit if instantiating a provider
+      fails. (LP: #1414591)
+    [ CI Train Bot ]
+    * Resync trunk
+    [ thomas-voss ]
+    * Add an interface for querying settings by key. Add an implementation
+      leveraging boost::property_tree to provide settings. (LP: #1362765)
+    * Allow for enabling/disabling providers. Wire up engine state changes
+      to enabling/disabling of providers. (LP: #1392399)
+    [ thomas-voss ]
+    * Print details about visible space vehicles to the gps provider test
+      case. (LP: #1408984)
+    [ thomas-voss ]
+    * Fix #1394204 by: (LP: #1394204)
+    [ Ubuntu daily release ]
+    * New rebuild forced
+    [ thomas-voss ]
+    * Make sure that devices being added/removed by NetworkManager are
+      handled correctly. (LP: #1390490)
+    [ CI bot ]
+    * Resync trunk
+    [ Kevin DuBois ]
+    * The headers shipped in libubuntu-location-service-dev contain
+      includes that are provided in the libboost-dev package (specifically
+      headers like boost/units/cmath.hpp). Make the dev package depend on
+      libboost-dev so the downstreams get what they need to compile
+      against the libubuntu-location-service-dev headers
+    * New rebuild forced
+    [ thomas-voss ]
+    * Bump build dependency.
+    * Disconnect event connections for bag of providers. (LP: #1387572)
+    [ thomas-voss ]
+    * Prevent multiple invocations of start positioning on android GPS HAL
+      to prevent buggy HAL implementations from blocking. Allow for
+      decorated provider names to enable moving providers OOP. (LP:
+      #1382501)
+    
+  * Adjust default timeout for downloading GPS XTRA data.
+    
+  * Send last known position on session start
+    Approved by: Thomas Voß
+    
+  * - Factor out service::Runtime from daemon.cpp into its own .h/.cpp pair of files.
+    - Add test cases around correct operation of service::Runtime.
+    
+  * See more information in merge proposal
+    
+  * [ Alberto Mardegan ]
+    * Send last known position on session start
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Thomas Voß ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    [ thomas-voss ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    * Adjust default timeout for downloading GPS XTRA data.
+    [ Alberto Mardegan ]
+    * Make sure that injected time is given in milliseconds
+    [ Thomas Voß ]
+    * Cherry-pick rev. 196 and 199 from lp:location-service. The changes
+      got accidentally removed by merging the outstanding documentation
+      branch.
+    * Handle responses of clients to updates asynchronously. Rely on
+      dummy::ConnectivityManager as harvesting is disabled anyway. (LP:
+      #1462664, #1387643)
+    
+  * Ensure that event connections are cleaned up on destruction. Fixes: #1480877
+    Approved by: Alberto Mardegan
+    
+  * * Ensure that event connections are cleaned up on destruction. (LP:
+      #1480877)
+    [ Alberto Mardegan ]
+    * Send last known position on session start
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Thomas Voß ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    [ thomas-voss ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    
+  * Fix settings not being applied correctly.
+    
+  * Account for changes in trust-store w.r.t. assembling the description of a trust prompt.
+    Approved by: Alberto Mardegan
+    
+  * Set debian source format to "3.0 (native)"
+    
+    This is a native package. With the wrong source format set, it's impossible to build this package with pdebuild.
+    For more information on package source formats, see:
+    http://manpages.ubuntu.com/manpages/precise/man1/dpkg-source.1.html#contenttoc6
+    Approved by: Thomas Voß
+    
+  * Allow providers to register themselves asynchronously Fixes: #1415029
+    Approved by: Thomas Voß
+    
+  * [ Alberto Mardegan ]
+    * Set debian source format to "3.0 (native)"
+    [ Scott Sweeny ]
+    * Allow providers to register themselves asynchronously (LP: #1415029)
+    * Account for changes in trust-store w.r.t. assembling the description
+      of a trust prompt.
+    * Fix settings not being applied correctly.
+    * Ensure that event connections are cleaned up on destruction. (LP:
+      #1480877)
+    [ Alberto Mardegan ]
+    * Send last known position on session start
+    [ CI Train Bot ]
+    * New rebuild forced.
+    [ Thomas Voß ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    [ thomas-voss ]
+    * Factor out service::Runtime from daemon.cpp into its own .h/.cpp
+      pair of files. Add test cases around correct operation of
+      service::Runtime. added:
+      src/location_service/com/ubuntu/location/service/runtime.cpp
+      src/location_service/com/ubuntu/location/service/runtime.h
+      tests/runtime_test.cpp
+    
+  * Remove explicit option to disable satellite-based positioning services.
+    
+    The service is clever enough to dynamically enable/disable the provider, taking into account
+    accuracy requirements.
+    
+  * Add SntpClient for querying reference time information.
+    Approved by: Łukasz Zemczak, Simon Fels
+    
+  * * Remove explicit option to disable satellite-based positioning
+      services.
+    [ Alberto Mardegan ]
+    * Set debian source format to "3.0 (native)"
+    [ Scott Sweeny ]
+    * Allow providers to register themselves asynchronously (LP: #1415029)
+    * Account for changes in trust-store w.r.t. assembling the description
+      of a trust prompt.
+    * Fix settings not being applied correctly.
+    
+  * Resync to trunk.
+    
+  * * Add SntpClient for querying reference time information.
+    * Remove explicit option to disable satellite-based positioning
+      services.
+    
+  * Resync to trunk.
+    
+  * Log to stderr by default, relying on upstart to rotate logs appropriately. Fixes: #1447110
+    Approved by: Scott Sweeny
+    
+  * See more information in merge proposal
+    
+  * Log to stderr by default, relying on upstart to rotate logs
+    appropriately. (LP: #1447110)
+    
+  * [ Alberto Mardegan ]
+    * Make sure that injected time is given in milliseconds
+    [ Thomas Voß ]
+    * Cherry-pick rev. 196 and 199 from lp:location-service. The changes
+      got accidentally removed by merging the outstanding documentation
+      branch.
+    * Handle responses of clients to updates asynchronously. Rely on
+      dummy::ConnectivityManager as harvesting is disabled anyway. (LP:
+      #1462664, #1387643)
+    [ Thomas Voß ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    [ thomas-voss ]
+    * Add documentation for debugging, hacking and debugging the location
+      service. Pull manual testing instructions over from the wiki. Add
+      tools for formatting the source.
+    Approved by: Alberto Mardegan
+    
+  * * Enable dual landings according to https://wiki.ubuntu.com/citrain/LandingProcess#Dual-landing_for_stable_and_devel:
+      * Both vivid+overlay and xenial packages are built from the same source.
+      * To account for differences in major revisions (necessary to handle the g++ 5 ABI break),
+        we generate install files on the fly.
+    Approved by: Łukasz Zemczak
+    
+  * Lower number of concurrent clients to stabilize acceptance test on loaded builders.
+    Approved by: Scott Sweeny
+    
+  * Small fixes around provider loading
+    
+  * Use a fusion engine provider to generate higher quality position updates
+    
+  * Use a fusion engine provider to generate higher quality position updates
+    
+  * Small fixes around provider loading
+    
+  * Resync trunk.
+    
+  * Fix #1584860. The NM update altered the type of LastSeen to int32. Fixes: #1584860
+    Approved by: Scott Sweeny
+    
+  * Expose service::State to the bus. (LP: #1536774)
+    
+  * Resync trunk.
+    
+  * Fusion provider: Always use an update that came from the same source as the previous used update (fixes LP: #1570878) (LP: #1570878)
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+  * See more information in merge proposal
+    
+
+  [ Simon Fels <simon.busch@canonical.com> ]
+  * Various improvements including
+    
+     * snap: let snapcraft figure out all library dependencies
+     * cmds: properly detect when we can't connect the service and fail
+     * prebuilt: use snap internal locationd binary and not the one from /snap/bin
+     * snap: bump version to developement
+     * dbus/stub: don't watch out for name but connect directly
+     * w11t: only iterate through interfaces when we got any
+     * stub: notify monitor command when service disappeared
+     * monitor: print current position on start
+     * monitor: require at least a single update to print KML header/footer
+    Merge-Proposal: https://code.launchpad.net/~morphis/snappy-hwe-snaps/+git/location-service/+merge/330561
+  * Add wpa plug to be able to talk to wpa-supplicant
+    Merge-Proposal: https://code.launchpad.net/~morphis/snappy-hwe-snaps/+git/location-service/+merge/331067
+  * Add extended documentation following the standard format we have in SE
+    
+    Still a bit work in progress and needs fine tuning here and there but open for a first review round.
+    Merge-Proposal: https://code.launchpad.net/~morphis/snappy-hwe-snaps/+git/location-service/+merge/330757
+
