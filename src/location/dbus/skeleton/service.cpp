@@ -208,9 +208,11 @@ void location::dbus::skeleton::Service::on_name_acquired(GDBusConnection*, const
     g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(skeleton.get()), connection.get(), location::dbus::Service::path(), nullptr);
 }
 
-void location::dbus::skeleton::Service::on_name_lost(GDBusConnection* connection, const std::string& name) 
+void location::dbus::skeleton::Service::on_name_lost(GDBusConnection* connection, const std::string& name)
 {
     boost::ignore_unused(connection, name);
+
+    lost_service_name_();
 }
 
 void location::dbus::skeleton::Service::on_name_vanished(
@@ -575,4 +577,9 @@ void location::dbus::skeleton::Service::create_session(
                         invocation.get(), g_variant_new("(o)", path.c_str()));
         }
     });
+}
+
+const core::Signal<void>& location::dbus::skeleton::Service::lost_service_name() const
+{
+    return lost_service_name_;
 }

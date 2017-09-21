@@ -175,7 +175,12 @@ void mls::Provider::activate()
 
 void mls::Provider::deactivate()
 {
-    boost::system::error_code ec; timer.cancel(ec);
+    boost::system::error_code ec;
+    timer.cancel(ec);
+
+    http_client->stop();
+    if (http_worker.joinable())
+        http_worker.join();
 }
 
 const core::Signal<location::Update<location::Position>>& mls::Provider::position_updates() const

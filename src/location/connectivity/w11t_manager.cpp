@@ -579,8 +579,7 @@ w11t::Supplicant::Ptr w11t::Supplicant::finalize_construction()
                           new Holder{wp}, Holder::closure_notify, GConnectFlags(0));
 
     auto iterator = fi_w1_wpa_supplicant1_get_interfaces(proxy_.get());
-
-    while (*iterator)
+    while (iterator && *iterator)
     {
         Interface::create(connection_, *iterator, [this, sp](const Result<Interface::Ptr>& result)
         {

@@ -31,6 +31,7 @@
 
 namespace location
 {
+class Engine;
 namespace cmds
 {
 // Run executes locationd, exposing the service via DBus.
@@ -45,6 +46,9 @@ private:
     // Ensure that log files dating back to before the fix
     // for lp:1447110 are removed and do not waste space.
     void account_for_lp1447110() const;
+
+    template<typename T>
+    void add_provider(const std::string &name, Engine *engine, const Context& ctxt);
 
     bool testing;                               // Whether we are running in a testing environment.
     dbus::Bus bus;                              // The bus we should connect to.

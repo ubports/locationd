@@ -23,6 +23,7 @@
 
 #include <mutex>
 #include <queue>
+#include <functional>
 
 #include <sys/eventfd.h>
 #include <sys/signalfd.h>

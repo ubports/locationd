@@ -26,6 +26,7 @@
 #include <location/runtime.h>
 
 #include <boost/locale.hpp>
+#include <boost/core/ignore_unused.hpp>
 
 #include <iostream>
 #include <type_traits>
@@ -115,27 +116,41 @@ void location::cmds::Monitor::TableOutputDelegate::print_row()
     }
 
     out << std::endl;
+}
 
+void location::cmds::Monitor::TableOutputDelegate::update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity)
+{
+    last_position_update = pos;
+    last_heading_update = heading;
+    last_velocity_update = velocity;
+    print_row();
 }
 
 location::cmds::Monitor::KmlOutputDelegate::KmlOutputDelegate(std::ostream& out) : out{out}
 {
-    // We have to imbue the right locale to make sure that formatting
-    // of floating point numbers is correct.
-    out.imbue(std::locale("C"));
-
-    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
-        << "<Folder><open>1</open><name>Recorded positions</name>";
 }
 
 location::cmds::Monitor::KmlOutputDelegate::~KmlOutputDelegate()
 {
-    out << "</Folder></kml>";
+    if (initialized_)
+        out << "</Folder></kml>";
 }
 
 void location::cmds::Monitor::KmlOutputDelegate::on_new_position(const Update<Position>& pos)
 {
+    if (!initialized_)
+    {
+        // We have to imbue the right locale to make sure that formatting
+        // of floating point numbers is correct.
+        out.imbue(std::locale("C"));
+
+        out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            << "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
+            << "<Folder><open>1</open><name>Recorded positions</name>";
+
+        initialized_ = true;
+    }
+
     static constexpr const char* placemark_pattern
     {
         "<Placemark><name>{1}</name><Point><coordinates>{2},{3},{4}</coordinates></Point></Placemark>"
@@ -156,6 +171,12 @@ void location::cmds::Monitor::KmlOutputDelegate::on_new_heading(const Update<uni
 void location::cmds::Monitor::KmlOutputDelegate::on_new_velocity(const Update<units::MetersPerSecond>&)
 {
     // Empty on purpose.
+}
+
+void location::cmds::Monitor::KmlOutputDelegate::update_all(const Position &pos, const units::Degrees &heading, const units::MetersPerSecond &velocity)
+{
+    boost::ignore_unused(heading, velocity);
+    on_new_position(pos);
 }
 
 location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
@@ -194,15 +215,13 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
             }
 
             auto service = result.value();
-            service->create_session_for_criteria(location::Criteria{}, [this, &ctxt, service](const Result<Service::Session::Ptr>& result)
+            service->create_session_for_criteria(location::Criteria{}, [this, &ctxt, service](const Service::Session::Ptr& session)
             {
-                if (!result)
+                if (!session)
                 {
                     glib::Runtime::instance()->stop();
                     return;
                 }
-
-                auto session = result.value();
 
                 session->updates().position.changed().connect([this, session](const location::Update<location::Position>& pos)
                 {
@@ -224,6 +243,19 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
                 session->updates().velocity_status = location::Service::Session::Updates::Status::enabled;
 
                 LOG(INFO) << "Enabled position/heading/velocity updates..." << std::endl;
+
+                // Print out current location data so that the user has immediate
+                // feedback of the current position.
+                Monitor::delegate->update_all(session->updates().position.get().value,
+                                              session->updates().heading.get().value,
+                                              session->updates().velocity.get().value);
+            });
+
+            // If the service goes away for whatever reason we will shutdown and
+            // print a warning to the user.
+            service->service_disappeared().connect([]() {
+                LOG(ERROR) << "locationd service disappeared, shutting down." << std::endl;
+                glib::Runtime::instance()->stop();
             });
         });
 

@@ -55,6 +55,11 @@ void location::dbus::stub::Service::deinit()
         g_signal_handler_disconnect(proxy_.get(), id);
 
     signal_handler_ids.clear();
+
+    if (name_vanished_context_) {
+        g_bus_unwatch_name(name_vanished_context_->watch_id);
+        name_vanished_context_.reset();
+    }
 }
 
 std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::init(
@@ -68,7 +73,21 @@ std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::in
     connection_ = connection;
     proxy_ = service;
 
-    state_ = boost::lexical_cast<Service::State>(com_ubuntu_location_service_get_state(proxy_.get()));
+    // Create a watch to get notified when the service instance disappears
+    // so we can forward this to our users
+    name_vanished_context_.reset(new Service::NameVanishedContext
+    {
+        0, shared_from_this()
+    });
+    name_vanished_context_->watch_id = g_bus_watch_name_on_connection(
+        connection_.get(), location::dbus::Service::name(), G_BUS_NAME_WATCHER_FLAGS_NONE,
+        nullptr, on_name_vanished,
+        name_vanished_context_.get(), nullptr);
+
+    const auto raw_state = com_ubuntu_location_service_get_state(proxy_.get());
+    if (raw_state)
+        state_ = boost::lexical_cast<Service::State>(raw_state);
+
     does_satellite_based_positioning_ = com_ubuntu_location_service_get_does_satellite_based_positioning(proxy_.get());
     does_report_cell_and_wifi_ids_ = com_ubuntu_location_service_get_does_report_cell_and_wifi_ids(proxy_.get());
     is_online_ = com_ubuntu_location_service_get_is_online(proxy_.get());
@@ -160,6 +179,11 @@ core::Property<std::map<location::SpaceVehicle::Key, location::SpaceVehicle>>& l
     return visible_space_vehicles_;
 }
 
+const core::Signal<void>& location::dbus::stub::Service::service_disappeared() const
+{
+    return service_disappeared_;
+}
+
 void location::dbus::stub::Service::on_proxy_ready(GObject* source, GAsyncResult* res, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
@@ -185,6 +209,18 @@ void location::dbus::stub::Service::on_proxy_ready(GObject* source, GAsyncResult
     }
 }
 
+void location::dbus::stub::Service::on_name_vanished(
+        GDBusConnection* bus, const gchar* name, gpointer user_data)
+{
+    LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
+    boost::ignore_unused(bus, name);
+
+    if (auto context = static_cast<Service::NameVanishedContext*>(user_data))
+    {
+        context->instance->service_disappeared_();
+    }
+}
+
 void location::dbus::stub::Service::on_bus_acquired(GObject* source, GAsyncResult* res, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
@@ -201,40 +237,16 @@ void location::dbus::stub::Service::on_bus_acquired(GObject* source, GAsyncResul
         }
         else
         {
-            auto name_appeared_for_creation_context =
-                    new NameAppearedForCreationContext{0, std::move(context->cb)};
-
-            name_appeared_for_creation_context->watch_id =
-                    g_bus_watch_name_on_connection(
-                        bus, location::dbus::Service::name(), G_BUS_NAME_WATCHER_FLAGS_NONE,
-                        on_name_appeared_for_creation, nullptr,
-                        name_appeared_for_creation_context, nullptr);
+            com_ubuntu_location_service_proxy_new(
+                        bus, G_DBUS_PROXY_FLAGS_NONE, location::dbus::Service::name(), location::dbus::Service::path(),
+                        nullptr, on_proxy_ready, new Service::ProxyCreationContext
+                        {
+                            location::glib::make_shared_object(bus),
+                            Ptr{new Service{}},
+                            context->cb
+                        });
         }
 
-        delete context;
-    }
-}
-
-void location::dbus::stub::Service::on_name_appeared_for_creation(
-        GDBusConnection* bus, const gchar* name, const gchar* name_owner, gpointer user_data)
-{
-    LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
-    boost::ignore_unused(name, name_owner);
-
-    if (auto context = static_cast<NameAppearedForCreationContext*>(user_data))
-    {
-        com_ubuntu_location_service_proxy_new(
-                    bus, G_DBUS_PROXY_FLAGS_NONE, location::dbus::Service::name(), location::dbus::Service::path(),
-                    nullptr, on_proxy_ready, new Service::ProxyCreationContext
-                    {
-                        location::glib::make_shared_object(bus),
-                        Ptr{new Service{}},
-                        context->cb
-                    });
-
-        // Make sure that we only react to name appeared events once in this code path.
-        g_bus_unwatch_name(context->watch_id);
-        // Clean up our context.
         delete context;
     }
 }
@@ -288,8 +300,8 @@ void location::dbus::stub::Service::on_session_ready(GObject *source, GAsyncResu
             }
             else
             {
-                // TODO(tvoss): Clarifz on error reporting infrastructure.
-                glib::wrap_error_as_exception(error);
+                LOG(ERROR) << "Failed to connect with locationd service: " << error->message << std::endl;
+                context->cb(nullptr);
             }
         }
         delete context;
