@@ -86,6 +86,8 @@ parts:
       - trust-store-bin
     stage-packages:
       - geoclue-ubuntu-geoip
+    install: |
+      make test
     filesets:
       licenses:
         - usr/share/doc/*/*copyright*
