@@ -1,6 +1,7 @@
 name: locationd
 version: 4.2.0-dev
 confinement: strict
+grade: stable
 summary: Location service mediates access to positioning providers.
 description: |
   Location service mediates access to positioning providers.
@@ -85,10 +86,12 @@ parts:
       - trust-store-bin
     stage-packages:
       - geoclue-ubuntu-geoip
+    install: |
+      make test
     filesets:
       licenses:
         - usr/share/doc/*/*copyright*
-    snap:
+    prime:
       - bin/locationd
       - etc/dbus-1/system.d
       - lib/
