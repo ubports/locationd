@@ -1,3 +1,13 @@
+2017-09-29 locationd 4.1.1
+
+  [ Simon Fels <simon.busch@canonical.com> ]
+  * Small set of snapcraft.yaml improvements
+    
+     * Run unit tests as additional test execution step
+     * Use prime keyword instead of deprecated snap one
+     * Define snap grade
+    Merge-Proposal: https://code.launchpad.net/~morphis/snappy-hwe-snaps/+git/location-service/+merge/331567
+
 2017-09-21 locationd 4.1.0
 
   [ unknown ]
