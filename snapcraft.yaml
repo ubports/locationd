@@ -89,7 +89,7 @@ parts:
     filesets:
       licenses:
         - usr/share/doc/*/*copyright*
-    snap:
+    prime:
       - bin/locationd
       - etc/dbus-1/system.d
       - lib/
