@@ -4,11 +4,12 @@
 # to list all the keys supported by locationd and
 # its in-tree providers.
 
+ubx_enable=$(snapctl get ubx.provider.enable)
 ubx_device=$(snapctl get ubx.provider.device)
 ubx_protocol=$(snapctl get ubx.provider.protocol)
-ubx_enable=$(snapctl get ubx.provider.assistnow.enable)
-ubx_token=$(snapctl get ubx.provider.assistnow.token)
-ubx_timeout=$(snapctl get ubx.provider.assistnow.timeout)
+ubx_assist_enable=$(snapctl get ubx.provider.assist_now.enable)
+ubx_assist_token=$(snapctl get ubx.provider.assist_now.token)
+ubx_assist_timeout=$(snapctl get ubx.provider.assist_now.timeout)
 
 sirf_enable=$(snapctl get sirf.provider.enable)
 sirf_device=$(snapctl get sirf.provider.device)
@@ -16,26 +17,30 @@ sirf_protocol=$(snapctl get sirf.provider.protocol)
 
 mls_enable=$(snapctl get mls.provider.enable)
 mls_host=$(snapctl get mls.provider.host)
-mls_api_key=$(snapctl get ml.sprovider.api_key)
+mls_api_key=$(snapctl get mls.provider.api_key)
+
+if [ -n "$ubx_enable" ]; then
+    $SNAP/bin/locationd set --key=ubx.provider.enable --value="$ubx_enable"
+fi
 
 if [ -n "$ubx_device" ]; then
-    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_device"
+    $SNAP/bin/locationd set --key=ubx.provider.device --value="$ubx_device"
 fi
 
 if [ -n "$ubx_protocol" ]; then
     $SNAP/bin/locationd set --key=ubx.provider.protocol --value="$ubx_protocol"
 fi
 
-if [ -n "$ubx_enable" ]; then
-    $SNAP/bin/locationd set --key=ubx.provider.path --value="$ubx_enable"
+if [ -n "$ubx_assist_enable" ]; then
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.enable --value="$ubx_assist_enable"
 fi
 
-if [ -n "$ubx_token" ]; then
-    $SNAP/bin/locationd set --key=ubx.provider.assist_now.token --value="$ubx_token"
+if [ -n "$ubx_assist_token" ]; then
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.token --value="$ubx_assist_token"
 fi
 
-if [ -n "$ubx_timeout" ]; then
-    $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_timeout"
+if [ -n "$ubx_assist_timeout" ]; then
+    $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_assist_timeout"
 fi
 
 if [ -n "$sirf_enable"]; then
@@ -43,7 +48,7 @@ if [ -n "$sirf_enable"]; then
 fi
 
 if [ -n "$sirf_device" ]; then
-    $SNAP/bin/locationd set --key=sirf.provider.path --value="$sirf_device"
+    $SNAP/bin/locationd set --key=sirf.provider.device --value="$sirf_device"
 fi
 
 if [ -n "$sirf_protocol" ]; then
