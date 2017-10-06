@@ -4,12 +4,15 @@
 # to list all the keys supported by locationd and
 # its in-tree providers.
 
+export LD_LIBRARY_PATH="$SNAP/lib:$SNAP/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH=$SNAP_LIBRARY_PATH:$LD_LIBRARY_PATH
+
 ubx_enable=$(snapctl get ubx.provider.enable)
 ubx_device=$(snapctl get ubx.provider.device)
 ubx_protocol=$(snapctl get ubx.provider.protocol)
-ubx_assist_enable=$(snapctl get ubx.provider.assist_now.enable)
-ubx_assist_token=$(snapctl get ubx.provider.assist_now.token)
-ubx_assist_timeout=$(snapctl get ubx.provider.assist_now.timeout)
+ubx_assist_enable=$(snapctl get ubx.provider.assistnow.enable)
+ubx_assist_token=$(snapctl get ubx.provider.assistnow.token)
+ubx_assist_timeout=$(snapctl get ubx.provider.assistnow.timeout)
 
 sirf_enable=$(snapctl get sirf.provider.enable)
 sirf_device=$(snapctl get sirf.provider.device)
@@ -17,7 +20,7 @@ sirf_protocol=$(snapctl get sirf.provider.protocol)
 
 mls_enable=$(snapctl get mls.provider.enable)
 mls_host=$(snapctl get mls.provider.host)
-mls_api_key=$(snapctl get mls.provider.api_key)
+mls_api_key=$(snapctl get mls.provider.apikey)
 
 if [ -n "$ubx_enable" ]; then
     $SNAP/bin/locationd set --key=ubx.provider.enable --value="$ubx_enable"
@@ -43,7 +46,7 @@ if [ -n "$ubx_assist_timeout" ]; then
     $SNAP/bin/locationd set --key=ubx.provider.assist_now.timeout --value="$ubx_assist_timeout"
 fi
 
-if [ -n "$sirf_enable"]; then
+if [ -n "$sirf_enable" ]; then
     $SNAP/bin/locationd set --key=sirf.provider.enable --value="$sirf_enable"
 fi
 
