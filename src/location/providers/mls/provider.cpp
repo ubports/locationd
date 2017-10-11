@@ -79,8 +79,7 @@ mls::Provider::Provider(const mls::Configuration& config)
       ichnaea_client{std::make_shared<ichnaea::Client>(config.host, config.api_key, http_client)},
       stop_requested{false},
       rt{location::Runtime::create(1)},
-      timer{rt->service()},
-      http_worker{[this]() { http_client->run(); }}
+      timer{rt->service()}
 {
     connectivity::platform_default_manager([this](const std::shared_ptr<connectivity::Manager>& manager)
     {
@@ -143,11 +142,6 @@ mls::Provider::Provider(const mls::Configuration& config)
 mls::Provider::~Provider() noexcept
 {
     deactivate();
-
-    http_client->stop();
-    if (http_worker.joinable())
-        http_worker.join();
-
     rt->stop();
 }
 
@@ -176,12 +170,22 @@ void mls::Provider::disable()
 void mls::Provider::activate()
 {
     on_timeout(boost::system::error_code{});
+
+    http_worker = std::move(std::thread([this]()
+    {
+        http_client->run();
+    }));
 }
 
 void mls::Provider::deactivate()
 {
     boost::system::error_code ec;
     timer.cancel(ec);
+
+    http_client->stop();
+    if (http_worker.joinable())
+        http_worker.join();
+
 }
 
 const core::Signal<location::Update<location::Position>>& mls::Provider::position_updates() const
