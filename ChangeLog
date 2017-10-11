@@ -1,3 +1,22 @@
+2017-10-11 locationd 4.1.2
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Do not stop http thread on mls deactivation.
+    
+    locationd was not sending requests to the mozilla location service
+    for the second and posterior clients to connect to the service.
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/locationd/+merge/331859
+  * Really run "locationd set" in configure hook (LD_LIBRARY_PATH was missing).
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/locationd/+merge/331947
+
+  [ Roberto Mier Escandón  <roberto.escandon@canonical.com> ]
+  * Added support for:
+    
+    make uninstall
+    Merge-Proposal: https://code.launchpad.net/~rmescandon/snappy-hwe-snaps/+git/locationd/+merge/332044
+  * Moved mls provider worker thread start and stop to activate() and deactivate()
+    Merge-Proposal: https://code.launchpad.net/~rmescandon/snappy-hwe-snaps/+git/locationd/+merge/332042
+
 2017-09-29 locationd 4.1.1
 
   [ Simon Fels <simon.busch@canonical.com> ]
