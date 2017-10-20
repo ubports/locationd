@@ -217,7 +217,8 @@ location::Provider::Ptr ubx::Provider::create_instance(const util::settings::Sou
 {
     Configuration configuration
     {
-        settings.get_value<Protocol>(options::protocol, Protocol::ubx),
+        // Production devices in the field use nmea by default
+        settings.get_value<Protocol>(options::protocol, Protocol::nmea),
         settings.get_value<std::string>(options::device, "/dev/ttyACM1"),
         {
             settings.get_value<bool>(options::assist_now::enable, false),
