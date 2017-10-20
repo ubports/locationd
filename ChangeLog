@@ -1,3 +1,9 @@
+2017-10-20 locationd 4.2.0
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Fix for regression in caracalla (LP: #1715724)
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/locationd/+merge/332549
+
 2017-10-11 locationd 4.1.2
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
