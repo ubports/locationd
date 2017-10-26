@@ -1,6 +1,7 @@
 #include <location/providers/ubx/_8/receiver.h>
 
 #include <location/nmea/sentence.h>
+#include <location/logging.h>
 
 #include <iostream>
 
@@ -70,12 +71,17 @@ void ubx::_8::Receiver::process_chunk(Buffer::iterator it, Buffer::iterator itE)
                 {
                     monitor->on_new_nmea_sentence(nmea::parse_sentence(nmea_scanner.finalize()));
                 }
+                catch (const std::exception &e)
+                {
+                    LOG(ERROR) << "Exception while processing: " << e.what();
+                }
                 catch (...)
                 {
                     // Dropping the exception as there is hardly any reasonable measure
                     // we can take. Both scanners are designed to recover from issues, and we
                     // we just trap the exception here to guarantee that we keep on consuming the
                     // entire buffer.
+                    LOG(ERROR) << "Unknown exception while processing" << std::endl;
                 }
             }
         }
