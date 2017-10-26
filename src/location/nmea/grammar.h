@@ -99,7 +99,7 @@ public:
     hdop %= boost::spirit::qi::real_parser<float>();
     vdop %= boost::spirit::qi::real_parser<float>();
 
-    latitude %= boost::spirit::qi::uint_parser<std::uint32_t, 10, 2, 2>() >>                                                                             
+    latitude %= boost::spirit::qi::uint_parser<std::uint32_t, 10, 2, 2>() >>
                 boost::spirit::qi::real_parser<double, FixedPrecisionRealPolicy<2, double>>();
 
     longitude %= boost::spirit::qi::uint_parser<std::uint32_t, 10, 3, 3>() >>
@@ -131,7 +131,7 @@ public:
                   >> -hdop                                                                                        >> field_separator
                   >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::strict_ureal_policies<float>>())  >> field_separator
                   >> -boost::spirit::qi::lit('M')                                                                 >> field_separator
-                  >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::strict_ureal_policies<float>>())  >> field_separator
+                  >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::real_policies<float>>())          >> field_separator
                   >> -boost::spirit::qi::lit('M')                                                                 >> field_separator
                   >> -boost::spirit::qi::real_parser<float, boost::spirit::qi::strict_ureal_policies<float>>()    >> field_separator
                   >> -boost::spirit::qi::uint_parser<std::uint32_t, 10, 2, 2>();
