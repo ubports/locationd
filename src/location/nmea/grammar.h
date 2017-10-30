@@ -129,7 +129,7 @@ public:
                   >> -gps.fix_mode                                                                                >> field_separator
                   >> -boost::spirit::qi::uint_parser<std::uint32_t, 10, 2, 2>()                                   >> field_separator
                   >> -hdop                                                                                        >> field_separator
-                  >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::strict_ureal_policies<float>>())  >> field_separator
+                  >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::real_policies<float>>())          >> field_separator
                   >> -boost::spirit::qi::lit('M')                                                                 >> field_separator
                   >> -(boost::spirit::qi::real_parser<float, boost::spirit::qi::real_policies<float>>())          >> field_separator
                   >> -boost::spirit::qi::lit('M')                                                                 >> field_separator
