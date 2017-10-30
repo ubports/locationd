@@ -242,7 +242,7 @@ location::cmds::Monitor::Monitor(const std::shared_ptr<Delegate>& delegate)
                 session->updates().heading_status = location::Service::Session::Updates::Status::enabled;
                 session->updates().velocity_status = location::Service::Session::Updates::Status::enabled;
 
-                LOG(INFO) << "Enabled position/heading/velocity updates..." << std::endl;
+                std::cout << "Enabled position/heading/velocity updates..." << std::endl;
 
                 // Print out current location data so that the user has immediate
                 // feedback of the current position.
