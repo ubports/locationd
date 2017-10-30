@@ -50,10 +50,12 @@ nmea::Sentence nmea::parse_sentence(const std::string& message) {
     throw std::runtime_error("Failed to unmarshal NMEA message: " + message);
 
   nmea::Sentence sentence;
-  if (not boost::spirit::qi::parse(s.begin(), s.end(), nmea::Grammar<std::string::iterator>(), sentence))
-    throw std::runtime_error("Failed to parse NMEA sentence: " + s);
+  if (not boost::spirit::qi::parse(s.begin(), s.end(),
+                                   nmea::Grammar<std::string::iterator>(), sentence))
+    throw std::runtime_error("Failed to parse NMEA sentence: " + message);
 
-  if (checksum(s.begin(), s.end()) != cs) throw std::runtime_error("Failed to verify NMEA message integrity.");
+  if (checksum(s.begin(), s.end()) != cs)
+    throw std::runtime_error("Failed to verify NMEA message integrity: " + message);
 
   return sentence;
 }
