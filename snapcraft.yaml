@@ -1,5 +1,5 @@
 name: locationd
-version: 4.2.1
+version: 4.2.2-dev
 confinement: strict
 grade: stable
 summary: Location service mediates access to positioning providers.
