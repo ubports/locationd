@@ -1,3 +1,11 @@
+2017-11-07 locationd 4.2.1
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Height of geoid above WGS84 can be negative. Additional fix for lp: #1715724.
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/locationd/+merge/332852
+  * Fix NMEA parsing error (height can be negative)
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/locationd/+merge/332979
+
 2017-10-20 locationd 4.2.0
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
