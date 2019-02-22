@@ -3,11 +3,10 @@
 # Modifications should be made to control.in instead.
 # This file is regenerated automatically in the clean target.
 #
-Source: location-service
+Source: locationd
 Section: utils
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Thomas Voß <thomas.voss@canonical.com>
+Maintainer: Marius Gripsgard <marius@ubports.com>
 Build-Depends: cmake,
                cmake-extras,
                curl,
@@ -19,7 +18,6 @@ Build-Depends: cmake,
                graphviz,
                libapparmor-dev,
                libboost-filesystem-dev,
-               libboost-locale-dev,
                libboost-program-options-dev,
                libboost-system-dev,
                libdbus-1-dev,
@@ -38,13 +36,9 @@ Build-Depends: cmake,
                lsb-release,
                trust-store-bin,
 Standards-Version: 3.9.4
-Homepage: http://launchpad.net/location-service
-# If you aren't a member of ~phablet-team but need to upload packaging changes,
-# just go ahead.  ~phablet-team will notice and sync up the code again.
-Vcs-Bzr: https://code.launchpad.net/~phablet-team/location-service/trunk
-Vcs-Browser: http://bazaar.launchpad.net/~phablet-team/location-service/trunk/files
+Homepage: https://github.com/ubports/locationd
 
-Package: libubuntu-location-service3
+Package: liblocationd4
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -56,35 +50,35 @@ Description: location service aggregating position/velocity/heading
  .
  Contains the shared library needed by client applications.
 
-Package: libubuntu-location-service-dev
+Package: liblocationd-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: foreign
-Recommends: ubuntu-location-service-doc,
-Depends: libubuntu-location-service3 (= ${binary:Version}),
+Recommends: locationd-doc,
+Depends: liblocationd4 (= ${binary:Version}),
          libdbus-1-dev,
          libdbus-cpp-dev,
          libboost-dev,
          ${misc:Depends},
-Suggests: ubuntu-location-service-doc,
+Suggests: locationd-doc,
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
  .
  Contains header files required to develop clients talking to the ubuntu
  location service.
 
-Package: libubuntu-location-service-dbg
+Package: liblocationd-dbg
 Section: debug
 Architecture: any
 Multi-Arch: foreign
-Depends: libubuntu-location-service3 (= ${binary:Version}),
+Depends: liblocationd4 (= ${binary:Version}),
          ${misc:Depends},
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
  .
  Contains debug symbols.
 
-Package: ubuntu-location-service-tests
+Package: locationd-tests
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
@@ -93,38 +87,38 @@ Description: location service aggregating position/velocity/heading
  .
  Contains all test executables
 
-Package: ubuntu-location-service-bin
+Package: locationd-bin
 Architecture: any
-Depends: libubuntu-location-service3 (= ${binary:Version}),
+Depends: liblocationd4 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
          trust-store-bin,
-Breaks: ubuntu-location-service-examples (<< 0.0.2),
-Replaces: ubuntu-location-service-examples (<< 0.0.2),
+Breaks: locationd-examples (<< 0.0.2),
+Replaces: locationd-examples (<< 0.0.2),
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
  .
  Contains the service executable and man pages.
 
-Package: ubuntu-location-service-examples
+Package: locationd-examples
 Architecture: any
 Multi-Arch: same
-Depends: libubuntu-location-service3 (= ${binary:Version}),
+Depends: liblocationd4 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
-         ubuntu-location-service-doc,
+         locationd-doc,
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
  .
  Contains example service and client.
 
-Package: ubuntu-location-service-doc
+Package: locationd-doc
 Section: doc
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-Recommends: ubuntu-location-service-examples,
+Recommends: locationd-examples,
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
  .

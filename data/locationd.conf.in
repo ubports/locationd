@@ -1,0 +1,7 @@
+description "Location Services"
+
+start on started dbus
+
+respawn
+
+exec /usr/bin/locationd run

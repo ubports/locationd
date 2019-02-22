@@ -6,8 +6,8 @@ add_library(
 target_link_libraries(
   mls
 
-  ubuntu-location-service-connectivity
-  
+  locationd-connectivity
+
   ichnaea)
 
 set(

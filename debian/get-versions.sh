@@ -59,10 +59,10 @@ else
 fi
 [ -n $soversion ]
 
-echo ${full_version} >${output_dir}/libubuntu-location-service.full-version
-echo ${major} >${output_dir}/libubuntu-location-service.major-version
-echo ${minor} >${output_dir}/libubuntu-location-service.minor-version
-echo ${micro} >${output_dir}/libubuntu-location-service.micro-version
-echo ${major_minor} >${output_dir}/libubuntu-location-service.major-minor-version
-echo ${soversion} >${output_dir}/libubuntu-location-service.soversion
-echo ${vivid_soversion} >${output_dir}/libubuntu-location-service.vivid-soversion
+echo ${full_version} >${output_dir}/liblocationd.full-version
+echo ${major} >${output_dir}/liblocationd.major-version
+echo ${minor} >${output_dir}/liblocationd.minor-version
+echo ${micro} >${output_dir}/liblocationd.micro-version
+echo ${major_minor} >${output_dir}/liblocationd.major-minor-version
+echo ${soversion} >${output_dir}/liblocationd.soversion
+echo ${vivid_soversion} >${output_dir}/liblocationd.vivid-soversion

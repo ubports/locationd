@@ -41,7 +41,7 @@ add_library(
   nmea/sentence.cpp)
 
 add_library(
-  ubuntu-location-service SHARED
+  locationd SHARED
 
   ${LOCATIOND_PUBLIC_HEADERS}
 
@@ -96,7 +96,7 @@ add_library(
   cmds/status.cpp
   cmds/test.h
   cmds/test.cpp
-  
+
   util/benchmark.h
   util/benchmark.cpp
   util/cli.h
@@ -159,7 +159,7 @@ add_library(
 )
 
 add_library(
-  ubuntu-location-service-connectivity SHARED
+  locationd-connectivity SHARED
 
   set_name_for_thread.cpp
 
@@ -179,7 +179,7 @@ add_library(
 set(symbol_map "${CMAKE_SOURCE_DIR}/symbols.map")
 
 set_target_properties(
-  ubuntu-location-service
+  locationd
 
   PROPERTIES
   LINK_FLAGS "${ldflags} -Wl,--version-script,${symbol_map}"
@@ -189,7 +189,7 @@ set_target_properties(
 )
 
 set_target_properties(
-  ubuntu-location-service-connectivity
+  locationd-connectivity
 
   PROPERTIES
   LINK_FLAGS "${ldflags} -Wl,--version-script,${symbol_map}"
@@ -201,7 +201,7 @@ set_target_properties(
 add_definitions(${ENABLED_PROVIDER_TARGETS_DEFINITIONS})
 
 target_link_libraries(
-  ubuntu-location-service-connectivity
+  locationd-connectivity
 
   ${CMAKE_THREAD_LIBS_INIT}
   ${Boost_LIBRARIES}
@@ -214,9 +214,9 @@ target_link_libraries(
 )
 
 target_link_libraries(
-  ubuntu-location-service
+  locationd
 
-  ubuntu-location-service-connectivity
+  locationd-connectivity
 
   ${ENABLED_PROVIDER_TARGETS}
 
@@ -235,30 +235,35 @@ target_link_libraries(
 )
 
 install(
-  TARGETS ubuntu-location-service
+  TARGETS locationd
   DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
 install(
-  TARGETS ubuntu-location-service-connectivity
+  TARGETS locationd-connectivity
   DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
 add_executable(
-  locationd
+  locationd-bin
 
   daemon_main.cpp
 )
 
 target_link_libraries(
-  locationd
+  locationd-bin
 
-  ubuntu-location-service
+  locationd
 
   ${ENABLED_PROVIDER_TARGETS}
 )
 
+set_target_properties(
+  locationd-bin
+  PROPERTIES OUTPUT_NAME locationd
+)
+
 install(
-  TARGETS locationd
+  TARGETS locationd-bin
   DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

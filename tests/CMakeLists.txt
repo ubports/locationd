@@ -20,8 +20,8 @@ macro(LOCATION_SERVICE_ADD_TEST test_name src)
   target_link_libraries(
     ${test_name}
 
-    ubuntu-location-service
-    ubuntu-location-service-connectivity
+    locationd
+    locationd-connectivity
 
     mongoose
 
@@ -37,7 +37,7 @@ macro(LOCATION_SERVICE_ADD_TEST test_name src)
 
   add_test(${test_name} ${CMAKE_CURRENT_BINARY_DIR}/${test_name} --gtest_filter=*-*requires*)
 
-  # Address android's limit on cmdline length and distill ubuntu-location-service into uls
+  # Address android's limit on cmdline length and distill locationd into uls
   install(
     TARGETS ${test_name}
     DESTINATION ${CMAKE_INSTALL_BINDIR}/uls-tests
@@ -68,16 +68,16 @@ LOCATION_SERVICE_ADD_TEST(wifi_and_cell_id_reporting_state_changed_test wifi_and
 # Provider-specific test-cases go here.
 if (LOCATION_SERVICE_ENABLE_GPS_PROVIDER)
   include_directories(${CMAKE_SOURCE_DIR}/src/location_service)
-  LOCATION_SERVICE_ADD_TEST(gps_provider_test gps_provider_test.cpp)
-  LOCATION_SERVICE_ADD_TEST(sntp_client_test sntp_client_test.cpp)
+#  LOCATION_SERVICE_ADD_TEST(gps_provider_test gps_provider_test.cpp)
+#  LOCATION_SERVICE_ADD_TEST(sntp_client_test sntp_client_test.cpp)
 endif(LOCATION_SERVICE_ENABLE_GPS_PROVIDER)
 
 if (LOCATION_SERVICE_ENABLE_GEOCLUE_PROVIDERS)
   add_executable(geoclue_provider_test geoclue_provider_test.cpp)
   target_link_libraries(
     geoclue_provider_test
-    
-    ubuntu-location-service
+
+    locationd
 
     ${CMAKE_THREAD_LIBS_INIT}
     ${Boost_LIBRARIES}

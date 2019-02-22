@@ -11,16 +11,16 @@ find_package(PkgConfig)
 find_package(Threads)
 
 pkg_check_modules(
-  DBUS_CPP 
+  DBUS_CPP
   dbus-cpp REQUIRED)
 
 pkg_check_modules(
-  PROCESS_CPP 
+  PROCESS_CPP
   process-cpp REQUIRED)
 
 pkg_check_modules(
-  LOCATION_CONNECTIVITY 
-  ubuntu-location-service-connectivity REQUIRED)
+  LOCATION_CONNECTIVITY
+  locationd-connectivity REQUIRED)
 
 include_directories(
   ${DBUS_CPP_INCLUDE_DIRS}
@@ -42,5 +42,3 @@ target_link_libraries(
   ${GLog_LIBRARY}
   ${PROCESS_CPP_LDFLAGS}
   ${LOCATION_CONNECTIVITY_LDFLAGS})
-
-

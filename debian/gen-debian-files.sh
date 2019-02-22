@@ -24,7 +24,7 @@
 # This script is called from debian/rules and generates:
 #
 # - control
-# - libubuntu-location-service${soversion}.install.${target_arch}
+# - liblocationd${soversion}.install.${target_arch}
 #
 # For all but control, this is a straight substition and/or renaming exercise for each file.
 # For control, if building on Wily or later, we also fix the "Replaces:" and "Conflicts:"
@@ -51,10 +51,10 @@ version_dir=$(mktemp -d)
 
 sh ${dir}/get-versions.sh ${dir} ${version_dir}
 
-full_version=$(cat "${version_dir}"/libubuntu-location-service.full-version)
-major_minor=$(cat "${version_dir}"/libubuntu-location-service.major-minor-version)
-soversion=$(cat "${version_dir}"/libubuntu-location-service.soversion)
-vivid_soversion=$(cat "${version_dir}"/libubuntu-location-service.vivid-soversion)
+full_version=$(cat "${version_dir}"/liblocationd.full-version)
+major_minor=$(cat "${version_dir}"/liblocationd.major-minor-version)
+soversion=$(cat "${version_dir}"/liblocationd.soversion)
+vivid_soversion=$(cat "${version_dir}"/liblocationd.vivid-soversion)
 
 warning=$(mktemp -t gen-debian-files-msg.XXX)
 
@@ -81,31 +81,31 @@ cat $warning $infile \
     | sed -e "s/@UBUNTU_LOCATION_SERVICE_SOVERSION@/${soversion}/" > "$outfile"
 
 [ "$distro" != "vivid" ] && {
-    sed -i -e "/Replaces: libubuntu-location-service2,/a\
-\          libubuntu-location-service${vivid_soversion}," \
+    sed -i -e "/Replaces: liblocationd2,/a\
+\          liblocationd${vivid_soversion}," \
         "$outfile"
 }
 
 # Generate the install files, naming them according to the soversion.
 
 # Install file for binary package
-infile="${dir}"/libubuntu-location-service.install.in
-outfile="${dir}"/libubuntu-location-service${soversion}.install
+infile="${dir}"/liblocationd.install.in
+outfile="${dir}"/liblocationd${soversion}.install
 warning_msg "$infile"
 cat $warning "$infile" >"$outfile"
 
-infile="${dir}"/libubuntu-location-service.install.with-gps.in
-outfile="${dir}"/libubuntu-location-service${soversion}.install.with-gps
+infile="${dir}"/liblocationd.install.with-gps.in
+outfile="${dir}"/liblocationd${soversion}.install.with-gps
 warning_msg "$infile"
 cat $warning "$infile" >"$outfile"
 
-infile="${dir}"/libubuntu-location-service-dev.install.in
-outfile="${dir}"/libubuntu-location-service-dev.install
+infile="${dir}"/liblocationd-dev.install.in
+outfile="${dir}"/liblocationd-dev.install
 warning_msg "$infile"
 cat $warning $infile | sed -e "s/@UBUNTU_LOCATION_SERVICE_SOVERSION@/${soversion}/" > "$outfile"
 
-ln -s "${dir}"/libubuntu-location-service${soversion}.install.with-gps "${dir}"/libubuntu-location-service${soversion}.install.amd64
-ln -s "${dir}"/libubuntu-location-service${soversion}.install.with-gps "${dir}"/libubuntu-location-service${soversion}.install.armhf
-ln -s "${dir}"/libubuntu-location-service${soversion}.install.with-gps "${dir}"/libubuntu-location-service${soversion}.install.i386
+ln -s "${dir}"/liblocationd${soversion}.install.with-gps "${dir}"/liblocationd${soversion}.install.amd64
+ln -s "${dir}"/liblocationd${soversion}.install.with-gps "${dir}"/liblocationd${soversion}.install.armhf
+ln -s "${dir}"/liblocationd${soversion}.install.with-gps "${dir}"/liblocationd${soversion}.install.i386
 
 exit 0

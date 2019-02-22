@@ -1,4 +1,4 @@
-location-service (3.0.0+16.10.20160616-0ubuntu1) yakkety; urgency=medium
+locationd (3.0.0+16.10.20160616-0ubuntu1) yakkety; urgency=medium
 
   [ Scott Sweeny ]
   * Fusion provider: Always use an update that came from the same source
@@ -6,14 +6,14 @@ location-service (3.0.0+16.10.20160616-0ubuntu1) yakkety; urgency=medium
 
  -- Thomas Voß <thomas.voss@canonical.com>  Thu, 16 Jun 2016 06:03:16 +0000
 
-location-service (3.0.0+16.10.20160613.1-0ubuntu1) yakkety; urgency=medium
+locationd (3.0.0+16.10.20160613.1-0ubuntu1) yakkety; urgency=medium
 
   [ Thomas Voß ]
   * Expose service::State to the bus. (LP: #1536774)
 
  -- marcus.tomlinson@canonical.com <marcus.tomlinson@canonical.com>  Mon, 13 Jun 2016 13:38:47 +0000
 
-location-service (3.0.0+16.10.20160524.3-0ubuntu1) yakkety; urgency=medium
+locationd (3.0.0+16.10.20160524.3-0ubuntu1) yakkety; urgency=medium
 
   [ CI Train Bot ]
   * Resync trunk.
@@ -24,7 +24,7 @@ location-service (3.0.0+16.10.20160524.3-0ubuntu1) yakkety; urgency=medium
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Tue, 24 May 2016 09:45:00 +0000
 
-location-service (3.0.0+16.04.20160405-0ubuntu1) xenial; urgency=medium
+locationd (3.0.0+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
   * Small fixes around provider loading added: tests/mock_engine.h
   * Use a fusion engine provider to generate higher quality position
@@ -42,7 +42,7 @@ location-service (3.0.0+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
  -- Scott Sweeny <ci-train-bot@canonical.com>  Tue, 05 Apr 2016 21:33:22 +0000
 
-location-service (3.0.0+16.04.20160404-0ubuntu1) xenial; urgency=medium
+locationd (3.0.0+16.04.20160404-0ubuntu1) xenial; urgency=medium
 
   * Enable dual landings according to https://wiki.ubuntu.com/citrain/LandingProcess#Dual-landing_for_stable_and_devel:
     * Both vivid+overlay and xenial packages are built from the same
@@ -54,52 +54,52 @@ location-service (3.0.0+16.04.20160404-0ubuntu1) xenial; urgency=medium
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Mon, 04 Apr 2016 19:22:15 +0000
 
-location-service (3.0.0-0ubuntu4) wily-proposed; urgency=medium
+locationd (3.0.0-0ubuntu4) wily-proposed; urgency=medium
 
   * No change rebuild.
 
  -- Ken VanDine <ken.vandine@canonical.com>  Mon, 03 Aug 2015 13:33:13 -0400
 
-location-service (3.0.0-0ubuntu3) wily; urgency=medium
+locationd (3.0.0-0ubuntu3) wily; urgency=medium
 
   * No change rebuild.
 
  -- Matthias Klose <doko@ubuntu.com>  Fri, 31 Jul 2015 00:23:18 +0200
 
-location-service (3.0.0-0ubuntu2) wily; urgency=medium
+locationd (3.0.0-0ubuntu2) wily; urgency=medium
 
-  * libubuntu-location-service3: Replaces libubuntu-location-service2,
+  * libubuntu-locationd3: Replaces libubuntu-locationd2,
     config file /etc/gps.conf in both packages.
 
  -- Matthias Klose <doko@ubuntu.com>  Thu, 30 Jul 2015 09:57:50 +0200
 
-location-service (3.0.0) wily; urgency=medium
+locationd (3.0.0) wily; urgency=medium
 
   * Bump major revision and fix LP:#1478750 to account for toolchain update.
 
  -- Thomas Voß <thomas.voss@canonical.com>  Thu, 30 Jul 2015 08:33:13 +0200
 
-location-service (2.1+15.04.20160331.2-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20160331.2-0ubuntu1) vivid; urgency=medium
 
   * Log to stderr by default, relying on upstart to rotate logs
     appropriately. (LP: #1447110)
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Thu, 31 Mar 2016 11:03:46 +0000
 
-location-service (2.1+15.04.20160308.1-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20160308.1-0ubuntu1) vivid; urgency=medium
 
   * Add SntpClient for querying reference time information.
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Tue, 08 Mar 2016 08:54:07 +0000
 
-location-service (2.1+15.04.20160302.1-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20160302.1-0ubuntu1) vivid; urgency=medium
 
   * Remove explicit option to disable satellite-based positioning
     services.
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Wed, 02 Mar 2016 15:28:02 +0000
 
-location-service (2.1+15.04.20160106-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20160106-0ubuntu1) vivid; urgency=medium
 
   [ Alberto Mardegan ]
   * Set debian source format to "3.0 (native)"
@@ -109,27 +109,27 @@ location-service (2.1+15.04.20160106-0ubuntu1) vivid; urgency=medium
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Wed, 06 Jan 2016 16:15:29 +0000
 
-location-service (2.1+15.04.20151211-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151211-0ubuntu1) vivid; urgency=medium
 
   * Account for changes in trust-store w.r.t. assembling the description
     of a trust prompt.
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Fri, 11 Dec 2015 08:57:44 +0000
 
-location-service (2.1+15.04.20151209-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151209-0ubuntu1) vivid; urgency=medium
 
   * Fix settings not being applied correctly.
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Wed, 09 Dec 2015 15:22:22 +0000
 
-location-service (2.1+15.04.20151202.1-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151202.1-0ubuntu1) vivid; urgency=medium
 
   * Ensure that event connections are cleaned up on destruction. (LP:
     #1480877)
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Wed, 02 Dec 2015 12:12:21 +0000
 
-location-service (2.1+15.04.20151127-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151127-0ubuntu1) vivid; urgency=medium
 
   [ Alberto Mardegan ]
   * Send last known position on session start
@@ -155,19 +155,19 @@ location-service (2.1+15.04.20151127-0ubuntu1) vivid; urgency=medium
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Fri, 27 Nov 2015 13:00:33 +0000
 
-location-service (2.1+15.04.20151113-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151113-0ubuntu1) vivid; urgency=medium
 
   * Adjust default timeout for downloading GPS XTRA data.
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Fri, 13 Nov 2015 10:33:56 +0000
 
-location-service (2.1+15.04.20151109.2-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151109.2-0ubuntu1) vivid; urgency=medium
 
   [ Alberto Mardegan ]
   * Make sure that injected time is given in milliseconds
 
   [ Thomas Voß ]
-  * Cherry-pick rev. 196 and 199 from lp:location-service. The changes
+  * Cherry-pick rev. 196 and 199 from lp:locationd. The changes
     got accidentally removed by merging the outstanding documentation
     branch.
   * Handle responses of clients to updates asynchronously. Rely on
@@ -176,7 +176,7 @@ location-service (2.1+15.04.20151109.2-0ubuntu1) vivid; urgency=medium
 
  -- David Barth <david.barth@canonical.com>  Mon, 09 Nov 2015 20:48:48 +0000
 
-location-service (2.1+15.04.20151022-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20151022-0ubuntu1) vivid; urgency=medium
 
   [ Thomas Voß ]
   * Add documentation for debugging, hacking and debugging the location
@@ -190,7 +190,7 @@ location-service (2.1+15.04.20151022-0ubuntu1) vivid; urgency=medium
 
  -- Thomas Voß <ci-train-bot@canonical.com>  Thu, 22 Oct 2015 07:16:50 +0000
 
-location-service (2.1+15.04.20150427.1-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20150427.1-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
   * New rebuild forced.
@@ -201,7 +201,7 @@ location-service (2.1+15.04.20150427.1-0ubuntu1) vivid; urgency=medium
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 27 Apr 2015 22:55:52 +0000
 
-location-service (2.1+15.04.20150424-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20150424-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
   * New rebuild forced.
@@ -218,7 +218,7 @@ location-service (2.1+15.04.20150424-0ubuntu1) vivid; urgency=medium
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 24 Apr 2015 14:46:59 +0000
 
-location-service (2.1+15.04.20150417-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20150417-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
   * New rebuild forced.
@@ -229,7 +229,7 @@ location-service (2.1+15.04.20150417-0ubuntu1) vivid; urgency=medium
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 17 Apr 2015 09:45:52 +0000
 
-location-service (2.1+15.04.20150226-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20150226-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
   * Launchpad automatic translations update. added: po/af.po po/bg.po
@@ -241,7 +241,7 @@ location-service (2.1+15.04.20150226-0ubuntu1) vivid; urgency=medium
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 26 Feb 2015 19:53:44 +0000
 
-location-service (2.1+15.04.20150213-0ubuntu1) vivid; urgency=medium
+locationd (2.1+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
   [ thomas-voss ]
   * Automatically clean up session store for dead clients. (LP:
@@ -249,7 +249,7 @@ location-service (2.1+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 13 Feb 2015 13:54:25 +0000
 
-location-service (2.1+15.04.20150126.1-0ubuntu1) vivid; urgency=low
+locationd (2.1+15.04.20150126.1-0ubuntu1) vivid; urgency=low
 
   [ thomas-voss ]
   * Make the remote::Provider::Stub fail loudly on construction if the
@@ -259,7 +259,7 @@ location-service (2.1+15.04.20150126.1-0ubuntu1) vivid; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Jan 2015 20:16:32 +0000
 
-location-service (2.1+15.04.20150125~rtm-0ubuntu1) 14.09; urgency=low
+locationd (2.1+15.04.20150125~rtm-0ubuntu1) 14.09; urgency=low
 
   [ CI Train Bot ]
   * Resync trunk
@@ -272,7 +272,7 @@ location-service (2.1+15.04.20150125~rtm-0ubuntu1) 14.09; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sun, 25 Jan 2015 12:45:54 +0000
 
-location-service (2.1+15.04.20150113~rtm-0ubuntu1) 14.09; urgency=low
+locationd (2.1+15.04.20150113~rtm-0ubuntu1) 14.09; urgency=low
 
   [ thomas-voss ]
   * Print details about visible space vehicles to the gps provider test
@@ -280,7 +280,7 @@ location-service (2.1+15.04.20150113~rtm-0ubuntu1) 14.09; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 13 Jan 2015 13:01:58 +0000
 
-location-service (2.1+15.04.20150106~rtm-0ubuntu1) 14.09; urgency=low
+locationd (2.1+15.04.20150106~rtm-0ubuntu1) 14.09; urgency=low
 
   [ thomas-voss ]
   * Fix #1394204 by: (LP: #1394204)
@@ -290,7 +290,7 @@ location-service (2.1+15.04.20150106~rtm-0ubuntu1) 14.09; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 Jan 2015 18:50:55 +0000
 
-location-service (2.1+15.04.20141110.1-0ubuntu1) vivid; urgency=low
+locationd (2.1+15.04.20141110.1-0ubuntu1) vivid; urgency=low
 
   [ thomas-voss ]
   * Make sure that devices being added/removed by NetworkManager are
@@ -298,27 +298,27 @@ location-service (2.1+15.04.20141110.1-0ubuntu1) vivid; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 10 Nov 2014 20:30:56 +0000
 
-location-service (2.1+15.04.20141105.1-0ubuntu1) vivid; urgency=low
+locationd (2.1+15.04.20141105.1-0ubuntu1) vivid; urgency=low
 
   [ CI bot ]
   * Resync trunk
 
   [ Kevin DuBois ]
-  * The headers shipped in libubuntu-location-service-dev contain
+  * The headers shipped in libubuntu-locationd-dev contain
     includes that are provided in the libboost-dev package (specifically
     headers like boost/units/cmath.hpp). Make the dev package depend on
     libboost-dev so the downstreams get what they need to compile
-    against the libubuntu-location-service-dev headers
+    against the libubuntu-locationd-dev headers
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Nov 2014 15:51:16 +0000
 
-location-service (2.1+15.04.20141104-0ubuntu1) vivid; urgency=low
+locationd (2.1+15.04.20141104-0ubuntu1) vivid; urgency=low
 
   * New rebuild forced
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 06:20:45 +0000
 
-location-service (2.1+14.10.20141030~rtm-0ubuntu1) 14.09; urgency=low
+locationd (2.1+14.10.20141030~rtm-0ubuntu1) 14.09; urgency=low
 
   [ thomas-voss ]
   * Bump build dependency.
@@ -326,7 +326,7 @@ location-service (2.1+14.10.20141030~rtm-0ubuntu1) 14.09; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 Oct 2014 14:33:22 +0000
 
-location-service (2.1+14.10.20141023-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141023-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Prevent multiple invocations of start positioning on android GPS HAL
@@ -336,28 +336,28 @@ location-service (2.1+14.10.20141023-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 23 Oct 2014 16:41:05 +0000
 
-location-service (2.1+14.10.20141014-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141014-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Switch to a NonSelectingProviderSelectionPolicy by default.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 14 Oct 2014 12:44:53 +0000
 
-location-service (2.1+14.10.20141013-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141013-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Allow for creation of initially invalid radio cells. (LP: #1380668)
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 13 Oct 2014 15:28:59 +0000
 
-location-service (2.1+14.10.20141010-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141010-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Prefer /system/etc/gps.conf over /etc/gps.conf.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 10 Oct 2014 07:18:05 +0000
 
-location-service (2.1+14.10.20141009.1-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141009.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Make sure that modems are cached, no matter if they come with a
@@ -365,21 +365,21 @@ location-service (2.1+14.10.20141009.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Oct 2014 15:18:56 +0000
 
-location-service (2.1+14.10.20141008-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141008-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Make the service translateable. (LP: #1354092)
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 08 Oct 2014 09:20:31 +0000
 
-location-service (2.1+14.10.20141006-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20141006-0ubuntu1) utopic; urgency=low
 
   [ Alberto Aguirre ]
   * Ensure Engine::for_each_provider fulfills the noexcept promise
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 06 Oct 2014 16:39:42 +0000
 
-location-service (2.1+14.10.20140925.2-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20140925.2-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Implement heuristic to invalidate 3G cells after 60 seconds. (LP:
@@ -387,7 +387,7 @@ location-service (2.1+14.10.20140925.2-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Sep 2014 20:27:06 +0000
 
-location-service (2.1+14.10.20140917.1-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20140917.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Expose remote::Interface and respective stub/skeleton for using and
@@ -396,7 +396,7 @@ location-service (2.1+14.10.20140917.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Sep 2014 13:27:53 +0000
 
-location-service (2.1+14.10.20140915-0ubuntu1) utopic; urgency=low
+locationd (2.1+14.10.20140915-0ubuntu1) utopic; urgency=low
 
   [ Loïc Minier ]
   * Update upstart job start conditions; workaround startup issue with a
@@ -407,7 +407,7 @@ location-service (2.1+14.10.20140915-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 20:02:59 +0000
 
-location-service (2.1+14.10.20140829-0ubuntu1) utopic; urgency=medium
+locationd (2.1+14.10.20140829-0ubuntu1) utopic; urgency=medium
 
   [ Manuel de la Pena ]
   * Add a new provider for the remote project.
@@ -417,7 +417,7 @@ location-service (2.1+14.10.20140829-0ubuntu1) utopic; urgency=medium
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 29 Aug 2014 11:01:26 +0000
 
-location-service (2.0.1+14.10.20140825-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140825-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Add request for wireless scans to load test threads. Make sure that
@@ -426,7 +426,7 @@ location-service (2.0.1+14.10.20140825-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 09:14:46 +0000
 
-location-service (2.0.1+14.10.20140818-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140818-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Add a demultiplexing reporter implementation. Adjust daemon config
@@ -441,7 +441,7 @@ location-service (2.0.1+14.10.20140818-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 18 Aug 2014 08:11:55 +0000
 
-location-service (2.0.1+14.10.20140811-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140811-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Make sure that state property changes are correctly reported to the
@@ -452,7 +452,7 @@ location-service (2.0.1+14.10.20140811-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 11 Aug 2014 10:21:20 +0000
 
-location-service (2.0.1+14.10.20140808.1-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140808.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Ensure that connections to events are properly cut on destruction.
@@ -460,14 +460,14 @@ location-service (2.0.1+14.10.20140808.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 08 Aug 2014 19:25:54 +0000
 
-location-service (2.0.1+14.10.20140808-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140808-0ubuntu1) utopic; urgency=low
 
   [ Nick Dedekind ]
   * Revert hotfix for bug#1352977 (LP: #1352977)
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 08 Aug 2014 09:12:14 +0000
 
-location-service (2.0.1+14.10.20140807.1-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140807.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Add camera app and osm touch to the whitelist for permission mgmt.
@@ -477,7 +477,7 @@ location-service (2.0.1+14.10.20140807.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 07 Aug 2014 20:45:31 +0000
 
-location-service (2.0.1+14.10.20140806-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140806-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Make the location service a trusted helper.
@@ -487,7 +487,7 @@ location-service (2.0.1+14.10.20140806-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 06 Aug 2014 14:26:22 +0000
 
-location-service (2.0.1+14.10.20140731-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140731-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Expose connectivity state and primary connection characteristics.
@@ -495,7 +495,7 @@ location-service (2.0.1+14.10.20140731-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 31 Jul 2014 13:25:55 +0000
 
-location-service (2.0.1+14.10.20140730.1-0ubuntu1) utopic; urgency=low
+locationd (2.0.1+14.10.20140730.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Make sure that logging directories are created on service startup.
@@ -507,7 +507,7 @@ location-service (2.0.1+14.10.20140730.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 14:17:04 +0000
 
-location-service (2.0.1+14.10.20140729.1-0ubuntu1) utopic; urgency=medium
+locationd (2.0.1+14.10.20140729.1-0ubuntu1) utopic; urgency=medium
 
   [ Pete Woods ]
   * Add libdbus-cpp and libdbus as dependencies on devel package.
@@ -515,41 +515,41 @@ location-service (2.0.1+14.10.20140729.1-0ubuntu1) utopic; urgency=medium
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 29 Jul 2014 09:21:00 +0000
 
-location-service (2.0.0+14.10.20140718.2-0ubuntu2) utopic; urgency=medium
+locationd (2.0.0+14.10.20140718.2-0ubuntu2) utopic; urgency=medium
 
   * No-change rebuild to get dbgsyms for all binaries onto
     ddebs.ubuntu.com
 
  -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 24 Jul 2014 12:36:51 -0700
 
-location-service (2.0.0+14.10.20140718.2-0ubuntu1) utopic; urgency=medium
+locationd (2.0.0+14.10.20140718.2-0ubuntu1) utopic; urgency=medium
 
   [ Thomas Voß ]
   * Bump major revision and so name to account for toolchain update.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 15:35:25 +0000
 
-location-service (1.0.0+14.10.20140717.1-0ubuntu1) utopic; urgency=low
+locationd (1.0.0+14.10.20140717.1-0ubuntu1) utopic; urgency=low
 
   [ thomas-voss ]
   * Switch to json-c for json parsing/generation purposes.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 17 Jul 2014 20:38:22 +0000
 
-location-service (1.0.0+14.10.20140715-0ubuntu1) utopic; urgency=low
+locationd (1.0.0+14.10.20140715-0ubuntu1) utopic; urgency=low
 
   * New rebuild forced
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Jul 2014 14:13:06 +0000
 
-location-service (1.0.0+14.10.20140630-0ubuntu1) utopic; urgency=medium
+locationd (1.0.0+14.10.20140630-0ubuntu1) utopic; urgency=medium
 
   [ Thomas Voß ]
   * Bump major version.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Jun 2014 08:57:56 +0000
 
-location-service (0.0.3+14.10.20140612-0ubuntu1) utopic; urgency=low
+locationd (0.0.3+14.10.20140612-0ubuntu1) utopic; urgency=low
 
   [ Ubuntu daily release ]
   * New rebuild forced
@@ -559,20 +559,20 @@ location-service (0.0.3+14.10.20140612-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 12 Jun 2014 10:45:09 +0000
 
-location-service (0.0.3+14.10.20140512-0ubuntu1) utopic; urgency=medium
+locationd (0.0.3+14.10.20140512-0ubuntu1) utopic; urgency=medium
 
   [ Thomas Voß ]
   * Patch version bump reflecting the toolchain switch.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 May 2014 21:02:13 +0000
 
-location-service (0.0.2+14.04.20140307-0ubuntu2) utopic; urgency=high
+locationd (0.0.2+14.04.20140307-0ubuntu2) utopic; urgency=high
 
   * No change rebuild against boost1.55.
 
  -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 28 Apr 2014 02:59:37 +0100
 
-location-service (0.0.2+14.04.20140307-0ubuntu1) trusty; urgency=low
+locationd (0.0.2+14.04.20140307-0ubuntu1) trusty; urgency=low
 
   [ thomas-voss ]
   * Re-enable onSessionDied().
@@ -582,21 +582,21 @@ location-service (0.0.2+14.04.20140307-0ubuntu1) trusty; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 07 Mar 2014 12:42:42 +0000
 
-location-service (0.0.2+14.04.20140211-0ubuntu1) trusty; urgency=low
+locationd (0.0.2+14.04.20140211-0ubuntu1) trusty; urgency=low
 
   [ thomas-voss ]
   * Backport dummy provider and accompanying tests.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Feb 2014 19:26:26 +0000
 
-location-service (0.0.2+14.04.20140205.1-0ubuntu1) trusty; urgency=low
+locationd (0.0.2+14.04.20140205.1-0ubuntu1) trusty; urgency=low
 
   [ thomas-voss ]
   * Force compilation against gcc 4.7.
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Feb 2014 14:32:35 +0000
 
-location-service (0.0.2+14.04.20140204-0ubuntu1) trusty; urgency=low
+locationd (0.0.2+14.04.20140204-0ubuntu1) trusty; urgency=low
 
   [ thomas-voss ]
   * * Fix a race when a session is created while another one ends. *
@@ -606,13 +606,13 @@ location-service (0.0.2+14.04.20140204-0ubuntu1) trusty; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Feb 2014 12:36:02 +0000
 
-location-service (0.0.2+13.10.20131016.1-0ubuntu2) trusty; urgency=low
+locationd (0.0.2+13.10.20131016.1-0ubuntu2) trusty; urgency=low
 
   * No change rebuild for Boost 1.54 transition.
 
  -- Dmitrijs Ledkovs <xnox@ubuntu.com>  Mon, 21 Oct 2013 18:26:01 +0100
 
-location-service (0.0.2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
+locationd (0.0.2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
 
   [ Olivier Tilloy ]
   * Ensure the service is restarted if ended unexpectedly. (LP:
@@ -623,10 +623,10 @@ location-service (0.0.2+13.10.20131016.1-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 16 Oct 2013 11:01:51 +0000
 
-location-service (0.0.2+13.10.20131015.2-0ubuntu1) saucy; urgency=low
+locationd (0.0.2+13.10.20131015.2-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
-  * Refactor packaging such that the service executable is part of ubuntu-location-service-bin.
+  * Refactor packaging such that the service executable is part of ubuntu-locationd-bin.
   * Refactor packaging of service executable. (LP: #1235419)
 
   [ Ubuntu daily release ]
@@ -634,7 +634,7 @@ location-service (0.0.2+13.10.20131015.2-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 15:07:41 +0000
 
-location-service (0.0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
   * Replace throwing an exception with logging, fulfill the noexcept
@@ -648,7 +648,7 @@ location-service (0.0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Oct 2013 05:41:09 +0000
 
-location-service (0.0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
   * Correctly link against gflags. (LP: #1218896)
@@ -658,12 +658,12 @@ location-service (0.0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 03:02:21 +0000
 
-location-service (0.0.1+13.10.20130903-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130903-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
   * * Remove build-dependency on lcov. * Add build-dependency on
     graphviz. * Add "Pre-Depends: ${misc:Pre-Depends}" for libubuntu-
-    location-service0. * Add MultiArch: foreign for ubuntu-location-
+    locationd0. * Add MultiArch: foreign for ubuntu-location-
     service-doc. * Disable JS-based search engine in doxygen setup to
     address lintian warning. (LP: #1218896)
 
@@ -672,7 +672,7 @@ location-service (0.0.1+13.10.20130903-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 15:16:22 +0000
 
-location-service (0.0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
   * Remove ruby-ronn from the build-dependencies.
@@ -682,7 +682,7 @@ location-service (0.0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 15:21:28 +0000
 
-location-service (0.0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
 
   [ thomas-voss ]
   * Log gps::Provider status updates to syslog, but only every 20th
@@ -693,7 +693,7 @@ location-service (0.0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 02:10:46 +0000
 
-location-service (0.0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
 
   [ Thomas Voß ]
   * Switch to gcc 4.7.
@@ -703,7 +703,7 @@ location-service (0.0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 08:04:30 +0000
 
-location-service (0.0.1+13.10.20130819-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130819-0ubuntu1) saucy; urgency=low
 
   [ Thomas Voß ]
   * Add linker flags to pkgconfig setup.
@@ -713,7 +713,7 @@ location-service (0.0.1+13.10.20130819-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 19 Aug 2013 10:06:44 +0000
 
-location-service (0.0.1+13.10.20130815.1-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130815.1-0ubuntu1) saucy; urgency=low
 
   [ Thomas Voß ]
   * Adjust path to service executable.
@@ -723,7 +723,7 @@ location-service (0.0.1+13.10.20130815.1-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 15 Aug 2013 06:06:14 +0000
 
-location-service (0.0.1+13.10.20130814-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130814-0ubuntu1) saucy; urgency=low
 
   [ Ted Gould ]
   * Add an upstart config file to examples, adjust path to service
@@ -738,7 +738,7 @@ location-service (0.0.1+13.10.20130814-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 14 Aug 2013 10:07:04 +0000
 
-location-service (0.0.1+13.10.20130813-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130813-0ubuntu1) saucy; urgency=low
 
   [ Thomas Voß ]
   * Adjust build and runtime dependency to use the hardware bits of the
@@ -749,7 +749,7 @@ location-service (0.0.1+13.10.20130813-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 13 Aug 2013 10:06:35 +0000
 
-location-service (0.0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
 
   [ Didier Roche ]
   * Adapt to new gmock snapshot (which doesn't ship anymore shared lib).
@@ -760,13 +760,13 @@ location-service (0.0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Jul 2013 02:01:50 +0000
 
-location-service (0.0.1+13.10.20130709-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130709-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 18
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Jul 2013 02:02:37 +0000
 
-location-service (0.0.1+13.10.20130705-0ubuntu1) saucy; urgency=low
+locationd (0.0.1+13.10.20130705-0ubuntu1) saucy; urgency=low
 
   [ Didier Roche ]
   * Ship a -doc package now to install the documentation. In addition to
@@ -777,19 +777,19 @@ location-service (0.0.1+13.10.20130705-0ubuntu1) saucy; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Jul 2013 02:01:11 +0000
 
-location-service (0.0.1daily13.06.18-0ubuntu1) saucy; urgency=low
+locationd (0.0.1daily13.06.18-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 14
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Jun 2013 02:03:05 +0000
 
-location-service (0.0.1daily13.06.17-0ubuntu1) saucy; urgency=low
+locationd (0.0.1daily13.06.17-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 13
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 17 Jun 2013 02:02:04 +0000
 
-location-service (0.0.1daily13.06.14.1-0ubuntu1) saucy; urgency=low
+locationd (0.0.1daily13.06.14.1-0ubuntu1) saucy; urgency=low
 
   [ Łukasz 'sil2100' Zemczak ]
   * debian/compat, debian/rules, debian/control, debian/copyright:

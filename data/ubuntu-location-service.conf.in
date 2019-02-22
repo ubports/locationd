@@ -1,7 +1,0 @@
-description "Location Services"
-
-start on started dbus
-
-respawn
-
-exec /usr/bin/ubuntu-location-serviced --bus system --provider gps::Provider --provider remote::Provider  --remote::Provider::name="com.ubuntu.espoo.Service.Provider" --remote::Provider::path="/com/ubuntu/espoo/Service/Provider"

@@ -15,28 +15,28 @@
 # Authored by: Thomas Voss <thomas.voss@canonical.com>
 
 configure_file(
-  ubuntu-location-service.pc.in ubuntu-location-service.pc @ONLY
+  locationd.pc.in locationd.pc @ONLY
 )
 
 configure_file(
-  ubuntu-location-service-connectivity.pc.in ubuntu-location-service-connectivity.pc @ONLY
+  locationd-connectivity.pc.in locationd-connectivity.pc @ONLY
 )
 
 configure_file(
-  ubuntu-location-service.conf.in ubuntu-location-service.conf @ONLY
+  locationd.conf.in locationd.conf @ONLY
 )
 
 configure_file(
-  ubuntu-location-service-trust-stored.conf.in ubuntu-location-service-trust-stored.conf @ONLY
+  locationd-trust-stored.conf.in locationd-trust-stored.conf @ONLY
 )
 
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-location-service.pc
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/locationd.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
 
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-location-service-connectivity.pc
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/locationd-connectivity.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
 
@@ -46,12 +46,12 @@ install(
 )
 
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-location-service.conf
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/locationd.conf
   DESTINATION /etc/init/
 )
 
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-location-service-trust-stored.conf
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/locationd-trust-stored.conf
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/upstart/sessions/
 )
 
@@ -60,5 +60,5 @@ install(
   ${CMAKE_CURRENT_SOURCE_DIR}/location/dbus/provider.xml
   ${CMAKE_CURRENT_SOURCE_DIR}/location/dbus/service.xml
   ${CMAKE_CURRENT_SOURCE_DIR}/location/dbus/session.xml
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ubuntu-location-service/dbus/
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/locationd/dbus/
 )
