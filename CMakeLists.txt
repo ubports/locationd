@@ -6,32 +6,9 @@ if (DEFINED SNAPPY_UBUNTU_CORE)
   add_definitions(-DSNAPPY_UBUNTU_CORE)
 endif()
 
-# We haven't received version information via the packaging setup.
-# For that, we try to determine sensible values on our own, ensuring
-# plain old invocations to cmake still work as expected.
-if (NOT DEFINED LOCATIOND_VERSION_MAJOR)
-  find_program(LSB_RELEASE lsb_release)
-  execute_process(
-    COMMAND ${LSB_RELEASE} -c -s
-    OUTPUT_VARIABLE DISTRO_CODENAME
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-  # We explicitly ignore errors and only check if we are building for vivid.
-  # For all other cases:
-  #   - releases other than vivid
-  #   - other distros
-  #   - errors
-  # we define the version to be 2.0.0
-  if (${DISTRO_CODENAME} STREQUAL "vivid")
-    set(LOCATIOND_VERSION_MAJOR 3)
-    set(LOCATIOND_VERSION_MINOR 0)
-    set(LOCATIOND_VERSION_PATCH 0)
-  else ()
-    set(LOCATIOND_VERSION_MAJOR 4)
-    set(LOCATIOND_VERSION_MINOR 0)
-    set(LOCATIOND_VERSION_PATCH 0)
-  endif()
-endif()
+set(LOCATIOND_VERSION_MAJOR 0)
+set(LOCATIOND_VERSION_MINOR 0)
+set(LOCATIOND_VERSION_PATCH 1)
 
 message(STATUS "${CMAKE_PROJECT_NAME} ${LOCATIOND_VERSION_MAJOR}.${LOCATIOND_VERSION_MINOR}.${LOCATIOND_VERSION_PATCH}")
 

@@ -38,7 +38,7 @@ Build-Depends: cmake,
 Standards-Version: 3.9.4
 Homepage: https://github.com/ubports/locationd
 
-Package: liblocationd4
+Package: liblocationd0
 Section: libs
 Architecture: any
 Multi-Arch: same
@@ -55,7 +55,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: foreign
 Recommends: locationd-doc,
-Depends: liblocationd4 (= ${binary:Version}),
+Depends: liblocationd0 (= ${binary:Version}),
          libdbus-1-dev,
          libdbus-cpp-dev,
          libboost-dev,
@@ -71,7 +71,7 @@ Package: liblocationd-dbg
 Section: debug
 Architecture: any
 Multi-Arch: foreign
-Depends: liblocationd4 (= ${binary:Version}),
+Depends: liblocationd0 (= ${binary:Version}),
          ${misc:Depends},
 Description: location service aggregating position/velocity/heading
  updates and exporting them over dbus.
@@ -89,7 +89,7 @@ Description: location service aggregating position/velocity/heading
 
 Package: locationd-bin
 Architecture: any
-Depends: liblocationd4 (= ${binary:Version}),
+Depends: liblocationd0 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
          trust-store-bin,
@@ -103,7 +103,7 @@ Description: location service aggregating position/velocity/heading
 Package: locationd-examples
 Architecture: any
 Multi-Arch: same
-Depends: liblocationd4 (= ${binary:Version}),
+Depends: liblocationd0 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends},
          locationd-doc,
