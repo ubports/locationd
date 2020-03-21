@@ -23,7 +23,7 @@ include(CTest)
 include(GNUInstallDirs)
 
 find_package(PkgConfig)
-find_package(Boost COMPONENTS filesystem locale system program_options)
+find_package(Boost REQUIRED COMPONENTS filesystem locale system program_options)
 find_package(GLog)
 find_package(GFlags)
 find_package(Threads)
