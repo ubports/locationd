@@ -51,7 +51,7 @@ void sirf::Writer::write_unsigned_short(std::uint16_t value)
     if (current + sizeof(value) > end)
         throw std::out_of_range{"Write buffer exhausted"};
 
-    *reinterpret_cast<std::uint16_t*>(&(*current)) = ::ntohs(value);
+    *reinterpret_cast<std::uint16_t*>(&(*current)) = ntohs(value);
     current += sizeof(value);
 }
 
@@ -60,7 +60,7 @@ void sirf::Writer::write_signed_short(std::int16_t value)
     if (current + sizeof(value) > end)
         throw std::out_of_range{"Write buffer exhausted"};
 
-    *reinterpret_cast<std::int16_t*>(&(*current)) = ::ntohs(value);
+    *reinterpret_cast<std::int16_t*>(&(*current)) = ntohs(value);
     current += sizeof(value);
 }
 
@@ -69,7 +69,7 @@ void sirf::Writer::write_unsigned_long(std::uint32_t value)
     if (current + sizeof(value) > end)
         throw std::out_of_range{"Write buffer exhausted"};
 
-    *reinterpret_cast<std::uint32_t*>(&(*current)) = ::ntohl(value);
+    *reinterpret_cast<std::uint32_t*>(&(*current)) = ntohl(value);
     current += sizeof(value);
 }
 
@@ -78,7 +78,7 @@ void sirf::Writer::write_signed_long(std::int32_t value)
     if (current + sizeof(value) > end)
         throw std::out_of_range{"Write buffer exhausted"};
 
-    *reinterpret_cast<std::int32_t*>(&(*current)) = ::ntohl(value);
+    *reinterpret_cast<std::int32_t*>(&(*current)) = ntohl(value);
     current += sizeof(value);
 }
 

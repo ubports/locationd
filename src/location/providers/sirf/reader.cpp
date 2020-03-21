@@ -53,7 +53,7 @@ std::uint16_t sirf::Reader::read_unsigned_short()
 
     auto result = reinterpret_cast<const std::uint16_t*>(&(*current));
     current += sizeof(std::uint16_t);
-    return ::htons(*result);
+    return htons(*result);
 }
 
 std::int16_t sirf::Reader::read_signed_short()
@@ -63,7 +63,7 @@ std::int16_t sirf::Reader::read_signed_short()
 
     auto result = reinterpret_cast<const std::int16_t*>(&(*current));
     current += sizeof(std::int16_t);
-    return ::htons(*result);
+    return htons(*result);
 }
 
 std::uint32_t sirf::Reader::read_unsigned_long()
@@ -73,7 +73,7 @@ std::uint32_t sirf::Reader::read_unsigned_long()
 
     auto result = reinterpret_cast<const std::uint32_t*>(&(*current));
     current += sizeof(std::uint32_t);
-    return ::htonl(*result);
+    return htonl(*result);
 }
 
 std::int32_t sirf::Reader::read_signed_long()
@@ -83,5 +83,5 @@ std::int32_t sirf::Reader::read_signed_long()
 
     auto result = reinterpret_cast<const std::int32_t*>(&(*current));
     current += sizeof(std::int32_t);
-    return ::htonl(*result);
+    return htonl(*result);
 }
