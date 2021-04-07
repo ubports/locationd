@@ -63,7 +63,7 @@ void location::dbus::stub::Service::deinit()
 }
 
 std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::init(
-        const glib::SharedObject<GDBusConnection>& connection, const glib::SharedObject<ComUbuntuLocationService>& service)
+        const glib::SharedObject<GDBusConnection>& connection, const glib::SharedObject<CoreLocationdService>& service)
 {
     auto sp = shared_from_this();
     std::weak_ptr<Service> wp{sp};
@@ -84,30 +84,30 @@ std::shared_ptr<location::dbus::stub::Service> location::dbus::stub::Service::in
         nullptr, on_name_vanished,
         name_vanished_context_.get(), nullptr);
 
-    const auto raw_state = com_ubuntu_location_service_get_state(proxy_.get());
+    const auto raw_state = core_locationd_service_get_state(proxy_.get());
     if (raw_state)
         state_ = boost::lexical_cast<Service::State>(raw_state);
 
-    does_satellite_based_positioning_ = com_ubuntu_location_service_get_does_satellite_based_positioning(proxy_.get());
-    does_report_cell_and_wifi_ids_ = com_ubuntu_location_service_get_does_report_cell_and_wifi_ids(proxy_.get());
-    is_online_ = com_ubuntu_location_service_get_is_online(proxy_.get());
+    does_satellite_based_positioning_ = core_locationd_service_get_does_satellite_based_positioning(proxy_.get());
+    does_report_cell_and_wifi_ids_ = core_locationd_service_get_does_report_cell_and_wifi_ids(proxy_.get());
+    is_online_ = core_locationd_service_get_is_online(proxy_.get());
 
     does_satellite_based_positioning_.changed().connect([this, wp](bool value)
     {
         if (auto sp = wp.lock())
-            com_ubuntu_location_service_set_does_satellite_based_positioning(proxy_.get(), value);
+            core_locationd_service_set_does_satellite_based_positioning(proxy_.get(), value);
     });
 
     does_report_cell_and_wifi_ids_.changed().connect([this, wp](bool value)
     {
         if (auto sp = wp.lock())
-            com_ubuntu_location_service_set_does_report_cell_and_wifi_ids(proxy_.get(), value);
+            core_locationd_service_set_does_report_cell_and_wifi_ids(proxy_.get(), value);
     });
 
     is_online_.changed().connect([this, wp](bool value)
     {
         if (auto sp = wp.lock())
-            com_ubuntu_location_service_set_is_online(proxy_.get(), value);
+            core_locationd_service_set_is_online(proxy_.get(), value);
     });
 
     signal_handler_ids.insert(
@@ -138,7 +138,7 @@ void location::dbus::stub::Service::create_session_for_criteria(const Criteria& 
     auto sp = shared_from_this();
     std::weak_ptr<Service> wp{sp};
 
-    com_ubuntu_location_service_call_create_session_for_criteria(
+    core_locationd_service_call_create_session_for_criteria(
                 proxy_.get(), dbus::encode(criteria), nullptr, on_session_ready, new Service::SessionCreationContext{std::move(cb), wp});
 }
 
@@ -150,7 +150,7 @@ void location::dbus::stub::Service::add_provider(const Provider::Ptr& provider)
     auto path = "/providers/" + std::to_string(provider_counter++);
     auto skeleton = location::providers::remote::Provider::Skeleton::create(connection_, path, provider);
 
-    com_ubuntu_location_service_call_add_provider(
+    core_locationd_service_call_add_provider(
                 proxy_.get(), path.c_str(), nullptr, Service::on_provider_added, new Service::ProviderAdditionContext{skeleton, wp});
 }
 
@@ -192,7 +192,7 @@ void location::dbus::stub::Service::on_proxy_ready(GObject* source, GAsyncResult
     if (auto context = static_cast<Service::ProxyCreationContext*>(user_data))
     {
         GError* error{nullptr};
-        auto stub = com_ubuntu_location_service_proxy_new_finish(res, &error);
+        auto stub = core_locationd_service_proxy_new_finish(res, &error);
 
         if (error)
         {
@@ -237,7 +237,7 @@ void location::dbus::stub::Service::on_bus_acquired(GObject* source, GAsyncResul
         }
         else
         {
-            com_ubuntu_location_service_proxy_new(
+            core_locationd_service_proxy_new(
                         bus, G_DBUS_PROXY_FLAGS_NONE, location::dbus::Service::name(), location::dbus::Service::path(),
                         nullptr, on_proxy_ready, new Service::ProxyCreationContext
                         {
@@ -261,7 +261,7 @@ void location::dbus::stub::Service::on_provider_added(GObject *source, GAsyncRes
         if (auto sp = context->wp.lock())
         {
             GError* error{nullptr};
-            if (com_ubuntu_location_service_call_add_provider_finish(
+            if (core_locationd_service_call_add_provider_finish(
                         sp->proxy_.get(), res, &error))
             {
                 sp->providers.insert(context->provider);
@@ -286,7 +286,7 @@ void location::dbus::stub::Service::on_session_ready(GObject *source, GAsyncResu
         if (auto sp = context->wp.lock())
         {
             GError* error{nullptr}; char* path{nullptr};
-            com_ubuntu_location_service_call_create_session_for_criteria_finish(
+            core_locationd_service_call_create_session_for_criteria_finish(
                         sp->proxy_.get(), &path, res, &error);
 
             if (!error)
@@ -318,7 +318,7 @@ void location::dbus::stub::Service::on_does_satellite_based_positioning_changed(
         if (auto sp = holder->value.lock())
         {
             sp->does_satellite_based_positioning() =
-                    com_ubuntu_location_service_get_does_satellite_based_positioning(
+                    core_locationd_service_get_does_satellite_based_positioning(
                         sp->proxy_.get());
         }
     }
@@ -334,7 +334,7 @@ void location::dbus::stub::Service::on_does_report_cell_and_wifi_ids_changed(GOb
         if (auto sp = holder->value.lock())
         {
             sp->does_report_cell_and_wifi_ids() =
-                    com_ubuntu_location_service_get_does_report_cell_and_wifi_ids(
+                    core_locationd_service_get_does_report_cell_and_wifi_ids(
                         sp->proxy_.get());
         }
     }
@@ -350,7 +350,7 @@ void location::dbus::stub::Service::on_is_online_changed(GObject* object, GParam
         if (auto sp = holder->value.lock())
         {
             sp->is_online() =
-                    com_ubuntu_location_service_get_is_online(
+                    core_locationd_service_get_is_online(
                         sp->proxy_.get());
         }
     }

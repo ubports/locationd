@@ -17,8 +17,15 @@
  */
 
 #include <location/connectivity/manager.h>
+#include <location/connectivity/dummy_connectivity_manager.h>
+#include "w11t_manager.h"
+#include "ofono_nm_connectivity_manager.h"
+
+#include <core/dbus/asio/executor.h>
+#include <core/dbus/bus.h>
 
 namespace connectivity = com::ubuntu::location::connectivity;
+namespace w11t = location::connectivity::w11t;
 
 std::ostream& connectivity::operator<<(std::ostream& out, connectivity::State state)
 {
@@ -68,4 +75,106 @@ std::ostream& connectivity::operator<<(std::ostream& out, connectivity::Characte
 
     out << "]";
     return out;
+}
+
+namespace
+{
+struct Runtime
+{
+    static Runtime& instance()
+    {
+        static Runtime runtime;
+        return runtime;
+    }
+
+    Runtime()
+        : system_bus{std::make_shared<core::dbus::Bus>(core::dbus::WellKnownBus::system)},
+          executor{core::dbus::asio::make_executor(system_bus)}
+    {
+        system_bus->install_executor(executor);
+
+        worker_thread = std::move(std::thread
+        {
+            [this]()
+            {
+                while(true) {
+                    try
+                    {
+                        system_bus->run();
+                        break;  // run exited normally
+                    }
+                    catch (const std::exception& e)
+                    {
+                        LOG(WARNING) << e.what();
+                    }
+                    catch(...)
+                    {
+                        LOG(WARNING) << "Unexpected exception was raised by the io executor.";
+                    }
+                }
+            }
+        });
+    }
+
+    ~Runtime()
+    {
+        system_bus->stop();
+
+        if (worker_thread.joinable())
+            worker_thread.join();
+    }
+
+    core::dbus::Bus::Ptr system_bus;
+    core::dbus::Executor::Ptr executor;
+    std::thread worker_thread;
+};
+}
+
+void connectivity::platform_default_manager(const std::function<void(const std::shared_ptr<Manager>&)>& cb)
+{
+
+    auto p = platform_default_manager();
+    cb(p);
+
+/*
+    w11t::Manager::create([cb](const ::location::Result<w11t::Manager::Ptr>& result)
+    {
+        if (result)
+            cb(result.value());
+    });
+*/
+}
+
+const std::shared_ptr<connectivity::Manager>& connectivity::platform_default_manager()
+{
+        VLOG(1) << "platform_default_manager";
+    printf("platform_default_manager \n");
+    try
+    {
+        static const std::shared_ptr<connectivity::Manager> instance
+        {
+            new connectivity::OfonoNmConnectivityManager
+            {
+                Runtime::instance().system_bus
+            }
+        };
+
+            VLOG(1) << "OfonoNmConnectivityManager";
+    printf("OfonoNmConnectivityManager \n");
+
+        return instance;
+    }
+    catch(...)
+    {
+    }
+
+    static const std::shared_ptr<connectivity::Manager> dummy_instance
+    {
+        new dummy::ConnectivityManager{}
+    };
+
+    VLOG(1) << "dummy";
+    printf("dummy \n");
+
+    return dummy_instance;
 }

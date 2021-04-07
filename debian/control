@@ -36,6 +36,10 @@ Build-Depends: cmake,
                libproperties-cpp-dev,
                lsb-release,
                trust-store-bin,
+               qtbase5-dev,
+               qtlocation5-dev,
+               qtpositioning5-dev,
+               qtdeclarative5-dev
 Standards-Version: 3.9.4
 Homepage: https://github.com/ubports/locationd
 

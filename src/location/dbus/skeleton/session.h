@@ -45,7 +45,7 @@ public:
 
     struct Configuration
     {
-        glib::SharedObject<ComUbuntuLocationServiceSession> skeleton;
+        glib::SharedObject<CoreLocationdSession> skeleton;
         location::Service::Session::Ptr impl;
     };
 
@@ -58,17 +58,17 @@ public:
 
 private:
     static gboolean handle_start_position_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
     static gboolean handle_stop_position_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
     static gboolean handle_start_heading_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
     static gboolean handle_stop_heading_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
     static gboolean handle_start_velocity_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
     static gboolean handle_stop_velocity_updates(
-            ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
+            CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data);
 
     Session(const Configuration& configuration);
 
@@ -91,7 +91,7 @@ private:
     // Invoked whenever the actual session impl. reports a velocity update.
     virtual void on_velocity_changed(const Update<units::MetersPerSecond>& velocity);
 
-    glib::SharedObject<ComUbuntuLocationServiceSession> skeleton;
+    glib::SharedObject<CoreLocationdSession> skeleton;
     location::Service::Session::Ptr impl;
 };
 }

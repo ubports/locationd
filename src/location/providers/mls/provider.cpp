@@ -87,13 +87,24 @@ mls::Provider::Provider(const mls::Configuration& config)
 
         connectivity_manager->wireless_network_scan_finished().connect([this]()
         {
-            VLOG(1) << "Wireless network scan finished.";
+            VLOG(1) << "Wireless network scan finished. DDDDDD";
             std::vector<com::ubuntu::location::connectivity::WirelessNetwork::Ptr> wifis;
 
             connectivity_manager->enumerate_visible_wireless_networks([&wifis](const com::ubuntu::location::connectivity::WirelessNetwork::Ptr& wifi)
             {
                 wifis.push_back(wifi);
             });
+
+            std::vector<com::ubuntu::location::connectivity::RadioCell::Ptr> cells;
+
+            connectivity_manager->enumerate_connected_radio_cells([&cells](const com::ubuntu::location::connectivity::RadioCell::Ptr& cell)
+            {
+                VLOG(1) << "FOUND CELL";
+                cells.push_back(cell);
+            });
+
+
+            VLOG(1) << "NO CELL";
 
             ichnaea::geolocate::Parameters params;
             params.consider_ip = true;
@@ -107,6 +118,66 @@ mls::Provider::Provider(const mls::Configuration& config)
                 ap.signal_strength = wifi->signal_strength().get();
 
                 params.wifi_access_points.insert(ap);
+            }
+
+            for (auto cell : cells)
+            {
+                ichnaea::RadioCell rc;
+
+                rc.radio_type = ichnaea::RadioCell::RadioType::lte;
+                rc.serving = true;
+                rc.mcc = 0;
+                rc.mnc = 0;
+                rc.lac = 0;
+                rc.id = 0;
+                rc.age = std::chrono::duration_values<std::chrono::milliseconds>::zero();
+                rc.psc = 0;
+                rc.timing_advance = 0;
+
+                switch (cell->type()) {
+                    case connectivity::RadioCell::Type::gsm: {
+                        auto info = cell->gsm();
+                        rc.radio_type = ichnaea::RadioCell::RadioType::gsm;
+                        rc.mcc = info.mobile_country_code;
+                        rc.mnc = info.mobile_network_code;
+                        rc.lac = info.location_area_code;
+                        rc.id = info.id;
+                        rc.signal_strength = info.strength;
+
+                        std::cout << "got gsm" << info.mobile_network_code << std::endl;
+                        break;
+                    }
+
+                    case connectivity::RadioCell::Type::umts: {
+                        auto info = cell->umts();
+                        rc.radio_type = ichnaea::RadioCell::RadioType::wcdma;
+                        rc.mcc = info.mobile_country_code;
+                        rc.mnc = info.mobile_network_code;
+                        rc.lac = info.location_area_code;
+                        rc.id = info.id;
+                        rc.signal_strength = info.strength;
+
+                        std::cout << "got umts/wcdma" << info.mobile_network_code << std::endl;
+                        break;
+                    }
+                    case connectivity::RadioCell::Type::lte: {
+                        auto info = cell->lte();
+                        rc.radio_type = ichnaea::RadioCell::RadioType::lte;
+                        rc.mcc = info.mobile_country_code;
+                        rc.mnc = info.mobile_network_code;
+                        rc.lac = info.tracking_area_code;
+                        rc.psc = info.physical_id;
+                        rc.id = info.id;
+                        rc.signal_strength = info.strength;
+
+                        std::cout << "got lte" << info.mobile_network_code << std::endl;
+                        break;
+                    }
+                    default:
+                        continue;
+                }
+
+                params.radio_cells.insert(rc);
             }
 
             try

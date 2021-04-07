@@ -72,11 +72,11 @@ class Session : public location::Service::Session,
     static void on_heading_changed(GObject* object, GParamSpec* spec, gpointer user_data);
     static void on_velocity_changed(GObject* object, GParamSpec* spec, gpointer user_data);
 
-    Session(const glib::SharedObject<ComUbuntuLocationServiceSession>& session);
+    Session(const glib::SharedObject<CoreLocationdSession>& session);
 
     Ptr finalize_construction();
 
-    glib::SharedObject<ComUbuntuLocationServiceSession> session_;
+    glib::SharedObject<CoreLocationdSession> session_;
 
     Updates updates_;
     std::set<ulong> signal_handler_ids_;

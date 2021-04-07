@@ -765,12 +765,3 @@ const core::Property<com::ubuntu::location::connectivity::Characteristics>& w11t
 {
     return active_connection_characteristics_;
 }
-
-void com::ubuntu::location::connectivity::platform_default_manager(const std::function<void(const std::shared_ptr<Manager>&)>& cb)
-{
-    w11t::Manager::create([cb](const ::location::Result<w11t::Manager::Ptr>& result)
-    {
-        if (result)
-            cb(result.value());
-    });
-}

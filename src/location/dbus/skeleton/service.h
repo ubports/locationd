@@ -144,11 +144,11 @@ private:
             GDBusConnection* connection, const gchar* name, gpointer user_data);
 
     static gboolean handle_create_session_for_criteria(
-            ComUbuntuLocationService* service, GDBusMethodInvocation* invocation, GVariant* criteria, gpointer user_data);
+            CoreLocationdService* service, GDBusMethodInvocation* invocation, GVariant* criteria, gpointer user_data);
     static gboolean handle_add_provider(
-            ComUbuntuLocationService* service, GDBusMethodInvocation* invocation, const gchar* path, gpointer user_data);
+            CoreLocationdService* service, GDBusMethodInvocation* invocation, const gchar* path, gpointer user_data);
     static gboolean handle_remove_provider(
-            ComUbuntuLocationService* service, GDBusMethodInvocation* invocation, const gchar* path, gpointer user_data);
+            CoreLocationdService* service, GDBusMethodInvocation* invocation, const gchar* path, gpointer user_data);
 
     static void on_does_satellite_based_positioning_changed(
             GObject* object, GParamSpec* spec, gpointer user_data);
@@ -179,7 +179,7 @@ private:
     ObjectPathGenerator object_path_generator;
 
     glib::SharedObject<GDBusConnection> connection;
-    glib::SharedObject<ComUbuntuLocationService> skeleton;
+    glib::SharedObject<CoreLocationdService> skeleton;
     glib::SharedObject<GDBusObjectManagerServer> object_manager_server;
     std::shared_ptr<DBusDaemonCredentialsResolver> credentials_resolver;
 

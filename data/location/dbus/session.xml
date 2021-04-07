@@ -1,5 +1,5 @@
 <node>
-  <interface name='com.ubuntu.location.Service.Session'>
+  <interface name='core.locationd.Session'>
     <!-- Requests the session to start delivering updates to Position -->
     <method name='StartPositionUpdates'/>
     <!-- Requests the session to stop delivering updates to Position -->
@@ -23,10 +23,26 @@
         - altitude: double, in [m]
         - vertical-accuracy: double, in [m]
     -->
-    <property name='Position' type='(ta{sv})' access='read'/>
+    <property name='Position' type='(ta{sv})' access='read'>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="Position"/>
+    </property>
     <!-- Timestamped updates to the current velocity in [m/s]. Clock refers to unix time in microseconds. -->
-    <property name='Velocity' type='(t(d))' access='read' />
+    <property name='Velocity' type='(t(d))' access='read'>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="Velocity"/>
+    </property>
     <!-- Timestamped updates to the current heading in [°]. Clock refers to unix time in microseconds. -->
-    <property name='Heading' type='(t(d))' access='read' />
+    <property name='Heading' type='(t(d))' access='read'>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="Heading"/>
+    </property>
   </interface>
+
+  <interface name="org.freedesktop.DBus.Properties">
+    <signal name="PropertiesChanged">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
+      <arg name="interface" type="s" direction="out" />
+      <arg name="changed" type="a{sv}" direction="out" />
+      <arg name="invalid" type="as" direction="out" />
+    </signal>
+  </interface>
+
 </node>

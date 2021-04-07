@@ -99,10 +99,10 @@ class Service : public location::Service, public std::enable_shared_from_this<Se
 
     void deinit();
     std::shared_ptr<Service> init(const glib::SharedObject<GDBusConnection>& connection_,
-                                  const glib::SharedObject<ComUbuntuLocationService>& service);
+                                  const glib::SharedObject<CoreLocationdService>& service);
 
     glib::SharedObject<GDBusConnection> connection_;
-    glib::SharedObject<ComUbuntuLocationService> proxy_;
+    glib::SharedObject<CoreLocationdService> proxy_;
     std::set<ulong> signal_handler_ids;
     std::unique_ptr<NameVanishedContext> name_vanished_context_;
 

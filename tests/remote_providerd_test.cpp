@@ -52,7 +52,7 @@ TEST_F(RemoteProviderdTest, AClientReceivesUpdatesFromAnOutOfProcessProvider)
         const char* argv[] =
         {
             "--bus", "session",                                         // 2
-            "--service-name", "com.ubuntu.location.providers.Dummy",    // 4
+            "--service-name", "core.locationd.providers.Dummy",    // 4
             "--service-path", "/location/providers/Dummy",   // 6
             "--provider", "dummy::Provider"                             // 8
         };
@@ -81,7 +81,7 @@ TEST_F(RemoteProviderdTest, AClientReceivesUpdatesFromAnOutOfProcessProvider)
             "--bus", "session",                                                 // 2
             "--provider", "remote::Provider",                                   // 4
             "--remote::Provider::bus=session_with_address_from_env",            // 5
-            "--remote::Provider::name=com.ubuntu.location.providers.Dummy",     // 6
+            "--remote::Provider::name=core.locationd.providers.Dummy",     // 6
             "--remote::Provider::path=/location/providers/Dummy"     // 7
         };
 

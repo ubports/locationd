@@ -60,7 +60,7 @@ interface is described [here](reference/dbus-api.md).
 The general steps to obtain location updates via DBus look like this:
 
  1. Create a new session with the service (`CreateSessionForCriteria`
-    method of the `com.ubuntu.location.Service` interface) and specify
+    method of the `core.locationd.Service` interface) and specify
     which kind of updates the session should receive with the `requirements`
     parameter.
  2. Enable updates on the returned session object by calling the relevant
@@ -81,8 +81,8 @@ dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 bus = dbus.SystemBus()
 
 service = dbus.Interface(
-  bus.get_object("com.ubuntu.location.Service", "/com/ubuntu/location/Service"),
-  "com.ubuntu.location.Service")
+  bus.get_object("core.locationd.Service", "/core/locationd/Service"),
+  "core.locationd.Service")
 
 requirements = dict()
 # Sign up for position updates only. We're not interested in
@@ -100,14 +100,13 @@ def session_properties_changed(properties):
 
 bus.add_signal_receiver(session_properties_changed,
                         path=session_path,
-                        dbus_interface="com.ubuntu.location.Session",
+                        dbus_interface="core.locationd.Session",
                         signal_name="PropertyChanged")
 
 session = dbus.Interface(
-  bus.get_object("com.ubuntu.location.Service", session_path),
-  "com.ubuntu.location.Service.Session")
+  bus.get_object("core.locationd.Service", session_path),
+  "core.locationd.Session")
 session.StartPositionUpdates()
 
 gobject.MainLoop().run()
 ```
-

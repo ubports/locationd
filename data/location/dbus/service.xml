@@ -1,8 +1,8 @@
-<node name='/com/ubuntu/location/Service'>
-  <interface name='com.ubuntu.location.Service'>
+<node name='/core/locationd/Service'>
+  <interface name='core.locationd.Service'>
     <!-- Creates a new session for monitoring updates delivered by the
          service. Returns a path to an object implementing
-         com.ubuntu.location.Session.Service on success, an error
+         core.locationd.Session.Service on success, an error
          otherwise.
     -->
     <method name='CreateSessionForCriteria'>
@@ -17,25 +17,26 @@
           - 'heading-accuracy': double, in [°]
       -->
       <arg name='requirements' type='a{sv}' direction='in'/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="requirements"/>
       <!--
 	  Path to an object implementation to
-	  com.ubuntu.location.Service.Session.
+	  core.locationd.Session.
       -->
       <arg name='path' type='o' direction='out'/>
     </method>
 
-    <!-- Registers 'object' implementing com.ubuntu.location.Service.Provider
+    <!-- Registers 'object' implementing core.locationd.Service.Provider
 	 with the service. Returns an error in case of issues.
     -->
     <method name='AddProvider'>
-      <!-- Path to an object implementing com.ubuntu.location.Service.Provider -->
+      <!-- Path to an object implementing core.locationd.Service.Provider -->
       <arg name='object' type='o' direction='in'/>
     </method>
 
-    <!-- Removes 'object' implementing com.ubuntu.location.Service.Provider
+    <!-- Removes 'object' implementing core.locationd.Service.Provider
          from the service -->
     <method name='RemoveProvider'>
-      <!-- Path to an object implementing com.ubuntu.location.Service.Provider -->
+      <!-- Path to an object implementing core.locationd.Service.Provider -->
       <arg name='object' type='o' direction='in'/>
     </method>
 
@@ -57,6 +58,8 @@
         'used-in-fix': boolean * 'azimuth': double * 'elevation':
         double
     -->
-    <property name='VisibleSpaceVehicles' type='aa{sv}' access='read'/>
+    <property name='VisibleSpaceVehicles' type='aa{sv}' access='read'>
+       <annotation name="org.qtproject.QtDBus.QtTypeName" value="VisibleSpaceVehicles"/>
+    </property>
   </interface>
 </node>

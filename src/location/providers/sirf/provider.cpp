@@ -194,8 +194,8 @@ location::Provider::Ptr sirf::Provider::create_instance(const util::settings::So
 {
     Configuration configuration
     {
-        settings.get_value<Protocol>(options::protocol, Protocol::sirf),
-        settings.get_value<std::string>(options::device, "/dev/ttyUSB0")
+        settings.get_value<Protocol>(options::protocol, Protocol::nmea),
+        settings.get_value<std::string>(options::device, "/dev/EG25.NMEA")
     };
 
     return sirf::Provider::create(configuration);

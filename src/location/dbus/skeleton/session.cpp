@@ -35,7 +35,7 @@ using Holder = location::glib::Holder<std::weak_ptr<location::dbus::skeleton::Se
 }  // namespace
 
 gboolean location::dbus::skeleton::Session::handle_start_position_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -53,7 +53,7 @@ gboolean location::dbus::skeleton::Session::handle_start_position_updates(
 }
 
 gboolean location::dbus::skeleton::Session::handle_stop_position_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -71,7 +71,7 @@ gboolean location::dbus::skeleton::Session::handle_stop_position_updates(
 }
 
 gboolean location::dbus::skeleton::Session::handle_start_heading_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -89,7 +89,7 @@ gboolean location::dbus::skeleton::Session::handle_start_heading_updates(
 }
 
 gboolean location::dbus::skeleton::Session::handle_stop_heading_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -107,7 +107,7 @@ gboolean location::dbus::skeleton::Session::handle_stop_heading_updates(
 }
 
 gboolean location::dbus::skeleton::Session::handle_start_velocity_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -125,7 +125,7 @@ gboolean location::dbus::skeleton::Session::handle_start_velocity_updates(
 }
 
 gboolean location::dbus::skeleton::Session::handle_stop_velocity_updates(
-        ComUbuntuLocationServiceSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdSession* session, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(session);
@@ -236,22 +236,22 @@ void location::dbus::skeleton::Session::on_stop_velocity_updates()
 // Invoked whenever the actual session impl. for the session reports a position update.
 void location::dbus::skeleton::Session::on_position_changed(const location::Update<location::Position>& position)
 {
-    com_ubuntu_location_service_session_set_position(
-                COM_UBUNTU_LOCATION_SERVICE_SESSION(skeleton.get()), dbus::encode(position));
+    core_locationd_session_set_position(
+                CORE_LOCATIOND_SESSION(skeleton.get()), dbus::encode(position));
 }
 
 // Invoked whenever the actual session impl. reports a heading update.
 void location::dbus::skeleton::Session::on_heading_changed(const location::Update<location::units::Degrees>& heading)
 {
-    com_ubuntu_location_service_session_set_heading(
-                COM_UBUNTU_LOCATION_SERVICE_SESSION(skeleton.get()), dbus::encode(heading));
+    core_locationd_session_set_heading(
+                CORE_LOCATIOND_SESSION(skeleton.get()), dbus::encode(heading));
 }
 
 // Invoked whenever the actual session impl. reports a velocity update.
 void location::dbus::skeleton::Session::on_velocity_changed(const location::Update<location::units::MetersPerSecond>& velocity)
 {
-    com_ubuntu_location_service_session_set_velocity(
-                COM_UBUNTU_LOCATION_SERVICE_SESSION(skeleton.get()), dbus::encode(velocity));
+    core_locationd_session_set_velocity(
+                CORE_LOCATIOND_SESSION(skeleton.get()), dbus::encode(velocity));
 
 }
 

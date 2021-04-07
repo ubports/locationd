@@ -1,0 +1,7 @@
+{
+    "Keys": ["locationd"],
+    "Provider": "locationd",
+    "Position": true,
+    "Satellite": false,
+    "Priority": 2000
+}

@@ -41,7 +41,7 @@ install(
 )
 
 install(
-  FILES ${CMAKE_CURRENT_SOURCE_DIR}/com.ubuntu.location.Service.conf
+  FILES ${CMAKE_CURRENT_SOURCE_DIR}/core.locationd.Service.conf
   DESTINATION /etc/dbus-1/system.d/
 )
 

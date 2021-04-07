@@ -16,6 +16,12 @@
 
 #include <iostream>
 
+bool ichnaea::operator<(const RadioCell& lhs, const RadioCell& rhs)
+{
+    return std::tie(lhs.radio_type, lhs.serving, lhs.mcc, lhs.mnc, lhs.lac, lhs.id, lhs.age, lhs.psc, lhs.timing_advance, lhs.signal_strength) <
+           std::tie(rhs.radio_type, rhs.serving, rhs.mcc, rhs.mnc, rhs.lac, rhs.id, rhs.age, lhs.psc, lhs.timing_advance, lhs.signal_strength);
+}
+
 std::ostream& ichnaea::operator<<(std::ostream& out, ichnaea::RadioCell::RadioType radio_type)
 {
     switch (radio_type)

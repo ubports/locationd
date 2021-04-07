@@ -37,7 +37,7 @@ struct LOCATION_DLL_PUBLIC Provider
 {
     static constexpr const char* name()
     {
-        return "com.ubuntu.location.Service.Provider";
+        return "core.locationd.Service.Provider";
     }
 
     class Stub : public location::Provider, public std::enable_shared_from_this<Stub>
@@ -80,10 +80,10 @@ struct LOCATION_DLL_PUBLIC Provider
         static void on_heading_updated(GObject* object, GParamSpec* spec, gpointer user_data);
         static void on_velocity_updated(GObject* object, GParamSpec* spec, gpointer user_data);
 
-        Stub(const glib::SharedObject<ComUbuntuLocationServiceProvider>& stub);
+        Stub(const glib::SharedObject<CoreLocationdServiceProvider>& stub);
         std::shared_ptr<Stub> finalize_construction();
 
-        glib::SharedObject<ComUbuntuLocationServiceProvider> stub_;
+        glib::SharedObject<CoreLocationdServiceProvider> stub_;
         Requirements requirements_;
         core::Signal<Update<Position>> position_updates_;
         core::Signal<Update<units::Degrees>> heading_updates_;
@@ -120,24 +120,24 @@ struct LOCATION_DLL_PUBLIC Provider
 
     private:
         static bool handle_on_new_event(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* event, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* event, gpointer user_data);
         static bool handle_satisfies(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* requirements, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* requirements, gpointer user_data);
         static bool handle_enable(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
         static bool handle_disable(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
         static bool handle_activate(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
         static bool handle_deactivate(
-                ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
+                CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data);
 
-        Skeleton(const glib::SharedObject<ComUbuntuLocationServiceProvider>& skeleton,
+        Skeleton(const glib::SharedObject<CoreLocationdServiceProvider>& skeleton,
                  const Provider::Ptr& impl);
 
         std::shared_ptr<Skeleton> finalize_construction();
 
-        glib::SharedObject<ComUbuntuLocationServiceProvider> skeleton_;
+        glib::SharedObject<CoreLocationdServiceProvider> skeleton_;
         Provider::Ptr impl_;
     };
 };

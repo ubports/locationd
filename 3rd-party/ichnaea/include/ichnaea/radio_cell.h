@@ -53,6 +53,9 @@ struct RadioCell
     double timing_advance;                   ///< The timing advance value for this cell network.
 };
 
+/// @brief operator< returns true if lhs is smaller than rhs.
+bool operator<(const RadioCell& lhs, const RadioCell& rhs);
+
 /// @brief operator<< inserts radio_type into out.
 std::ostream& operator<<(std::ostream& out, RadioCell::RadioType radio_type);
 }

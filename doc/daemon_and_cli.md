@@ -31,7 +31,7 @@ instance described by the given unique DBus name and path.
 	  --bus system \
 	  --provider remote::Provider \
           --remote::Provider::bus=system \
-	  --remote::Provider::name=com.ubuntu.location.provider.Gps \
+	  --remote::Provider::name=core.locationd.provider.Gps \
 	  --remote::Provider::path=/
 
 Please note that the service allows for decorating provider names to
@@ -45,11 +45,9 @@ positioning (decorated with @network):
 	  --bus system \
 	  --provider remote::Provider@gps \
           --remote::Provider@gps::bus=system \
-	  --remote::Provider@gps::name=com.ubuntu.location.provider.Gps \
+	  --remote::Provider@gps::name=core.locationd.provider.Gps \
 	  --remote::Provider@gps::path=/ \
 	  --provider remote::Provider@network \
           --remote::Provider@network::bus=system \
-	  --remote::Provider@network::name=com.ubuntu.location.provider.Network \
+	  --remote::Provider@network::name=core.locationd.provider.Network \
 	  --remote::Provider@network::path=/
-
-    

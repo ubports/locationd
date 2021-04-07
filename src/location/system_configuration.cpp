@@ -41,7 +41,7 @@ struct SnappySystemConfiguration : public location::SystemConfiguration
 
             // If SNAP_DATA isn't set it's almost certain we're not running
             // from a snap, so return the conventional path
-            return "/var/lib/ubuntu-location-service";
+            return "/var/lib/ubuntu-location-service/data.ini";
         }
     }
     
@@ -64,7 +64,7 @@ struct UbuntuSystemConfiguration : public location::SystemConfiguration
 {
     fs::path runtime_persistent_data_dir() const
     {
-        return "/var/lib/ubuntu-location-service";
+        return "/var/lib/ubuntu-location-service/data.ini";
     }
     
     location::PermissionManager::Ptr create_permission_manager() const

@@ -37,12 +37,12 @@ using Holder = location::glib::Holder<std::weak_ptr<location::dbus::stub::Sessio
 void location::dbus::stub::Session::create(
         const glib::SharedObject<GDBusConnection>& connection, const std::string& path, std::function<void (const Result<Session::Ptr>&)> cb)
 {
-    com_ubuntu_location_service_session_proxy_new(
+    core_locationd_session_proxy_new(
                 connection.get(), G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START, location::dbus::Service::name(), path.c_str(),
                 nullptr, on_proxy_ready, new ProxyCreationContext{std::move(cb)});
 }
 
-location::dbus::stub::Session::Session(const glib::SharedObject<ComUbuntuLocationServiceSession>& session)
+location::dbus::stub::Session::Session(const glib::SharedObject<CoreLocationdSession>& session)
         : session_{session}
 {
 }
@@ -114,37 +114,37 @@ location::dbus::stub::Session::~Session() noexcept
 
 void location::dbus::stub::Session::start_position_updates()
 {
-    com_ubuntu_location_service_session_call_start_position_updates(
+    core_locationd_session_call_start_position_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
 void location::dbus::stub::Session::stop_position_updates()
 {
-    com_ubuntu_location_service_session_call_stop_position_updates(
+    core_locationd_session_call_stop_position_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
 void location::dbus::stub::Session::start_velocity_updates()
 {
-    com_ubuntu_location_service_session_call_start_velocity_updates(
+    core_locationd_session_call_start_velocity_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
 void location::dbus::stub::Session::stop_velocity_updates()
 {
-    com_ubuntu_location_service_session_call_stop_velocity_updates(
+    core_locationd_session_call_stop_velocity_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
 void location::dbus::stub::Session::start_heading_updates()
 {
-    com_ubuntu_location_service_session_call_start_heading_updates(
+    core_locationd_session_call_start_heading_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
 void location::dbus::stub::Session::stop_heading_updates()
 {
-    com_ubuntu_location_service_session_call_stop_heading_updates(
+    core_locationd_session_call_stop_heading_updates(
                 session_.get(), nullptr, nullptr, nullptr);
 }
 
@@ -162,8 +162,8 @@ void location::dbus::stub::Session::on_proxy_ready(GObject* source, GAsyncResult
     if (auto context = static_cast<ProxyCreationContext*>(user_data))
     {
         GError* error{nullptr};
-        location::glib::SharedObject<ComUbuntuLocationServiceSession> session =
-                location::glib::make_shared_object(com_ubuntu_location_service_session_proxy_new_finish(res, &error));
+        location::glib::SharedObject<CoreLocationdSession> session =
+                location::glib::make_shared_object(core_locationd_session_proxy_new_finish(res, &error));
 
         if (error)
         {
@@ -191,7 +191,7 @@ void location::dbus::stub::Session::on_position_changed(GObject* object, GParamS
     {
         if (auto thiz = holder->value.lock())
         {
-            if (auto variant = com_ubuntu_location_service_session_get_position(thiz->session_.get()))
+            if (auto variant = core_locationd_session_get_position(thiz->session_.get()))
             {
                 auto update =
                     location::dbus::decode<
@@ -215,7 +215,7 @@ void location::dbus::stub::Session::on_heading_changed(GObject* object, GParamSp
     {
         if (auto thiz = holder->value.lock())
         {
-            if (auto variant = com_ubuntu_location_service_session_get_heading(thiz->session_.get()))
+            if (auto variant = core_locationd_session_get_heading(thiz->session_.get()))
             {
                 auto update =
                         location::dbus::decode<
@@ -239,7 +239,7 @@ void location::dbus::stub::Session::on_velocity_changed(GObject* object, GParamS
     {
         if (auto thiz = holder->value.lock())
         {
-            if (auto variant = com_ubuntu_location_service_session_get_velocity(thiz->session_.get()))
+            if (auto variant = core_locationd_session_get_velocity(thiz->session_.get()))
             {
                 auto update =
                         location::dbus::decode<

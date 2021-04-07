@@ -166,10 +166,14 @@ add_library(
   glib/util.h
   glib/util.cpp
 
+  connectivity/cached_radio_cell.cpp
+  connectivity/cached_wireless_network.cpp
+
   connectivity/manager.cpp
   connectivity/radio_cell.cpp
   connectivity/wireless_network.cpp
 
+  connectivity/ofono_nm_connectivity_manager.cpp
   connectivity/w11t_manager.h
   connectivity/w11t_manager.cpp
   "${CMAKE_CURRENT_BINARY_DIR}/connectivity/w11t_gen.h"

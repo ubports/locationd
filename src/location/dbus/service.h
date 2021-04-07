@@ -30,12 +30,12 @@ struct Service
 {
     static constexpr const char* name()
     {
-        return "com.ubuntu.location.Service";
+        return "core.locationd.Service";
     }
 
     static constexpr const char* path()
     {
-        return "/com/ubuntu/location/Service";
+        return "/core/locationd/Service";
     }
   };
 

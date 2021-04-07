@@ -1,5 +1,5 @@
 <node>
-  <interface name='com.ubuntu.location.Service.Provider'>
+  <interface name='core.locationd.Service.Provider'>
     <!-- Satisfies checks if a given set of requirements
 	 can be satisfied by a Provider -->
     <method name='Satisfies'>

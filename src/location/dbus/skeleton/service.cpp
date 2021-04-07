@@ -234,13 +234,13 @@ location::dbus::skeleton::Service::Ptr location::dbus::skeleton::Service::create
 
 location::dbus::skeleton::Service::Service(const location::dbus::skeleton::Service::Configuration& configuration)
     : configuration(configuration),
-      skeleton{glib::make_shared_object(com_ubuntu_location_service_skeleton_new())},
+      skeleton{glib::make_shared_object(core_locationd_service_skeleton_new())},
       object_manager_server(glib::make_shared_object<GDBusObjectManagerServer>(g_dbus_object_manager_server_new(location::dbus::Service::path())))
 {
-    com_ubuntu_location_service_set_state(skeleton.get(), boost::lexical_cast<std::string>(Service::configuration.impl->state().get()).c_str());
-    com_ubuntu_location_service_set_does_satellite_based_positioning(skeleton.get(), Service::configuration.impl->does_satellite_based_positioning().get());
-    com_ubuntu_location_service_set_does_report_cell_and_wifi_ids(skeleton.get(), Service::configuration.impl->does_report_cell_and_wifi_ids().get());
-    com_ubuntu_location_service_set_is_online(skeleton.get(), Service::configuration.impl->is_online().get());
+    core_locationd_service_set_state(skeleton.get(), boost::lexical_cast<std::string>(Service::configuration.impl->state().get()).c_str());
+    core_locationd_service_set_does_satellite_based_positioning(skeleton.get(), Service::configuration.impl->does_satellite_based_positioning().get());
+    core_locationd_service_set_does_report_cell_and_wifi_ids(skeleton.get(), Service::configuration.impl->does_report_cell_and_wifi_ids().get());
+    core_locationd_service_set_is_online(skeleton.get(), Service::configuration.impl->is_online().get());
 }
 
 std::shared_ptr<location::dbus::skeleton::Service> location::dbus::skeleton::Service::finalize_construction()
@@ -252,31 +252,31 @@ std::shared_ptr<location::dbus::skeleton::Service> location::dbus::skeleton::Ser
         if (auto sp = wp.lock())
         {
             std::ostringstream ss; ss << state;
-            com_ubuntu_location_service_set_state(COM_UBUNTU_LOCATION_SERVICE(sp->skeleton.get()), ss.str().c_str());
+            core_locationd_service_set_state(CORE_LOCATIOND_SERVICE(sp->skeleton.get()), ss.str().c_str());
         }
     });
 
     configuration.impl->does_satellite_based_positioning().changed().connect([wp](bool value) mutable {
         if (auto sp = wp.lock())
         {
-            com_ubuntu_location_service_set_does_satellite_based_positioning(
-                        COM_UBUNTU_LOCATION_SERVICE(sp->skeleton.get()), value);
+            core_locationd_service_set_does_satellite_based_positioning(
+                        CORE_LOCATIOND_SERVICE(sp->skeleton.get()), value);
         }
     });
 
     configuration.impl->does_report_cell_and_wifi_ids().changed().connect([wp](bool value) mutable {
         if (auto sp = wp.lock())
         {
-            com_ubuntu_location_service_set_does_report_cell_and_wifi_ids(
-                        COM_UBUNTU_LOCATION_SERVICE(sp->skeleton.get()), value);
+            core_locationd_service_set_does_report_cell_and_wifi_ids(
+                        CORE_LOCATIOND_SERVICE(sp->skeleton.get()), value);
         }
     });
 
     configuration.impl->is_online().changed().connect([wp](bool value) mutable {
         if (auto sp = wp.lock())
         {
-            com_ubuntu_location_service_set_is_online(
-                        COM_UBUNTU_LOCATION_SERVICE(sp->skeleton.get()), value);
+            core_locationd_service_set_is_online(
+                        CORE_LOCATIOND_SERVICE(sp->skeleton.get()), value);
         }
     });
 
@@ -354,7 +354,7 @@ void location::dbus::skeleton::Service::on_name_vanished(
             sp->on_name_vanished(connection, name);
 }
 
-gboolean location::dbus::skeleton::Service::handle_create_session_for_criteria(ComUbuntuLocationService* service,
+gboolean location::dbus::skeleton::Service::handle_create_session_for_criteria(CoreLocationdService* service,
                                                                                GDBusMethodInvocation* invocation,
                                                                                GVariant* parameters,
                                                                                gpointer user_data)
@@ -374,7 +374,7 @@ gboolean location::dbus::skeleton::Service::handle_create_session_for_criteria(C
     return true;
 }
 
-gboolean location::dbus::skeleton::Service::handle_add_provider(ComUbuntuLocationService* service,
+gboolean location::dbus::skeleton::Service::handle_add_provider(CoreLocationdService* service,
                                                                 GDBusMethodInvocation* invocation,
                                                                 const gchar* path,
                                                                 gpointer user_data)
@@ -398,7 +398,7 @@ gboolean location::dbus::skeleton::Service::handle_add_provider(ComUbuntuLocatio
                 else
                 {
                     thiz->add_provider(result.value());
-                    com_ubuntu_location_service_complete_add_provider(
+                    core_locationd_service_complete_add_provider(
                                 thiz->skeleton.get(), invocation);
                 }
             });
@@ -410,7 +410,7 @@ gboolean location::dbus::skeleton::Service::handle_add_provider(ComUbuntuLocatio
     return false;
 }
 
-gboolean location::dbus::skeleton::Service::handle_remove_provider(ComUbuntuLocationService* service,
+gboolean location::dbus::skeleton::Service::handle_remove_provider(CoreLocationdService* service,
                                                                    GDBusMethodInvocation* invocation,
                                                                    const gchar* path,
                                                                    gpointer user_data)
@@ -429,7 +429,7 @@ void location::dbus::skeleton::Service::on_does_satellite_based_positioning_chan
     if (auto holder = static_cast<Holder*>(user_data))
         if (auto sp = holder->value.lock())
             sp->does_satellite_based_positioning() =
-                    com_ubuntu_location_service_get_does_satellite_based_positioning(
+                    core_locationd_service_get_does_satellite_based_positioning(
                         sp->skeleton.get());
 }
 
@@ -442,7 +442,7 @@ void location::dbus::skeleton::Service::on_does_report_cell_and_wifi_ids_changed
     if (auto holder = static_cast<Holder*>(user_data))
         if (auto sp = holder->value.lock())
             sp->does_report_cell_and_wifi_ids() =
-                    com_ubuntu_location_service_get_does_report_cell_and_wifi_ids(
+                    core_locationd_service_get_does_report_cell_and_wifi_ids(
                         sp->skeleton.get());
 }
 
@@ -455,7 +455,7 @@ void location::dbus::skeleton::Service::on_is_online_changed(
     if (auto holder = static_cast<Holder*>(user_data))
         if (auto sp = holder->value.lock())
             sp->is_online() =
-                    com_ubuntu_location_service_get_is_online(
+                    core_locationd_service_get_is_online(
                         sp->skeleton.get());
 }
 
@@ -553,7 +553,7 @@ void location::dbus::skeleton::Service::create_session(
         if (auto sp = wp.lock())
         {
             auto path = object_path_generator.object_path_for_caller_credentials(credentials);
-            auto session = glib::make_shared_object(com_ubuntu_location_service_session_skeleton_new());
+            auto session = glib::make_shared_object(core_locationd_session_skeleton_new());
             auto skeleton = location::dbus::skeleton::Session::create(
                         location::dbus::skeleton::Session::Configuration{session, impl});
             auto skeleton_object = glib::make_shared_object(object_skeleton_new(path.c_str()));

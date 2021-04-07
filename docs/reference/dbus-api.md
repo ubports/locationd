@@ -22,20 +22,20 @@ like `gdbus-codegen` you can use the available introspection files from
 
 ## Object structure
 
-The service exposes a central DBus object at the path `/com/ubuntu/location/Service`
+The service exposes a central DBus object at the path `/core/locationd/Service`
 
 Session objects are available on paths selected by the service when a
 session is created via the `CreationSessionForCriteria` method from the
-`com.ubuntu.location.Service` interface.
+`core.locationd.Service` interface.
 
 ## Available interfaces
 
-The main interface used to communicate with the service is `com.ubuntu.location.Service`. It
+The main interface used to communicate with the service is `core.locationd.Service`. It
 gives a client control to create a new session to listen for position
 updates or to register a provider which can deliver additional position
 updates to the service.
 
-### com.ubuntu.location.Service
+### core.locationd.Service
 
 ### Methods
 
@@ -43,7 +43,7 @@ updates to the service.
 
 Creates a new session for monitoring updates delivered by the
 service. Returns a path to an object implementing
-`com.ubuntu.location.Session.Service` on success, an error otherwise.
+`core.locationd.Session.Service` on success, an error otherwise.
 
 The following keys for the `requirements` argument are handled by the service:
 
@@ -57,11 +57,11 @@ The following keys for the `requirements` argument are handled by the service:
 
 **void AddProvider(object ObjectPath)**
 
-Registers 'object' implementing the com.ubuntu.location.Service.Provider interface with the service. Returns an error in case of issues.
+Registers 'object' implementing the core.locationd.Service.Provider interface with the service. Returns an error in case of issues.
 
 **void RemoveObject(object ObjectPath)**
 
-Removes 'object' implementing com.ubuntu.location.Service.Provider
+Removes 'object' implementing core.locationd.Service.Provider
 from the service.
 
 ### Properties
@@ -122,7 +122,7 @@ Within every dict, at least the following keys are available:
  * azimuth: double
  * elevation: double
 
-### com.ubuntu.location.Service.Session
+### core.locationd.Session
 
 ### Methods
 

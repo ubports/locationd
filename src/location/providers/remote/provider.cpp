@@ -50,7 +50,7 @@ void remote::Provider::Stub::create(
         const std::string& path,
         std::function<void(const Result<Provider::Ptr>&)> cb)
 {
-    com_ubuntu_location_service_provider_proxy_new(
+    core_locationd_service_provider_proxy_new(
                 connection.get(), G_DBUS_PROXY_FLAGS_NONE, name.c_str(), path.c_str(),
                 nullptr, on_proxy_ready, new OnProxyReadyContext{std::move(cb)});
 }
@@ -64,7 +64,7 @@ void remote::Provider::Stub::on_proxy_ready(
     if (auto context = static_cast<OnProxyReadyContext*>(user_data))
     {
         GError* error{nullptr};
-        auto proxy = com_ubuntu_location_service_provider_proxy_new_finish(res, &error);
+        auto proxy = core_locationd_service_provider_proxy_new_finish(res, &error);
 
         if (error)
         {
@@ -83,10 +83,10 @@ void remote::Provider::Stub::on_proxy_ready(
     }
 }
 
-remote::Provider::Stub::Stub(const glib::SharedObject<ComUbuntuLocationServiceProvider>& stub)
+remote::Provider::Stub::Stub(const glib::SharedObject<CoreLocationdServiceProvider>& stub)
     : stub_{stub},
       requirements_{*dbus::decode<Requirements>(
-                        com_ubuntu_location_service_provider_get_requirements(stub_.get()))}
+                        core_locationd_service_provider_get_requirements(stub_.get()))}
 {
 }
 
@@ -120,27 +120,27 @@ remote::Provider::Stub::~Stub() noexcept
 
 void remote::Provider::Stub::on_new_event(const Event& event)
 {
-    com_ubuntu_location_service_provider_call_on_new_event(stub_.get(), dbus::encode(event), nullptr, nullptr, nullptr);
+    core_locationd_service_provider_call_on_new_event(stub_.get(), dbus::encode(event), nullptr, nullptr, nullptr);
 }
 
 void remote::Provider::Stub::enable()
 {
-    com_ubuntu_location_service_provider_call_enable(stub_.get(), nullptr, nullptr, nullptr);
+    core_locationd_service_provider_call_enable(stub_.get(), nullptr, nullptr, nullptr);
 }
 
 void remote::Provider::Stub::disable()
 {
-    com_ubuntu_location_service_provider_call_disable(stub_.get(), nullptr, nullptr, nullptr);
+    core_locationd_service_provider_call_disable(stub_.get(), nullptr, nullptr, nullptr);
 }
 
 void remote::Provider::Stub::activate()
 {
-    com_ubuntu_location_service_provider_call_activate(stub_.get(), nullptr, nullptr, nullptr);
+    core_locationd_service_provider_call_activate(stub_.get(), nullptr, nullptr, nullptr);
 }
 
 void remote::Provider::Stub::deactivate()
 {
-    com_ubuntu_location_service_provider_call_deactivate(stub_.get(), nullptr, nullptr, nullptr);
+    core_locationd_service_provider_call_deactivate(stub_.get(), nullptr, nullptr, nullptr);
 }
 
 location::Provider::Requirements remote::Provider::Stub::requirements() const
@@ -151,7 +151,7 @@ location::Provider::Requirements remote::Provider::Stub::requirements() const
 bool remote::Provider::Stub::satisfies(const Criteria& criteria)
 {
     gboolean result{false};
-    if (!com_ubuntu_location_service_provider_call_satisfies_sync(stub_.get(), dbus::encode(criteria), &result, nullptr, nullptr))
+    if (!core_locationd_service_provider_call_satisfies_sync(stub_.get(), dbus::encode(criteria), &result, nullptr, nullptr))
         return false;
     return result;
 }
@@ -182,7 +182,7 @@ void remote::Provider::Stub::on_requirements_changed(GObject* object, GParamSpec
         {
             auto requirements =
                     dbus::decode<Requirements>(
-                        com_ubuntu_location_service_provider_get_requirements(
+                        core_locationd_service_provider_get_requirements(
                             sp->stub_.get()));
             if (requirements)
                 sp->requirements_ = *requirements;
@@ -200,7 +200,7 @@ void remote::Provider::Stub::on_position_updated(GObject* object, GParamSpec* sp
         if (auto sp = thiz->value.lock())
         {
             auto update =
-                    dbus::decode<location::Update<location::Position>>(com_ubuntu_location_service_provider_get_position(
+                    dbus::decode<location::Update<location::Position>>(core_locationd_service_provider_get_position(
                                                                            sp->stub_.get()));
             if (update)
                 sp->position_updates_(*update);
@@ -218,7 +218,7 @@ void remote::Provider::Stub::on_heading_updated(GObject* object, GParamSpec* spe
         if (auto sp = thiz->value.lock())
         {
             auto update =
-                    dbus::decode<location::Update<units::Degrees>>(com_ubuntu_location_service_provider_get_heading(
+                    dbus::decode<location::Update<units::Degrees>>(core_locationd_service_provider_get_heading(
                                                                        sp->stub_.get()));
             if (update)
                 sp->heading_updates_(*update);
@@ -236,7 +236,7 @@ void remote::Provider::Stub::on_velocity_updated(GObject* object, GParamSpec* sp
         if (auto sp = thiz->value.lock())
         {
             auto update =
-                    dbus::decode<location::Update<location::units::MetersPerSecond>>(com_ubuntu_location_service_provider_get_velocity(
+                    dbus::decode<location::Update<location::units::MetersPerSecond>>(core_locationd_service_provider_get_velocity(
                                                                                          sp->stub_.get()));
             if (update)
                 sp->velocity_updates_(*update);
@@ -248,7 +248,7 @@ location::Provider::Ptr remote::Provider::Skeleton::create(const glib::SharedObj
                                         const std::string& path,
                                         const Provider::Ptr& impl)
 {
-    auto skeleton = glib::make_shared_object(com_ubuntu_location_service_provider_skeleton_new());
+    auto skeleton = glib::make_shared_object(core_locationd_service_provider_skeleton_new());
 
     GError* error{nullptr};
     if (!g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(skeleton.get()), connection.get(), path.c_str(), &error))
@@ -258,7 +258,7 @@ location::Provider::Ptr remote::Provider::Skeleton::create(const glib::SharedObj
     return sp->finalize_construction();
 }
 
-remote::Provider::Skeleton::Skeleton(const glib::SharedObject<ComUbuntuLocationServiceProvider>& skeleton,
+remote::Provider::Skeleton::Skeleton(const glib::SharedObject<CoreLocationdServiceProvider>& skeleton,
                                      const Provider::Ptr& impl)
     : skeleton_{skeleton},
       impl_{impl}
@@ -299,7 +299,7 @@ std::shared_ptr<remote::Provider::Skeleton> remote::Provider::Skeleton::finalize
         glib::Runtime::instance()->dispatch([this, wp, value]()
         {
             if (auto sp = wp.lock())
-                com_ubuntu_location_service_provider_set_position(skeleton_.get(), dbus::encode(value));
+                core_locationd_service_provider_set_position(skeleton_.get(), dbus::encode(value));
         });
     });
 
@@ -308,7 +308,7 @@ std::shared_ptr<remote::Provider::Skeleton> remote::Provider::Skeleton::finalize
         glib::Runtime::instance()->dispatch([this, wp, value]()
         {
             if (auto sp = wp.lock())
-                com_ubuntu_location_service_provider_set_heading(skeleton_.get(), dbus::encode(value));
+                core_locationd_service_provider_set_heading(skeleton_.get(), dbus::encode(value));
         });
     });
 
@@ -317,7 +317,7 @@ std::shared_ptr<remote::Provider::Skeleton> remote::Provider::Skeleton::finalize
         glib::Runtime::instance()->dispatch([this, wp, value]()
         {
             if (auto sp = wp.lock())
-                com_ubuntu_location_service_provider_set_velocity(skeleton_.get(), dbus::encode(value));
+                core_locationd_service_provider_set_velocity(skeleton_.get(), dbus::encode(value));
         });
     });
 
@@ -380,7 +380,7 @@ const core::Signal<location::Update<location::units::MetersPerSecond>>& remote::
 }
 
 bool remote::Provider::Skeleton::handle_on_new_event(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* event, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* event, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -392,7 +392,7 @@ bool remote::Provider::Skeleton::handle_on_new_event(
             if (auto decoded_event = dbus::decode<Event::Ptr>(event))
             {
                 sp->on_new_event(*(decoded_event.get()));
-                com_ubuntu_location_service_provider_complete_on_new_event(provider, invocation);
+                core_locationd_service_provider_complete_on_new_event(provider, invocation);
                 return true;
             }
         }
@@ -402,7 +402,7 @@ bool remote::Provider::Skeleton::handle_on_new_event(
 }
 
 bool remote::Provider::Skeleton::handle_satisfies(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* criteria, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, GVariant* criteria, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -414,7 +414,7 @@ bool remote::Provider::Skeleton::handle_satisfies(
             if (auto decoded_criteria = dbus::decode<Criteria>(criteria))
             {
                 bool satisfies = sp->satisfies(*decoded_criteria);
-                com_ubuntu_location_service_provider_complete_satisfies(provider, invocation, satisfies);
+                core_locationd_service_provider_complete_satisfies(provider, invocation, satisfies);
                 return true;
             }
         }
@@ -424,7 +424,7 @@ bool remote::Provider::Skeleton::handle_satisfies(
 }
 
 bool remote::Provider::Skeleton::handle_enable(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -434,7 +434,7 @@ bool remote::Provider::Skeleton::handle_enable(
         if (auto sp = holder->value.lock())
         {
             sp->enable();
-            com_ubuntu_location_service_provider_complete_enable(provider, invocation);
+            core_locationd_service_provider_complete_enable(provider, invocation);
             return true;
         }
     }
@@ -443,7 +443,7 @@ bool remote::Provider::Skeleton::handle_enable(
 }
 
 bool remote::Provider::Skeleton::handle_disable(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -453,7 +453,7 @@ bool remote::Provider::Skeleton::handle_disable(
         if (auto sp = holder->value.lock())
         {
             sp->disable();
-            com_ubuntu_location_service_provider_complete_disable(provider, invocation);
+            core_locationd_service_provider_complete_disable(provider, invocation);
             return true;
         }
     }
@@ -462,7 +462,7 @@ bool remote::Provider::Skeleton::handle_disable(
 }
 
 bool remote::Provider::Skeleton::handle_activate(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -472,7 +472,7 @@ bool remote::Provider::Skeleton::handle_activate(
         if (auto sp = holder->value.lock())
         {
             sp->activate();
-            com_ubuntu_location_service_provider_complete_activate(provider, invocation);
+            core_locationd_service_provider_complete_activate(provider, invocation);
             return true;
         }
     }
@@ -481,7 +481,7 @@ bool remote::Provider::Skeleton::handle_activate(
 }
 
 bool remote::Provider::Skeleton::handle_deactivate(
-        ComUbuntuLocationServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
+        CoreLocationdServiceProvider* provider, GDBusMethodInvocation* invocation, gpointer user_data)
 {
     LOCATION_DBUS_TRACE_STATIC_TRAMPOLIN;
     boost::ignore_unused(provider);
@@ -491,7 +491,7 @@ bool remote::Provider::Skeleton::handle_deactivate(
         if (auto sp = holder->value.lock())
         {
             sp->deactivate();
-            com_ubuntu_location_service_provider_complete_deactivate(provider, invocation);
+            core_locationd_service_provider_complete_deactivate(provider, invocation);
             return true;
         }
     }
